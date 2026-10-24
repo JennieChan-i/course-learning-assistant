@@ -1,0 +1,21 @@
+# Private course material and all derived data
+/chunk/
+/runtime/
+/models/
+/.cache/
+/.venv/
+/.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+node_modules/
+dist/
+coverage/
+*.log
+*.tsbuildinfo
+/artifacts/private/
+/artifacts/browser/

@@ -1,0 +1,4784 @@
+{
+  "status": "exploratory",
+  "human_reviewed": false,
+  "dataset": "sample",
+  "dataset_version": "0cc2a04646d40718",
+  "split": "test",
+  "embedding_model": "BAAI/bge-small-zh-v1.5",
+  "rerank_model": "BAAI/bge-reranker-base",
+  "conditions": "single concurrency; warmed models; unanswerable queries excluded from retrieval metric denominators",
+  "modes": {
+    "bm25": {
+      "answerable_count": 40,
+      "total_count": 60,
+      "recall_at_10": 1.0,
+      "ndcg_at_5": 0.8815464876785729,
+      "p50_ms": 0.1,
+      "p95_ms": 0.2
+    },
+    "dense": {
+      "answerable_count": 40,
+      "total_count": 60,
+      "recall_at_10": 1.0,
+      "ndcg_at_5": 0.7738598893089806,
+      "p50_ms": 2.0,
+      "p95_ms": 2.905
+    },
+    "hybrid": {
+      "answerable_count": 40,
+      "total_count": 60,
+      "recall_at_10": 1.0,
+      "ndcg_at_5": 0.8727642955380093,
+      "p50_ms": 1.9,
+      "p95_ms": 2.6
+    },
+    "rerank": {
+      "answerable_count": 40,
+      "total_count": 60,
+      "recall_at_10": 1.0,
+      "ndcg_at_5": 0.8569910516987228,
+      "p50_ms": 19.45,
+      "p95_ms": 22.11
+    }
+  },
+  "records": [
+    {
+      "id": "E006",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S02",
+        "S15",
+        "S04",
+        "S01",
+        "S05",
+        "S09",
+        "S08",
+        "S06"
+      ],
+      "elapsed_ms": 0.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E007",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S02",
+        "S04",
+        "S15",
+        "S03",
+        "S08",
+        "S01",
+        "S05",
+        "S07",
+        "S13",
+        "S12"
+      ],
+      "elapsed_ms": 0.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E008",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S02",
+        "S15",
+        "S14",
+        "S06",
+        "S05",
+        "S12",
+        "S16",
+        "S09",
+        "S04",
+        "S03"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E009",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S01",
+        "S13",
+        "S16",
+        "S14",
+        "S04",
+        "S02",
+        "S12",
+        "S06",
+        "S03",
+        "S11"
+      ],
+      "elapsed_ms": 0.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.0
+      }
+    },
+    {
+      "id": "E010",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S02",
+        "S13",
+        "S15",
+        "S10",
+        "S01",
+        "S16",
+        "S06",
+        "S07",
+        "S11",
+        "S05"
+      ],
+      "elapsed_ms": 0.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E016",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S02",
+        "S04",
+        "S12",
+        "S01",
+        "S07",
+        "S16",
+        "S06",
+        "S08",
+        "S05",
+        "S14"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.6309297535714575
+      }
+    },
+    {
+      "id": "E017",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S04",
+        "S05",
+        "S07",
+        "S08",
+        "S13",
+        "S14",
+        "S11",
+        "S10",
+        "S06",
+        "S01"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E018",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S05",
+        "S04",
+        "S02",
+        "S01",
+        "S06",
+        "S12",
+        "S09",
+        "S08",
+        "S11",
+        "S15"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.6309297535714575
+      }
+    },
+    {
+      "id": "E019",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S01",
+        "S03",
+        "S02",
+        "S14",
+        "S15",
+        "S08",
+        "S10",
+        "S06",
+        "S16",
+        "S04"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.0
+      }
+    },
+    {
+      "id": "E020",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S04",
+        "S01",
+        "S05",
+        "S09",
+        "S08",
+        "S06"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E026",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S06",
+        "S10",
+        "S02",
+        "S05",
+        "S01",
+        "S04",
+        "S11",
+        "S07",
+        "S13",
+        "S09"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E027",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S06",
+        "S16",
+        "S01",
+        "S13",
+        "S08",
+        "S04",
+        "S05",
+        "S09",
+        "S12",
+        "S10"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E028",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S06",
+        "S04",
+        "S16",
+        "S10",
+        "S07",
+        "S01",
+        "S11",
+        "S09",
+        "S05",
+        "S15"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E029",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S04",
+        "S07",
+        "S06",
+        "S05",
+        "S08",
+        "S10",
+        "S12",
+        "S15",
+        "S02",
+        "S09"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.5
+      }
+    },
+    {
+      "id": "E030",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S06",
+        "S14",
+        "S03",
+        "S01",
+        "S15",
+        "S12",
+        "S11",
+        "S07",
+        "S13",
+        "S05"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E036",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S16",
+        "S01",
+        "S13",
+        "S14",
+        "S02",
+        "S08",
+        "S09",
+        "S11"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.0
+      }
+    },
+    {
+      "id": "E037",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S08",
+        "S15",
+        "S09",
+        "S05",
+        "S16",
+        "S01",
+        "S12",
+        "S03",
+        "S07",
+        "S02"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E038",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S08",
+        "S07",
+        "S05",
+        "S02",
+        "S03",
+        "S11",
+        "S10",
+        "S06",
+        "S01",
+        "S14"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E039",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S08",
+        "S04",
+        "S07",
+        "S05",
+        "S02",
+        "S14",
+        "S15",
+        "S13",
+        "S06",
+        "S11"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E040",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S09",
+        "S01",
+        "S08",
+        "S16",
+        "S06",
+        "S02",
+        "S05",
+        "S04",
+        "S12",
+        "S07"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.5
+      }
+    },
+    {
+      "id": "E046",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S10",
+        "S16",
+        "S01",
+        "S09",
+        "S13",
+        "S06",
+        "S07",
+        "S08",
+        "S15",
+        "S14"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E047",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S10",
+        "S14",
+        "S16",
+        "S13",
+        "S08",
+        "S01",
+        "S06",
+        "S04",
+        "S11",
+        "S09"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E048",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S10",
+        "S09",
+        "S04",
+        "S16",
+        "S07",
+        "S08",
+        "S13",
+        "S14",
+        "S02",
+        "S01"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E049",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S10",
+        "S14",
+        "S04"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E050",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S10",
+        "S14",
+        "S08",
+        "S01",
+        "S07",
+        "S09",
+        "S05",
+        "S06",
+        "S16",
+        "S13"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E056",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S12",
+        "S15",
+        "S07",
+        "S08",
+        "S10",
+        "S02"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E057",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S12",
+        "S11",
+        "S07",
+        "S05",
+        "S09",
+        "S10",
+        "S13"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E058",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S12",
+        "S09",
+        "S16",
+        "S10",
+        "S11",
+        "S14",
+        "S04",
+        "S06",
+        "S15",
+        "S05"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E059",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S12",
+        "S16",
+        "S03",
+        "S01",
+        "S09",
+        "S05",
+        "S11",
+        "S13",
+        "S04",
+        "S06"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E060",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S12",
+        "S09",
+        "S14",
+        "S11",
+        "S07",
+        "S05",
+        "S03",
+        "S01",
+        "S10",
+        "S13"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E066",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S14",
+        "S05",
+        "S07",
+        "S16",
+        "S15",
+        "S11",
+        "S13",
+        "S06",
+        "S08",
+        "S04"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E067",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S14",
+        "S09",
+        "S11",
+        "S10",
+        "S06",
+        "S16",
+        "S13",
+        "S03",
+        "S15",
+        "S07"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E068",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S14",
+        "S09",
+        "S05",
+        "S08",
+        "S10",
+        "S11",
+        "S06",
+        "S13",
+        "S15",
+        "S07"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E069",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S14",
+        "S11",
+        "S01",
+        "S07",
+        "S05",
+        "S13",
+        "S10",
+        "S16",
+        "S15",
+        "S08"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E070",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S14",
+        "S11",
+        "S13",
+        "S09",
+        "S05",
+        "S15",
+        "S12",
+        "S01",
+        "S16",
+        "S10"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E076",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S16",
+        "S09",
+        "S04",
+        "S12",
+        "S03",
+        "S01",
+        "S05"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E077",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S16",
+        "S13",
+        "S12",
+        "S06",
+        "S15",
+        "S07",
+        "S08",
+        "S10",
+        "S02"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E078",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S16",
+        "S08",
+        "S01",
+        "S13",
+        "S05",
+        "S03",
+        "S11",
+        "S06",
+        "S15",
+        "S02"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E079",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S16",
+        "S01",
+        "S03",
+        "S12",
+        "S09",
+        "S06",
+        "S10",
+        "S14",
+        "S08",
+        "S02"
+      ],
+      "elapsed_ms": 0.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E080",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S16",
+        "S05",
+        "S07",
+        "S06",
+        "S04",
+        "S15",
+        "S10",
+        "S11",
+        "S13",
+        "S14"
+      ],
+      "elapsed_ms": 0.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E086",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S01",
+        "S11",
+        "S06",
+        "S12",
+        "S05",
+        "S09",
+        "S15",
+        "S02",
+        "S07",
+        "S08"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E087",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S02",
+        "S14",
+        "S15",
+        "S04",
+        "S06",
+        "S01"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E088",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S16",
+        "S01",
+        "S11",
+        "S06",
+        "S12",
+        "S05",
+        "S09",
+        "S15",
+        "S02",
+        "S07"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E089",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S16",
+        "S12",
+        "S03",
+        "S06",
+        "S01",
+        "S09",
+        "S05"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E090",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S14",
+        "S11",
+        "S06",
+        "S05",
+        "S15",
+        "S02",
+        "S01",
+        "S07",
+        "S08",
+        "S04"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E096",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S01",
+        "S12",
+        "S03",
+        "S06",
+        "S09",
+        "S05"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E097",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S16",
+        "S04",
+        "S01"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E098",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S16",
+        "S11",
+        "S01",
+        "S06",
+        "S05",
+        "S15",
+        "S02",
+        "S07",
+        "S08",
+        "S04"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E099",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S01",
+        "S16",
+        "S09",
+        "S12",
+        "S03",
+        "S11",
+        "S06",
+        "S05",
+        "S15",
+        "S02"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E100",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S01",
+        "S09",
+        "S04",
+        "S14",
+        "S11",
+        "S12",
+        "S03",
+        "S06",
+        "S05"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E106",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S07",
+        "S12",
+        "S08",
+        "S11",
+        "S09"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E107",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S08",
+        "S01",
+        "S05",
+        "S13",
+        "S06",
+        "S07",
+        "S04",
+        "S11",
+        "S15",
+        "S02"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E108",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S01",
+        "S09",
+        "S03",
+        "S12"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E109",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S03",
+        "S12",
+        "S09",
+        "S14",
+        "S10",
+        "S06",
+        "S07",
+        "S04",
+        "S01",
+        "S05"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E110",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S09",
+        "S11",
+        "S05",
+        "S08",
+        "S12",
+        "S04",
+        "S16",
+        "S14",
+        "S07",
+        "S13"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E116",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S12",
+        "S15",
+        "S09",
+        "S03"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E117",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S12",
+        "S16",
+        "S07",
+        "S03",
+        "S01",
+        "S13",
+        "S04",
+        "S09",
+        "S05"
+      ],
+      "elapsed_ms": 0.2,
+      "metrics": null
+    },
+    {
+      "id": "E118",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S05",
+        "S03",
+        "S06",
+        "S01",
+        "S12",
+        "S09",
+        "S07",
+        "S04"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E119",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S09",
+        "S12",
+        "S11",
+        "S14",
+        "S10",
+        "S03",
+        "S06",
+        "S05",
+        "S15",
+        "S02"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E120",
+      "mode": "bm25",
+      "retrieved_ids": [
+        "S11",
+        "S02",
+        "S07",
+        "S08",
+        "S13",
+        "S01",
+        "S14",
+        "S16",
+        "S09",
+        "S12"
+      ],
+      "elapsed_ms": 0.1,
+      "metrics": null
+    },
+    {
+      "id": "E006",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S02",
+        "S04",
+        "S05",
+        "S01",
+        "S15",
+        "S07",
+        "S08",
+        "S16",
+        "S13",
+        "S06"
+      ],
+      "elapsed_ms": 22.6,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E007",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S02",
+        "S04",
+        "S07",
+        "S08",
+        "S01",
+        "S06",
+        "S03",
+        "S12",
+        "S05",
+        "S09"
+      ],
+      "elapsed_ms": 2.3,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E008",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S02",
+        "S05",
+        "S04",
+        "S01",
+        "S08",
+        "S07",
+        "S15",
+        "S03",
+        "S06",
+        "S16"
+      ],
+      "elapsed_ms": 2.5,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E009",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S01",
+        "S03",
+        "S10",
+        "S02",
+        "S09",
+        "S05",
+        "S04",
+        "S08",
+        "S11",
+        "S12"
+      ],
+      "elapsed_ms": 2.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.43067655807339306
+      }
+    },
+    {
+      "id": "E010",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S02",
+        "S15",
+        "S14",
+        "S16",
+        "S04",
+        "S07",
+        "S13",
+        "S01",
+        "S05",
+        "S10"
+      ],
+      "elapsed_ms": 2.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E016",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S04",
+        "S02",
+        "S01",
+        "S06",
+        "S07",
+        "S08",
+        "S05",
+        "S12",
+        "S03",
+        "S13"
+      ],
+      "elapsed_ms": 2.7,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E017",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S05",
+        "S04",
+        "S15",
+        "S10",
+        "S06",
+        "S01",
+        "S14",
+        "S11",
+        "S16",
+        "S07"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.6309297535714575
+      }
+    },
+    {
+      "id": "E018",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S01",
+        "S05",
+        "S04",
+        "S06",
+        "S07",
+        "S09",
+        "S02",
+        "S14",
+        "S08",
+        "S03"
+      ],
+      "elapsed_ms": 2.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.5
+      }
+    },
+    {
+      "id": "E019",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S01",
+        "S03",
+        "S06",
+        "S07",
+        "S10",
+        "S02",
+        "S14",
+        "S05",
+        "S04",
+        "S08"
+      ],
+      "elapsed_ms": 2.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.0
+      }
+    },
+    {
+      "id": "E020",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S04",
+        "S01",
+        "S02",
+        "S16",
+        "S03",
+        "S08",
+        "S05",
+        "S07",
+        "S06",
+        "S12"
+      ],
+      "elapsed_ms": 2.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E026",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S01",
+        "S10",
+        "S09",
+        "S04",
+        "S16",
+        "S12",
+        "S11",
+        "S06",
+        "S05",
+        "S15"
+      ],
+      "elapsed_ms": 2.5,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.0
+      }
+    },
+    {
+      "id": "E027",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S06",
+        "S01",
+        "S08",
+        "S07",
+        "S05",
+        "S04",
+        "S09",
+        "S02",
+        "S13",
+        "S16"
+      ],
+      "elapsed_ms": 2.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E028",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S06",
+        "S04",
+        "S07",
+        "S15",
+        "S05",
+        "S08",
+        "S10",
+        "S02",
+        "S03",
+        "S11"
+      ],
+      "elapsed_ms": 2.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E029",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S06",
+        "S09",
+        "S07",
+        "S08",
+        "S01",
+        "S03",
+        "S11",
+        "S10",
+        "S05",
+        "S12"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E030",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S04",
+        "S01",
+        "S15",
+        "S05",
+        "S10",
+        "S13",
+        "S02",
+        "S06",
+        "S07",
+        "S12"
+      ],
+      "elapsed_ms": 2.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.0
+      }
+    },
+    {
+      "id": "E036",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S08",
+        "S06",
+        "S01",
+        "S07",
+        "S05",
+        "S03",
+        "S09",
+        "S13",
+        "S14",
+        "S12"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E037",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S05",
+        "S08",
+        "S02",
+        "S10",
+        "S07",
+        "S06",
+        "S01",
+        "S03",
+        "S11",
+        "S04"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.6309297535714575
+      }
+    },
+    {
+      "id": "E038",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S08",
+        "S06",
+        "S07",
+        "S05",
+        "S01",
+        "S09",
+        "S13",
+        "S02",
+        "S10",
+        "S11"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E039",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S08",
+        "S03",
+        "S06",
+        "S05",
+        "S10",
+        "S09",
+        "S16",
+        "S01",
+        "S12",
+        "S02"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E040",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S09",
+        "S06",
+        "S01",
+        "S16",
+        "S14",
+        "S08",
+        "S07",
+        "S13",
+        "S10",
+        "S03"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.0
+      }
+    },
+    {
+      "id": "E046",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S10",
+        "S14",
+        "S16",
+        "S09",
+        "S15",
+        "S01",
+        "S13",
+        "S08",
+        "S06",
+        "S07"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E047",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S10",
+        "S14",
+        "S16",
+        "S13",
+        "S01",
+        "S07",
+        "S03",
+        "S15",
+        "S08",
+        "S09"
+      ],
+      "elapsed_ms": 3.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E048",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S10",
+        "S11",
+        "S12",
+        "S04",
+        "S14",
+        "S09",
+        "S01",
+        "S02",
+        "S15",
+        "S06"
+      ],
+      "elapsed_ms": 2.6,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E049",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S10",
+        "S04",
+        "S11",
+        "S05",
+        "S06",
+        "S09",
+        "S01",
+        "S12",
+        "S08",
+        "S07"
+      ],
+      "elapsed_ms": 2.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E050",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S01",
+        "S04",
+        "S09",
+        "S11",
+        "S06",
+        "S12",
+        "S03",
+        "S10",
+        "S05",
+        "S07"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.0
+      }
+    },
+    {
+      "id": "E056",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S12",
+        "S11",
+        "S04",
+        "S01",
+        "S03",
+        "S09",
+        "S16",
+        "S07",
+        "S05",
+        "S06"
+      ],
+      "elapsed_ms": 2.3,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E057",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S12",
+        "S09",
+        "S11",
+        "S10",
+        "S01",
+        "S05",
+        "S03",
+        "S15",
+        "S16",
+        "S06"
+      ],
+      "elapsed_ms": 2.4,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E058",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S12",
+        "S11",
+        "S04",
+        "S07",
+        "S01",
+        "S06",
+        "S15",
+        "S05",
+        "S16",
+        "S09"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E059",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S03",
+        "S01",
+        "S12",
+        "S16",
+        "S06",
+        "S13",
+        "S07",
+        "S02",
+        "S05",
+        "S14"
+      ],
+      "elapsed_ms": 2.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.5
+      }
+    },
+    {
+      "id": "E060",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S12",
+        "S09",
+        "S01",
+        "S03",
+        "S07",
+        "S06",
+        "S04",
+        "S02",
+        "S10",
+        "S08"
+      ],
+      "elapsed_ms": 2.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E066",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S14",
+        "S16",
+        "S10",
+        "S01",
+        "S06",
+        "S15",
+        "S08",
+        "S04",
+        "S09",
+        "S13"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E067",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S16",
+        "S14",
+        "S10",
+        "S13",
+        "S09",
+        "S02",
+        "S03",
+        "S01",
+        "S15",
+        "S08"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.6309297535714575
+      }
+    },
+    {
+      "id": "E068",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S14",
+        "S03",
+        "S01",
+        "S16",
+        "S04",
+        "S13",
+        "S10",
+        "S15",
+        "S02",
+        "S07"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E069",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S14",
+        "S15",
+        "S10",
+        "S16",
+        "S01",
+        "S04",
+        "S08",
+        "S05",
+        "S06",
+        "S07"
+      ],
+      "elapsed_ms": 2.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E070",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S01",
+        "S09",
+        "S16",
+        "S03",
+        "S10",
+        "S07",
+        "S13",
+        "S11",
+        "S14",
+        "S06"
+      ],
+      "elapsed_ms": 2.4,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.0
+      }
+    },
+    {
+      "id": "E076",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S16",
+        "S03",
+        "S01",
+        "S12",
+        "S09",
+        "S14",
+        "S13",
+        "S07",
+        "S06",
+        "S11"
+      ],
+      "elapsed_ms": 2.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E077",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S16",
+        "S12",
+        "S03",
+        "S01",
+        "S07",
+        "S09",
+        "S11",
+        "S06",
+        "S08",
+        "S05"
+      ],
+      "elapsed_ms": 2.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E078",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S13",
+        "S16",
+        "S07",
+        "S12",
+        "S08",
+        "S01",
+        "S03",
+        "S06",
+        "S11",
+        "S04"
+      ],
+      "elapsed_ms": 2.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.6309297535714575
+      }
+    },
+    {
+      "id": "E079",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S16",
+        "S03",
+        "S09",
+        "S12",
+        "S01",
+        "S14",
+        "S10",
+        "S13",
+        "S06",
+        "S07"
+      ],
+      "elapsed_ms": 2.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E080",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S16",
+        "S09",
+        "S06",
+        "S01",
+        "S04",
+        "S14",
+        "S11",
+        "S10",
+        "S07",
+        "S03"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E086",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S03",
+        "S16",
+        "S01",
+        "S12",
+        "S10",
+        "S07",
+        "S14",
+        "S09",
+        "S06",
+        "S13"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": null
+    },
+    {
+      "id": "E087",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S01",
+        "S16",
+        "S03",
+        "S06",
+        "S10",
+        "S05",
+        "S07",
+        "S14",
+        "S15",
+        "S13"
+      ],
+      "elapsed_ms": 2.0,
+      "metrics": null
+    },
+    {
+      "id": "E088",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S16",
+        "S10",
+        "S01",
+        "S07",
+        "S03",
+        "S09",
+        "S12",
+        "S06",
+        "S14",
+        "S11"
+      ],
+      "elapsed_ms": 3.2,
+      "metrics": null
+    },
+    {
+      "id": "E089",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S16",
+        "S01",
+        "S12",
+        "S10",
+        "S09",
+        "S11",
+        "S03",
+        "S14",
+        "S07",
+        "S06"
+      ],
+      "elapsed_ms": 2.3,
+      "metrics": null
+    },
+    {
+      "id": "E090",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S01",
+        "S03",
+        "S16",
+        "S05",
+        "S10",
+        "S06",
+        "S12",
+        "S09",
+        "S13",
+        "S08"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": null
+    },
+    {
+      "id": "E096",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S16",
+        "S01",
+        "S03",
+        "S09",
+        "S12",
+        "S07",
+        "S10",
+        "S11",
+        "S02",
+        "S05"
+      ],
+      "elapsed_ms": 2.0,
+      "metrics": null
+    },
+    {
+      "id": "E097",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S16",
+        "S14",
+        "S09",
+        "S03",
+        "S10",
+        "S01",
+        "S07",
+        "S13",
+        "S12",
+        "S15"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": null
+    },
+    {
+      "id": "E098",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S16",
+        "S03",
+        "S12",
+        "S01",
+        "S07",
+        "S04",
+        "S06",
+        "S05",
+        "S15",
+        "S08"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": null
+    },
+    {
+      "id": "E099",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S01",
+        "S16",
+        "S03",
+        "S12",
+        "S09",
+        "S14",
+        "S13",
+        "S10",
+        "S11",
+        "S02"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": null
+    },
+    {
+      "id": "E100",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S16",
+        "S01",
+        "S14",
+        "S09",
+        "S12",
+        "S03",
+        "S07",
+        "S10",
+        "S11",
+        "S04"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": null
+    },
+    {
+      "id": "E106",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S12",
+        "S07",
+        "S11",
+        "S09",
+        "S01",
+        "S05",
+        "S04",
+        "S03",
+        "S08",
+        "S02"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": null
+    },
+    {
+      "id": "E107",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S01",
+        "S06",
+        "S05",
+        "S04",
+        "S02",
+        "S11",
+        "S15",
+        "S09",
+        "S10",
+        "S07"
+      ],
+      "elapsed_ms": 1.7,
+      "metrics": null
+    },
+    {
+      "id": "E108",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S01",
+        "S05",
+        "S10",
+        "S06",
+        "S07",
+        "S08",
+        "S02",
+        "S13",
+        "S03",
+        "S09"
+      ],
+      "elapsed_ms": 2.9,
+      "metrics": null
+    },
+    {
+      "id": "E109",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S12",
+        "S07",
+        "S06",
+        "S01",
+        "S03",
+        "S05",
+        "S08",
+        "S02",
+        "S09",
+        "S16"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": null
+    },
+    {
+      "id": "E110",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S09",
+        "S11",
+        "S13",
+        "S01",
+        "S12",
+        "S16",
+        "S08",
+        "S03",
+        "S10",
+        "S07"
+      ],
+      "elapsed_ms": 2.1,
+      "metrics": null
+    },
+    {
+      "id": "E116",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S04",
+        "S12",
+        "S07",
+        "S02",
+        "S03",
+        "S01",
+        "S05",
+        "S06",
+        "S13",
+        "S16"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": null
+    },
+    {
+      "id": "E117",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S12",
+        "S02",
+        "S01",
+        "S04",
+        "S03",
+        "S09",
+        "S16",
+        "S05",
+        "S07",
+        "S15"
+      ],
+      "elapsed_ms": 1.7,
+      "metrics": null
+    },
+    {
+      "id": "E118",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S03",
+        "S12",
+        "S04",
+        "S01",
+        "S06",
+        "S05",
+        "S07",
+        "S09",
+        "S02",
+        "S08"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": null
+    },
+    {
+      "id": "E119",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S09",
+        "S11",
+        "S12",
+        "S01",
+        "S07",
+        "S02",
+        "S08",
+        "S03",
+        "S10",
+        "S05"
+      ],
+      "elapsed_ms": 2.1,
+      "metrics": null
+    },
+    {
+      "id": "E120",
+      "mode": "dense",
+      "retrieved_ids": [
+        "S11",
+        "S09",
+        "S03",
+        "S12",
+        "S07",
+        "S01",
+        "S02",
+        "S08",
+        "S10",
+        "S06"
+      ],
+      "elapsed_ms": 2.2,
+      "metrics": null
+    },
+    {
+      "id": "E006",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S02",
+        "S04",
+        "S15",
+        "S05",
+        "S01",
+        "S08",
+        "S09",
+        "S06",
+        "S07",
+        "S16"
+      ],
+      "elapsed_ms": 2.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E007",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S02",
+        "S04",
+        "S08",
+        "S07",
+        "S03",
+        "S01",
+        "S15",
+        "S05",
+        "S12",
+        "S06"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E008",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S02",
+        "S05",
+        "S15",
+        "S04",
+        "S06",
+        "S01",
+        "S14",
+        "S16",
+        "S03",
+        "S09"
+      ],
+      "elapsed_ms": 1.7,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E009",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S13",
+        "S09",
+        "S16",
+        "S12",
+        "S10",
+        "S14"
+      ],
+      "elapsed_ms": 2.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.6309297535714575
+      }
+    },
+    {
+      "id": "E010",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S02",
+        "S15",
+        "S13",
+        "S16",
+        "S01",
+        "S10",
+        "S07",
+        "S06",
+        "S05",
+        "S08"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E016",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S02",
+        "S04",
+        "S01",
+        "S07",
+        "S12",
+        "S06",
+        "S08",
+        "S05",
+        "S16",
+        "S09"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.6309297535714575
+      }
+    },
+    {
+      "id": "E017",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S04",
+        "S05",
+        "S10",
+        "S07",
+        "S14",
+        "S06",
+        "S11",
+        "S08",
+        "S01",
+        "S13"
+      ],
+      "elapsed_ms": 2.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E018",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S05",
+        "S01",
+        "S04",
+        "S06",
+        "S02",
+        "S09",
+        "S07",
+        "S08",
+        "S12",
+        "S14"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.5
+      }
+    },
+    {
+      "id": "E019",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S01",
+        "S03",
+        "S02",
+        "S06",
+        "S14",
+        "S10",
+        "S08",
+        "S15",
+        "S04",
+        "S16"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.0
+      }
+    },
+    {
+      "id": "E020",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S04",
+        "S01",
+        "S05",
+        "S08",
+        "S06",
+        "S09",
+        "S02",
+        "S16",
+        "S03",
+        "S07"
+      ],
+      "elapsed_ms": 2.5,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E026",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S10",
+        "S01",
+        "S06",
+        "S04",
+        "S09",
+        "S05",
+        "S11",
+        "S02",
+        "S12",
+        "S07"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.5
+      }
+    },
+    {
+      "id": "E027",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S06",
+        "S01",
+        "S08",
+        "S16",
+        "S05",
+        "S04",
+        "S13",
+        "S07",
+        "S09",
+        "S12"
+      ],
+      "elapsed_ms": 2.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E028",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S06",
+        "S04",
+        "S07",
+        "S10",
+        "S15",
+        "S05",
+        "S11",
+        "S16",
+        "S08",
+        "S01"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E029",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S05",
+        "S10",
+        "S04",
+        "S01",
+        "S12",
+        "S02"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E030",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S01",
+        "S15",
+        "S06",
+        "S05",
+        "S14",
+        "S03",
+        "S13",
+        "S12",
+        "S07",
+        "S11"
+      ],
+      "elapsed_ms": 2.3,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.5
+      }
+    },
+    {
+      "id": "E036",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S01",
+        "S08",
+        "S13",
+        "S16",
+        "S14",
+        "S09",
+        "S02",
+        "S11",
+        "S06",
+        "S07"
+      ],
+      "elapsed_ms": 2.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.6309297535714575
+      }
+    },
+    {
+      "id": "E037",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S08",
+        "S05",
+        "S02",
+        "S01",
+        "S09",
+        "S07",
+        "S15",
+        "S03",
+        "S16",
+        "S06"
+      ],
+      "elapsed_ms": 2.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E038",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S08",
+        "S07",
+        "S05",
+        "S06",
+        "S02",
+        "S01",
+        "S11",
+        "S10",
+        "S03",
+        "S09"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E039",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S08",
+        "S05",
+        "S06",
+        "S07",
+        "S02",
+        "S04",
+        "S03",
+        "S10",
+        "S14",
+        "S13"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E040",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S09",
+        "S01",
+        "S06",
+        "S16",
+        "S08",
+        "S02",
+        "S07",
+        "S05",
+        "S13",
+        "S14"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.38685280723454163
+      }
+    },
+    {
+      "id": "E046",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S10",
+        "S16",
+        "S09",
+        "S01",
+        "S14",
+        "S13",
+        "S15",
+        "S06",
+        "S08",
+        "S07"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E047",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S10",
+        "S14",
+        "S16",
+        "S13",
+        "S01",
+        "S08",
+        "S09",
+        "S07",
+        "S11",
+        "S06"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E048",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S10",
+        "S04",
+        "S09",
+        "S14",
+        "S16",
+        "S01",
+        "S02",
+        "S07",
+        "S08",
+        "S13"
+      ],
+      "elapsed_ms": 2.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E049",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S10",
+        "S04",
+        "S14",
+        "S11",
+        "S05",
+        "S06",
+        "S09",
+        "S01",
+        "S12",
+        "S08"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E050",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S01",
+        "S10",
+        "S09",
+        "S06",
+        "S08",
+        "S07",
+        "S04",
+        "S11",
+        "S14",
+        "S05"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.6309297535714575
+      }
+    },
+    {
+      "id": "E056",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S12",
+        "S07",
+        "S15",
+        "S08",
+        "S10",
+        "S02",
+        "S11",
+        "S04",
+        "S01",
+        "S03"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E057",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S12",
+        "S11",
+        "S09",
+        "S05",
+        "S10",
+        "S07",
+        "S13",
+        "S01",
+        "S03",
+        "S15"
+      ],
+      "elapsed_ms": 3.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E058",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S12",
+        "S11",
+        "S04",
+        "S09",
+        "S16",
+        "S06",
+        "S07",
+        "S01",
+        "S15",
+        "S10"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E059",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S12",
+        "S03",
+        "S16",
+        "S01",
+        "S13",
+        "S06",
+        "S05",
+        "S09",
+        "S11",
+        "S04"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E060",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S12",
+        "S09",
+        "S07",
+        "S01",
+        "S03",
+        "S11",
+        "S05",
+        "S06",
+        "S14",
+        "S10"
+      ],
+      "elapsed_ms": 2.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E066",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S14",
+        "S16",
+        "S15",
+        "S06",
+        "S07",
+        "S10",
+        "S05",
+        "S08",
+        "S13",
+        "S01"
+      ],
+      "elapsed_ms": 1.7,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E067",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S14",
+        "S16",
+        "S09",
+        "S10",
+        "S13",
+        "S03",
+        "S11",
+        "S06",
+        "S15",
+        "S01"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E068",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S14",
+        "S10",
+        "S09",
+        "S13",
+        "S16",
+        "S01",
+        "S08",
+        "S05",
+        "S03",
+        "S15"
+      ],
+      "elapsed_ms": 2.6,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E069",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S14",
+        "S01",
+        "S10",
+        "S15",
+        "S16",
+        "S05",
+        "S07",
+        "S11",
+        "S04",
+        "S08"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E070",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S09",
+        "S01",
+        "S14",
+        "S11",
+        "S13",
+        "S16",
+        "S10",
+        "S05",
+        "S07",
+        "S03"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.5
+      }
+    },
+    {
+      "id": "E076",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S16",
+        "S09",
+        "S03",
+        "S12",
+        "S01",
+        "S04",
+        "S05",
+        "S14",
+        "S13",
+        "S07"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E077",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S16",
+        "S12",
+        "S07",
+        "S06",
+        "S13",
+        "S08",
+        "S15",
+        "S10",
+        "S02",
+        "S03"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E078",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S16",
+        "S13",
+        "S08",
+        "S01",
+        "S03",
+        "S07",
+        "S05",
+        "S11",
+        "S06",
+        "S12"
+      ],
+      "elapsed_ms": 2.4,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E079",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S16",
+        "S03",
+        "S01",
+        "S09",
+        "S12",
+        "S14",
+        "S10",
+        "S06",
+        "S08",
+        "S13"
+      ],
+      "elapsed_ms": 1.7,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E080",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S16",
+        "S06",
+        "S04",
+        "S07",
+        "S05",
+        "S09",
+        "S10",
+        "S11",
+        "S14",
+        "S15"
+      ],
+      "elapsed_ms": 1.7,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E086",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S01",
+        "S12",
+        "S06",
+        "S03",
+        "S09",
+        "S11",
+        "S07",
+        "S16",
+        "S05",
+        "S14"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": null
+    },
+    {
+      "id": "E087",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S01",
+        "S06",
+        "S14",
+        "S15",
+        "S02",
+        "S04",
+        "S16",
+        "S03",
+        "S10",
+        "S05"
+      ],
+      "elapsed_ms": 1.7,
+      "metrics": null
+    },
+    {
+      "id": "E088",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S16",
+        "S01",
+        "S06",
+        "S12",
+        "S11",
+        "S09",
+        "S07",
+        "S10",
+        "S05",
+        "S03"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": null
+    },
+    {
+      "id": "E089",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S16",
+        "S12",
+        "S01",
+        "S03",
+        "S09",
+        "S06",
+        "S05",
+        "S10",
+        "S11",
+        "S14"
+      ],
+      "elapsed_ms": 2.6,
+      "metrics": null
+    },
+    {
+      "id": "E090",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S01",
+        "S05",
+        "S06",
+        "S14",
+        "S16",
+        "S15",
+        "S11",
+        "S12",
+        "S08",
+        "S10"
+      ],
+      "elapsed_ms": 1.7,
+      "metrics": null
+    },
+    {
+      "id": "E096",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S01",
+        "S03",
+        "S12",
+        "S09",
+        "S05",
+        "S06",
+        "S16",
+        "S07",
+        "S10",
+        "S11"
+      ],
+      "elapsed_ms": 2.2,
+      "metrics": null
+    },
+    {
+      "id": "E097",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S16",
+        "S01",
+        "S04",
+        "S14",
+        "S09",
+        "S03",
+        "S10",
+        "S07",
+        "S13",
+        "S12"
+      ],
+      "elapsed_ms": 1.7,
+      "metrics": null
+    },
+    {
+      "id": "E098",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S16",
+        "S01",
+        "S06",
+        "S05",
+        "S07",
+        "S15",
+        "S12",
+        "S11",
+        "S04",
+        "S08"
+      ],
+      "elapsed_ms": 1.7,
+      "metrics": null
+    },
+    {
+      "id": "E099",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S01",
+        "S16",
+        "S09",
+        "S03",
+        "S12",
+        "S11",
+        "S06",
+        "S14",
+        "S02",
+        "S13"
+      ],
+      "elapsed_ms": 2.2,
+      "metrics": null
+    },
+    {
+      "id": "E100",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S01",
+        "S09",
+        "S14",
+        "S12",
+        "S04",
+        "S03",
+        "S11",
+        "S06",
+        "S05",
+        "S16"
+      ],
+      "elapsed_ms": 2.4,
+      "metrics": null
+    },
+    {
+      "id": "E106",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S07",
+        "S12",
+        "S11",
+        "S09",
+        "S08",
+        "S01",
+        "S05",
+        "S04",
+        "S03",
+        "S02"
+      ],
+      "elapsed_ms": 1.9,
+      "metrics": null
+    },
+    {
+      "id": "E107",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S01",
+        "S05",
+        "S06",
+        "S04",
+        "S08",
+        "S11",
+        "S02",
+        "S07",
+        "S15",
+        "S13"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": null
+    },
+    {
+      "id": "E108",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S01",
+        "S09",
+        "S03",
+        "S12",
+        "S05",
+        "S10",
+        "S06",
+        "S07",
+        "S08",
+        "S02"
+      ],
+      "elapsed_ms": 1.7,
+      "metrics": null
+    },
+    {
+      "id": "E109",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S12",
+        "S03",
+        "S07",
+        "S06",
+        "S09",
+        "S01",
+        "S05",
+        "S10",
+        "S14",
+        "S04"
+      ],
+      "elapsed_ms": 2.3,
+      "metrics": null
+    },
+    {
+      "id": "E110",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S09",
+        "S11",
+        "S12",
+        "S08",
+        "S13",
+        "S16",
+        "S05",
+        "S04",
+        "S07",
+        "S03"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": null
+    },
+    {
+      "id": "E116",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S12",
+        "S03",
+        "S15",
+        "S09",
+        "S04",
+        "S07",
+        "S02",
+        "S01",
+        "S05",
+        "S06"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": null
+    },
+    {
+      "id": "E117",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S12",
+        "S01",
+        "S16",
+        "S03",
+        "S04",
+        "S07",
+        "S09",
+        "S05",
+        "S13",
+        "S02"
+      ],
+      "elapsed_ms": 2.2,
+      "metrics": null
+    },
+    {
+      "id": "E118",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S03",
+        "S05",
+        "S12",
+        "S06",
+        "S01",
+        "S04",
+        "S09",
+        "S07",
+        "S02",
+        "S08"
+      ],
+      "elapsed_ms": 2.0,
+      "metrics": null
+    },
+    {
+      "id": "E119",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S09",
+        "S12",
+        "S11",
+        "S10",
+        "S03",
+        "S01",
+        "S02",
+        "S07",
+        "S06",
+        "S05"
+      ],
+      "elapsed_ms": 1.8,
+      "metrics": null
+    },
+    {
+      "id": "E120",
+      "mode": "hybrid",
+      "retrieved_ids": [
+        "S11",
+        "S07",
+        "S02",
+        "S09",
+        "S08",
+        "S01",
+        "S12",
+        "S16",
+        "S13",
+        "S06"
+      ],
+      "elapsed_ms": 3.2,
+      "metrics": null
+    },
+    {
+      "id": "E006",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S02",
+        "S05",
+        "S15",
+        "S01",
+        "S08",
+        "S06",
+        "S04",
+        "S09",
+        "S13",
+        "S07"
+      ],
+      "elapsed_ms": 18.5,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E007",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S02",
+        "S04",
+        "S15",
+        "S03",
+        "S01",
+        "S06",
+        "S08",
+        "S07",
+        "S13",
+        "S10"
+      ],
+      "elapsed_ms": 18.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E008",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S02",
+        "S15",
+        "S13",
+        "S05",
+        "S06",
+        "S04",
+        "S03",
+        "S08",
+        "S07",
+        "S01"
+      ],
+      "elapsed_ms": 21.3,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E009",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S01",
+        "S02",
+        "S13",
+        "S14",
+        "S16",
+        "S03",
+        "S15",
+        "S04",
+        "S08",
+        "S05"
+      ],
+      "elapsed_ms": 20.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.6309297535714575
+      }
+    },
+    {
+      "id": "E010",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S02",
+        "S15",
+        "S14",
+        "S16",
+        "S13",
+        "S04",
+        "S10",
+        "S07",
+        "S03",
+        "S01"
+      ],
+      "elapsed_ms": 25.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E016",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S04",
+        "S02",
+        "S06",
+        "S01",
+        "S05",
+        "S12",
+        "S08",
+        "S13",
+        "S03",
+        "S09"
+      ],
+      "elapsed_ms": 19.6,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E017",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S04",
+        "S14",
+        "S16",
+        "S05",
+        "S13",
+        "S03",
+        "S06",
+        "S01",
+        "S07",
+        "S08"
+      ],
+      "elapsed_ms": 19.7,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E018",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S05",
+        "S01",
+        "S08",
+        "S06",
+        "S12",
+        "S03",
+        "S13",
+        "S04",
+        "S16",
+        "S14"
+      ],
+      "elapsed_ms": 20.5,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.0
+      }
+    },
+    {
+      "id": "E019",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S03",
+        "S02",
+        "S01",
+        "S15",
+        "S06",
+        "S04",
+        "S07",
+        "S13",
+        "S08",
+        "S10"
+      ],
+      "elapsed_ms": 20.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.0
+      }
+    },
+    {
+      "id": "E020",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S04",
+        "S06",
+        "S01",
+        "S16",
+        "S08",
+        "S05",
+        "S15",
+        "S12",
+        "S14",
+        "S10"
+      ],
+      "elapsed_ms": 20.5,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E026",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S06",
+        "S05",
+        "S01",
+        "S12",
+        "S03",
+        "S02",
+        "S09",
+        "S14",
+        "S04",
+        "S08"
+      ],
+      "elapsed_ms": 18.6,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E027",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S06",
+        "S08",
+        "S13",
+        "S07",
+        "S04",
+        "S09",
+        "S01",
+        "S05",
+        "S02",
+        "S16"
+      ],
+      "elapsed_ms": 21.3,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E028",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S06",
+        "S04",
+        "S07",
+        "S10",
+        "S15",
+        "S03",
+        "S05",
+        "S08",
+        "S14",
+        "S01"
+      ],
+      "elapsed_ms": 18.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E029",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S06",
+        "S07",
+        "S03",
+        "S08",
+        "S10",
+        "S01",
+        "S16",
+        "S13",
+        "S09",
+        "S14"
+      ],
+      "elapsed_ms": 20.7,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E030",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S02",
+        "S06",
+        "S03",
+        "S04",
+        "S07",
+        "S13",
+        "S16",
+        "S11",
+        "S14",
+        "S05"
+      ],
+      "elapsed_ms": 20.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.6309297535714575
+      }
+    },
+    {
+      "id": "E036",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S08",
+        "S13",
+        "S01",
+        "S16",
+        "S02",
+        "S03",
+        "S14",
+        "S09",
+        "S12",
+        "S07"
+      ],
+      "elapsed_ms": 18.4,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E037",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S08",
+        "S05",
+        "S03",
+        "S06",
+        "S02",
+        "S13",
+        "S16",
+        "S07",
+        "S14",
+        "S01"
+      ],
+      "elapsed_ms": 22.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E038",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S08",
+        "S06",
+        "S13",
+        "S07",
+        "S01",
+        "S02",
+        "S05",
+        "S03",
+        "S09",
+        "S16"
+      ],
+      "elapsed_ms": 18.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E039",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S08",
+        "S03",
+        "S13",
+        "S07",
+        "S06",
+        "S02",
+        "S16",
+        "S05",
+        "S01",
+        "S12"
+      ],
+      "elapsed_ms": 20.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E040",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S08",
+        "S09",
+        "S06",
+        "S01",
+        "S03",
+        "S13",
+        "S14",
+        "S12",
+        "S07",
+        "S16"
+      ],
+      "elapsed_ms": 19.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E046",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S10",
+        "S13",
+        "S14",
+        "S16",
+        "S15",
+        "S06",
+        "S08",
+        "S09",
+        "S07",
+        "S03"
+      ],
+      "elapsed_ms": 19.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E047",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S10",
+        "S14",
+        "S16",
+        "S13",
+        "S03",
+        "S09",
+        "S01",
+        "S12",
+        "S08",
+        "S02"
+      ],
+      "elapsed_ms": 20.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E048",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S02",
+        "S14",
+        "S16",
+        "S08",
+        "S04",
+        "S10",
+        "S09",
+        "S01",
+        "S07",
+        "S13"
+      ],
+      "elapsed_ms": 19.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.0
+      }
+    },
+    {
+      "id": "E049",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S10",
+        "S14",
+        "S13",
+        "S16",
+        "S04",
+        "S07",
+        "S11",
+        "S06",
+        "S15",
+        "S02"
+      ],
+      "elapsed_ms": 20.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E050",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S14",
+        "S16",
+        "S07",
+        "S03",
+        "S08",
+        "S10",
+        "S11",
+        "S06",
+        "S12",
+        "S09"
+      ],
+      "elapsed_ms": 21.0,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.0
+      }
+    },
+    {
+      "id": "E056",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S12",
+        "S16",
+        "S03",
+        "S07",
+        "S15",
+        "S08",
+        "S10",
+        "S02",
+        "S11",
+        "S04"
+      ],
+      "elapsed_ms": 19.3,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E057",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S12",
+        "S03",
+        "S09",
+        "S11",
+        "S16",
+        "S07",
+        "S01",
+        "S04",
+        "S13",
+        "S02"
+      ],
+      "elapsed_ms": 21.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E058",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S12",
+        "S07",
+        "S16",
+        "S09",
+        "S03",
+        "S13",
+        "S14",
+        "S04",
+        "S01",
+        "S11"
+      ],
+      "elapsed_ms": 18.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E059",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S12",
+        "S16",
+        "S03",
+        "S13",
+        "S01",
+        "S14",
+        "S11",
+        "S05",
+        "S09",
+        "S08"
+      ],
+      "elapsed_ms": 21.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E060",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S12",
+        "S09",
+        "S07",
+        "S01",
+        "S14",
+        "S13",
+        "S06",
+        "S08",
+        "S03",
+        "S11"
+      ],
+      "elapsed_ms": 22.3,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E066",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S14",
+        "S16",
+        "S10",
+        "S13",
+        "S01",
+        "S03",
+        "S15",
+        "S04",
+        "S06",
+        "S08"
+      ],
+      "elapsed_ms": 18.6,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E067",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S14",
+        "S16",
+        "S03",
+        "S13",
+        "S09",
+        "S15",
+        "S05",
+        "S10",
+        "S08",
+        "S04"
+      ],
+      "elapsed_ms": 20.9,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E068",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S14",
+        "S16",
+        "S03",
+        "S10",
+        "S08",
+        "S13",
+        "S15",
+        "S11",
+        "S02",
+        "S04"
+      ],
+      "elapsed_ms": 19.7,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E069",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S14",
+        "S13",
+        "S01",
+        "S09",
+        "S16",
+        "S11",
+        "S07",
+        "S10",
+        "S05",
+        "S04"
+      ],
+      "elapsed_ms": 18.7,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E070",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S13",
+        "S16",
+        "S03",
+        "S09",
+        "S14",
+        "S06",
+        "S10",
+        "S01",
+        "S12",
+        "S08"
+      ],
+      "elapsed_ms": 18.3,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.38685280723454163
+      }
+    },
+    {
+      "id": "E076",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S16",
+        "S03",
+        "S14",
+        "S12",
+        "S07",
+        "S10",
+        "S04",
+        "S11",
+        "S09",
+        "S01"
+      ],
+      "elapsed_ms": 19.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E077",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S16",
+        "S03",
+        "S13",
+        "S12",
+        "S07",
+        "S01",
+        "S09",
+        "S14",
+        "S08",
+        "S11"
+      ],
+      "elapsed_ms": 20.1,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E078",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S16",
+        "S13",
+        "S14",
+        "S08",
+        "S03",
+        "S02",
+        "S07",
+        "S15",
+        "S10",
+        "S01"
+      ],
+      "elapsed_ms": 19.4,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E079",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S03",
+        "S16",
+        "S01",
+        "S12",
+        "S09",
+        "S14",
+        "S13",
+        "S10",
+        "S08",
+        "S06"
+      ],
+      "elapsed_ms": 18.8,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 0.6309297535714575
+      }
+    },
+    {
+      "id": "E080",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S16",
+        "S14",
+        "S01",
+        "S13",
+        "S10",
+        "S09",
+        "S07",
+        "S06",
+        "S03",
+        "S08"
+      ],
+      "elapsed_ms": 19.2,
+      "metrics": {
+        "recall_at_10": 1.0,
+        "ndcg_at_5": 1.0
+      }
+    },
+    {
+      "id": "E086",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S16",
+        "S03",
+        "S14",
+        "S13",
+        "S10",
+        "S12",
+        "S08",
+        "S01",
+        "S06",
+        "S09"
+      ],
+      "elapsed_ms": 19.0,
+      "metrics": null
+    },
+    {
+      "id": "E087",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S03",
+        "S16",
+        "S13",
+        "S14",
+        "S10",
+        "S08",
+        "S12",
+        "S01",
+        "S06",
+        "S15"
+      ],
+      "elapsed_ms": 18.3,
+      "metrics": null
+    },
+    {
+      "id": "E088",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S16",
+        "S03",
+        "S14",
+        "S12",
+        "S10",
+        "S01",
+        "S06",
+        "S11",
+        "S09",
+        "S07"
+      ],
+      "elapsed_ms": 17.7,
+      "metrics": null
+    },
+    {
+      "id": "E089",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S03",
+        "S16",
+        "S14",
+        "S13",
+        "S12",
+        "S01",
+        "S09",
+        "S06",
+        "S05",
+        "S10"
+      ],
+      "elapsed_ms": 19.8,
+      "metrics": null
+    },
+    {
+      "id": "E090",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S03",
+        "S16",
+        "S14",
+        "S13",
+        "S01",
+        "S05",
+        "S06",
+        "S15",
+        "S11",
+        "S12"
+      ],
+      "elapsed_ms": 17.4,
+      "metrics": null
+    },
+    {
+      "id": "E096",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S03",
+        "S14",
+        "S16",
+        "S13",
+        "S08",
+        "S12",
+        "S05",
+        "S02",
+        "S01",
+        "S09"
+      ],
+      "elapsed_ms": 20.4,
+      "metrics": null
+    },
+    {
+      "id": "E097",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S16",
+        "S03",
+        "S14",
+        "S01",
+        "S04",
+        "S09",
+        "S10",
+        "S07",
+        "S13",
+        "S12"
+      ],
+      "elapsed_ms": 17.9,
+      "metrics": null
+    },
+    {
+      "id": "E098",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S16",
+        "S01",
+        "S06",
+        "S05",
+        "S07",
+        "S15",
+        "S12",
+        "S11",
+        "S04",
+        "S08"
+      ],
+      "elapsed_ms": 19.5,
+      "metrics": null
+    },
+    {
+      "id": "E099",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S01",
+        "S16",
+        "S03",
+        "S14",
+        "S12",
+        "S09",
+        "S13",
+        "S10",
+        "S04",
+        "S15"
+      ],
+      "elapsed_ms": 18.7,
+      "metrics": null
+    },
+    {
+      "id": "E100",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S14",
+        "S16",
+        "S03",
+        "S13",
+        "S12",
+        "S09",
+        "S02",
+        "S01",
+        "S04",
+        "S15"
+      ],
+      "elapsed_ms": 18.7,
+      "metrics": null
+    },
+    {
+      "id": "E106",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S03",
+        "S16",
+        "S12",
+        "S13",
+        "S07",
+        "S11",
+        "S14",
+        "S09",
+        "S08",
+        "S01"
+      ],
+      "elapsed_ms": 17.7,
+      "metrics": null
+    },
+    {
+      "id": "E107",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S03",
+        "S13",
+        "S02",
+        "S08",
+        "S05",
+        "S01",
+        "S07",
+        "S16",
+        "S14",
+        "S11"
+      ],
+      "elapsed_ms": 19.3,
+      "metrics": null
+    },
+    {
+      "id": "E108",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S01",
+        "S13",
+        "S02",
+        "S03",
+        "S09",
+        "S12",
+        "S16",
+        "S05",
+        "S10",
+        "S06"
+      ],
+      "elapsed_ms": 20.8,
+      "metrics": null
+    },
+    {
+      "id": "E109",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S03",
+        "S13",
+        "S12",
+        "S02",
+        "S08",
+        "S07",
+        "S16",
+        "S09",
+        "S01",
+        "S11"
+      ],
+      "elapsed_ms": 17.9,
+      "metrics": null
+    },
+    {
+      "id": "E110",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S09",
+        "S13",
+        "S02",
+        "S16",
+        "S03",
+        "S12",
+        "S11",
+        "S08",
+        "S01",
+        "S14"
+      ],
+      "elapsed_ms": 19.6,
+      "metrics": null
+    },
+    {
+      "id": "E116",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S12",
+        "S03",
+        "S02",
+        "S15",
+        "S16",
+        "S13",
+        "S09",
+        "S07",
+        "S04",
+        "S01"
+      ],
+      "elapsed_ms": 24.2,
+      "metrics": null
+    },
+    {
+      "id": "E117",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S03",
+        "S12",
+        "S09",
+        "S16",
+        "S02",
+        "S01",
+        "S13",
+        "S08",
+        "S07",
+        "S14"
+      ],
+      "elapsed_ms": 18.3,
+      "metrics": null
+    },
+    {
+      "id": "E118",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S03",
+        "S05",
+        "S12",
+        "S13",
+        "S01",
+        "S07",
+        "S06",
+        "S08",
+        "S02",
+        "S09"
+      ],
+      "elapsed_ms": 19.0,
+      "metrics": null
+    },
+    {
+      "id": "E119",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S09",
+        "S11",
+        "S03",
+        "S02",
+        "S12",
+        "S13",
+        "S08",
+        "S16",
+        "S07",
+        "S06"
+      ],
+      "elapsed_ms": 17.0,
+      "metrics": null
+    },
+    {
+      "id": "E120",
+      "mode": "rerank",
+      "retrieved_ids": [
+        "S02",
+        "S03",
+        "S07",
+        "S11",
+        "S12",
+        "S08",
+        "S09",
+        "S06",
+        "S16",
+        "S13"
+      ],
+      "elapsed_ms": 18.1,
+      "metrics": null
+    }
+  ],
+  "device": "cuda",
+  "peak_vram_mb": 609.0,
+  "note": "Draft labels are not a human-reviewed acceptance result. Test results must not be used for parameter selection."
+}

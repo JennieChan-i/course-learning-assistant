@@ -1,0 +1,1 @@
+{"name":"review","version":"1.0.0","triggers":["review"],"allowed_tools":["search_course","get_source"],"input":"previous misconception, course evidence, current question","output":"targeted explanation and variation practice"}
