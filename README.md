@@ -54,6 +54,12 @@ TAVILY_API_KEY=
 
 我使用兼容 OpenAI Chat Completions 的接口约定，要求模型支持原生工具调用和流式输出。部分兼容服务并不支持完整协议，先执行检查：
 
+温度参数默认不发送，采用服务商默认值。仅当所选模型支持自定义温度时，才在 `.env` 中设置 `LLM_TEMPERATURE`；例如某些仅思考模型不接受 `0.2`。
+
+`LLM_TIMEOUT_SECONDS` 默认120秒，是单次请求的超时上限；它不代表响应时延目标。思考模型可能消耗较多时间与输出预算，实际速度需要在所选服务上测量。
+
+结构化出题与评分默认预留 `LLM_STRUCTURED_OUTPUT_TOKENS=3500`。思考模型若耗尽预算，可提高该值，并同步为 `LLM_CONTEXT_TOKENS` 预留足够空间；本次 Kimi 接入使用6000与32768。增大预算可能增加调用费用。
+
 ```powershell
 .venv/Scripts/python.exe -m backend.cli doctor
 .venv/Scripts/python.exe -m backend.cli probe

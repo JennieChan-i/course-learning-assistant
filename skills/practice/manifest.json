@@ -1,1 +1,1 @@
-{"name":"practice","version":"1.0.0","triggers":["practice"],"allowed_tools":["search_course","get_source"],"input":"topic, course evidence","output":"QuestionSet: exactly three grounded questions and private rubric"}
+{"name":"practice","version":"1.0.1","triggers":["practice"],"allowed_tools":["search_course","get_source"],"input":"topic, course evidence","output":"QuestionSet: exactly three grounded questions and private rubric"}

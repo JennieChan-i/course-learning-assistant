@@ -25,6 +25,13 @@ def new_run(settings, kind):
         "skill_versions": {},
         "embedding_model": settings.embedding_model,
         "rerank_model": settings.rerank_model,
+        "generation_parameters": {
+            "temperature": settings.llm_temperature,
+            "max_output_tokens": settings.llm_max_output_tokens,
+            "structured_output_tokens": settings.llm_structured_output_tokens,
+            "context_tokens": settings.llm_context_tokens,
+            "timeout_seconds": settings.llm_timeout_seconds,
+        },
         "events": [],
         "usage": {"prompt_tokens": 0, "completion_tokens": 0},
         "status": "running",
@@ -59,13 +66,14 @@ class LLM:
             self.client = AsyncOpenAI(
                 api_key=self.settings.llm_api_key,
                 base_url=self.settings.llm_base_url,
-                timeout=45,
+                timeout=self.settings.llm_timeout_seconds,
                 max_retries=0,
             )
         return self.client
 
-    def budget(self, messages, tools=None):
-        limit = min(12000, self.settings.llm_context_tokens - self.settings.llm_max_output_tokens - 512)
+    def budget(self, messages, tools=None, output_limit=None):
+        reserved = output_limit or self.settings.llm_max_output_tokens
+        limit = min(12000, self.settings.llm_context_tokens - reserved - 512)
         if conservative_tokens({"messages": messages, "tools": tools or []}) > limit:
             raise ValueError("当前请求超出上下文预算，请缩短问题或缩小课程范围。")
 
@@ -81,15 +89,17 @@ class LLM:
             ) / 1_000_000
 
     async def complete(self, messages, run, role, tools=None, tool_choice=None, output_limit=None):
-        self.budget(messages, tools)
+        self.budget(messages, tools, output_limit)
         kwargs = {
             "model": self.settings.llm_model,
             "messages": messages,
             "max_tokens": output_limit or self.settings.llm_max_output_tokens,
-            "temperature": 0.2,
         }
+        if self.settings.llm_temperature is not None:
+            kwargs["temperature"] = self.settings.llm_temperature
         if tools:
             kwargs["tools"] = tools
+            kwargs["parallel_tool_calls"] = False
             if tool_choice:
                 kwargs["tool_choice"] = tool_choice
         start = time.perf_counter()
@@ -111,7 +121,10 @@ class LLM:
             schema.model_json_schema(), ensure_ascii=False
         )
         message = await self.complete(
-            [*messages, {"role": "system", "content": prompt}], run, role, output_limit=3500
+            [*messages, {"role": "system", "content": prompt}],
+            run,
+            role,
+            output_limit=max(self.settings.llm_structured_output_tokens, self.settings.llm_max_output_tokens),
         )
         content = (message.content or "").strip()
         if content.startswith("```"):
@@ -121,13 +134,16 @@ class LLM:
     async def stream(self, messages, run):
         self.budget(messages)
         start = time.perf_counter()
+        options = {}
+        if self.settings.llm_temperature is not None:
+            options["temperature"] = self.settings.llm_temperature
         response = await self.get_client().chat.completions.create(
             model=self.settings.llm_model,
             messages=messages,
             stream=True,
             stream_options={"include_usage": True},
             max_tokens=self.settings.llm_max_output_tokens,
-            temperature=0.2,
+            **options,
         )
         first = True
         async for part in response:

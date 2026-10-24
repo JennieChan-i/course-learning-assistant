@@ -21,6 +21,9 @@ class Settings(BaseSettings):
     llm_api_key: str = ""
     llm_context_tokens: int = 16384
     llm_max_output_tokens: int = 1800
+    llm_temperature: float | None = None
+    llm_timeout_seconds: float = 120
+    llm_structured_output_tokens: int = 3500
     llm_input_price_per_million: float | None = None
     llm_output_price_per_million: float | None = None
     tavily_api_key: str = ""

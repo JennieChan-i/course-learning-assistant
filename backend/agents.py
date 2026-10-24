@@ -69,7 +69,8 @@ class Agents:
         messages = [
             {
                 "role": "system",
-                "content": SYSTEM + "\n本阶段只收集证据；课程范围不可扩大。最多调用三轮工具。",
+                "content": SYSTEM
+                + "\n本阶段只收集证据；课程范围不可扩大。每轮只调用一个工具，不并行。先用一个完整检索问题调用 search_course，不要拆成多个相近查询。最多调用三轮工具。",
             },
             {
                 "role": "user",
@@ -140,6 +141,8 @@ class Agents:
                         "content": json.dumps(output, ensure_ascii=False),
                     }
                 )
+            if gathered and (not web_enabled or not allow_web or web_used):
+                break
             # Only keep bounded latest tool returns; earlier large evidence is represented by identifiers.
             for old in messages[: -len(message.tool_calls)]:
                 if old.get("role") == "tool":
@@ -298,6 +301,8 @@ class Agents:
         return {"questions": questions, "sources": sources, "revisions": state.get("revisions", -1) + 1}
 
     async def audit(self, state):
+        cited = {sid for q in state["questions"] for sid in q["source_ids"]}
+        audit_sources = [s for s in state["sources"] if s["id"] in cited]
         result = await self.llm.structured(
             [
                 {
@@ -308,7 +313,7 @@ class Agents:
                 {
                     "role": "user",
                     "content": json.dumps(
-                        {"questions": state["questions"], "evidence": packed_sources(state["sources"], 3500)},
+                        {"questions": state["questions"], "evidence": packed_sources(audit_sources, 5500)},
                         ensure_ascii=False,
                     ),
                 },
@@ -382,10 +387,12 @@ class Agents:
                 role=role,
             )
             all_sources = {s["id"]: s for s in [*practice["sources"], *extra]}
+            cited = {sid for q in practice["questions"] for sid in q["source_ids"]}
+            grading_sources = [s for sid, s in all_sources.items() if sid in cited]
             prompt = {
                 "questions": practice["questions"],
                 "student_answers": answers,
-                "evidence": packed_sources(list(all_sources.values()), 2800),
+                "evidence": packed_sources(grading_sources, 4800),
             }
             result = await self.llm.structured(
                 [

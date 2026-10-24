@@ -132,5 +132,6 @@ async def test_live_agent_flow_over_native_tool_and_stream_protocol(store):
         assert any(e["name"] == "handoff" for e in practice_run["events"])
         assert run["usage"]["prompt_tokens"] > 0
         assert any(b.get("stream") for b in calls)
+        assert all("temperature" not in b for b in calls)
     finally:
         await agent.llm.close()
