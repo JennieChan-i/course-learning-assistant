@@ -140,6 +140,11 @@ def main():
     parser.add_argument("--include-base", action="store_true")
     parser.add_argument("--split", choices=["dev", "test"], default="dev")
     parser.add_argument("--questions", type=Path)
+    parser.add_argument("--max-batches", type=int, default=None)
+    parser.add_argument("--retry-report", type=Path, default=None)
+    parser.add_argument(
+        "--case-ids", default=None, help="Comma-separated case IDs for an explicit regression subset"
+    )
     args = parser.parse_args()
     config = Settings()
     if args.dataset:
@@ -180,7 +185,10 @@ def main():
     elif args.command == "grade-eval":
         from .evaluation import grading_eval
 
-        write_report(config.runtime / "reports" / "grading-ablation.json", asyncio.run(grading_eval(config)))
+        write_report(
+            config.runtime / "reports" / "grading-ablation.json",
+            asyncio.run(grading_eval(config, args.max_batches, args.retry_report)),
+        )
     elif args.command == "answer-eval":
         from .evaluation import answer_eval
 
@@ -191,7 +199,11 @@ def main():
         )
         write_report(
             config.runtime / "reports" / f"answer-{args.split}.json",
-            asyncio.run(answer_eval(config, question_path, args.split)),
+            asyncio.run(
+                answer_eval(
+                    config, question_path, args.split, args.case_ids.split(",") if args.case_ids else None
+                )
+            ),
         )
     else:
         import uvicorn

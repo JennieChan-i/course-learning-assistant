@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -18,6 +18,8 @@ class ChatInput(StrictModel):
 class SearchInput(StrictModel):
     query: str = Field(min_length=1, max_length=600)
     course_id: str | None = None
+    intent: Literal["explain", "compare", "example", "practice", "review", "current", "clarify"] = "explain"
+    clarification: str = Field(default="", max_length=500)
 
 
 class SourceInput(StrictModel):
@@ -26,6 +28,9 @@ class SourceInput(StrictModel):
 
 class WebInput(StrictModel):
     query: str = Field(min_length=1, max_length=160)
+    include_domains: list[
+        Annotated[str, Field(max_length=253, pattern=r"^(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,63}$")]
+    ] = Field(default_factory=list, max_length=5)
 
 
 class Route(StrictModel):

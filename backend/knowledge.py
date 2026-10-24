@@ -219,8 +219,9 @@ class LocalModels:
 
 
 class Knowledge:
-    def __init__(self, settings: Settings):
+    def __init__(self, settings: Settings, index_override=None):
         self.settings = settings
+        self._index_override = index_override
         self.corpus = Corpus(settings.course_path)
         self.models = LocalModels(settings)
         self.client = None
@@ -243,6 +244,8 @@ class Knowledge:
 
     @property
     def index_path(self):
+        if self._index_override is not None:
+            return self._index_override
         tag = self.settings.embedding_model.replace("/", "--")
         return self.settings.runtime / "indexes" / f"{self.corpus.version}-{tag}"
 

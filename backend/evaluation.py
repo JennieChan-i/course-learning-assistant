@@ -1,17 +1,11 @@
 import hashlib
 import json
 import math
-import tempfile
-import time
-from pathlib import Path
 
 import numpy as np
 
-from .agents import Agents
 from .config import ROOT
 from .knowledge import Knowledge
-from .llm import new_run
-from .store import Store
 
 
 def read_jsonl(path):
@@ -42,6 +36,12 @@ def retrieval_eval(config, path, split):
         actual = hashlib.sha256(json.dumps(rows, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
         if actual != expected:
             raise ValueError("锁定测试集已变化，请创建新版本并记录原因，不可静默覆盖。")
+    from .evaluation_review import reviewed_rows
+
+    merged, review_version = reviewed_rows(path, all_rows)
+    rows = [r for r in merged if r["split"] == split]
+    if not rows:
+        raise ValueError("该集合没有可评测条目。")
     kb = Knowledge(config)
     report = {
         "status": "exploratory",
@@ -49,6 +49,7 @@ def retrieval_eval(config, path, split):
         "dataset": config.dataset,
         "dataset_version": kb.corpus.version,
         "split": split,
+        "review_version": review_version,
         "embedding_model": config.embedding_model,
         "rerank_model": config.rerank_model,
         "conditions": "single concurrency; warmed models; unanswerable queries excluded from retrieval metric denominators",
@@ -97,116 +98,13 @@ def retrieval_eval(config, path, split):
     return report
 
 
-async def grading_eval(config):
-    if not config.llm_ready:
-        return {"status": "not_run", "reason": "LLM API is not configured", "human_review": "pending"}
-    rows = read_jsonl(ROOT / "evals/grading.jsonl")
-    report = {"status": "exploratory", "model": config.llm_model, "records": [], "modes": {}}
-    kb = Knowledge(config)
-    with tempfile.TemporaryDirectory(dir=config.runtime) as temp:
-        agent = Agents(config, kb, Store(Path(temp) / "eval.sqlite3"))
-        try:
-            for dual in (False, True):
-                mode = "two_agents" if dual else "single_coach"
-                for start in range(0, len(rows), 3):
-                    original = rows[start : start + 3]
-                    batch = original + [original[-1]] * (3 - len(original))
-                    questions = [{**r["question"], "id": f"q{i}"} for i, r in enumerate(batch)]
-                    answers = {f"q{i}": r["answer"] for i, r in enumerate(batch)}
-                    source_ids = {sid for q in questions for sid in q["source_ids"]}
-                    p = {
-                        "questions": questions,
-                        "sources": [kb.corpus.source(s) for s in source_ids],
-                        "course_id": None,
-                        "topic": "",
-                    }
-                    run = new_run(config, f"eval_{mode}")
-                    begun = time.perf_counter()
-                    result = await agent.grade(p, answers, run, dual_agent=dual)
-                    for row, g in zip(original, result["grades"]):
-                        total = g["correctness"] + g["completeness"] + g["reasoning"]
-                        report["records"].append(
-                            {
-                                "id": row["id"],
-                                "mode": mode,
-                                "score": total,
-                                "human_expected_total": row["human_expected_total"],
-                                "grade": g,
-                                "batch_elapsed_ms": round((time.perf_counter() - begun) * 1000),
-                                "batch_usage": run["usage"],
-                            }
-                        )
-                valid = [
-                    r
-                    for r in report["records"]
-                    if r["mode"] == mode and r["human_expected_total"] is not None
-                ]
-                report["modes"][mode] = {
-                    "human_scored_count": len(valid),
-                    "within_one_point": sum(abs(r["score"] - r["human_expected_total"]) <= 1 for r in valid)
-                    / len(valid)
-                    if valid
-                    else None,
-                }
-        finally:
-            await agent.llm.close()
-            kb.close()
-    return report
+async def grading_eval(config, max_batches=None, retry_report=None):
+    from .evaluation_jobs import grading_job
+
+    return await grading_job(config, max_batches, retry_report)
 
 
-async def answer_eval(config, path, split):
-    if not config.llm_ready:
-        return {"status": "not_run", "reason": "LLM API is not configured"}
-    from .schemas import ChatInput
+async def answer_eval(config, path, split, case_ids=None):
+    from .evaluation_jobs import answer_job
 
-    rows = [r for r in read_jsonl(path) if r["split"] == split]
-    kb = Knowledge(config)
-    report = {
-        "status": "awaiting_human_claim_review",
-        "model": config.llm_model,
-        "split": split,
-        "dataset_version": kb.corpus.version,
-        "records": [],
-    }
-    with tempfile.TemporaryDirectory(dir=config.runtime) as temp:
-        store = Store(Path(temp) / "answers.sqlite3")
-        agent = Agents(config, kb, store)
-        try:
-            for row in rows:
-                sid = store.session(None, row.get("course_id"), row["query"])
-                run = new_run(config, "answer_eval")
-                start = time.perf_counter()
-                first = None
-                answer, sources, error = "", [], ""
-                try:
-                    async for item in agent.chat(
-                        ChatInput(message=row["query"], session_id=sid, course_id=row.get("course_id")), run
-                    ):
-                        if item["event"] == "delta":
-                            if first is None:
-                                first = (time.perf_counter() - start) * 1000
-                            answer += item["text"]
-                        elif item["event"] == "sources":
-                            sources = [{"id": s["id"], "text": s["chunk_text"]} for s in item["sources"]]
-                except Exception:
-                    error = "request_failed"
-                report["records"].append(
-                    {
-                        "id": row["id"],
-                        "query": row["query"],
-                        "category": row["category"],
-                        "answer": answer,
-                        "sources": sources,
-                        "error": error,
-                        "first_content_ms": first,
-                        "elapsed_ms": round((time.perf_counter() - start) * 1000),
-                        "usage": run["usage"],
-                        "human_claims": [],
-                        "human_correct_abstention": None,
-                        "human_boundary_pass": None,
-                    }
-                )
-        finally:
-            await agent.llm.close()
-            kb.close()
-    return report
+    return await answer_job(config, path, split, case_ids)

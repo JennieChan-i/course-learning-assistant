@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>评测审阅 · 学知</title>
+    <style>
+      :root {
+        font:
+          15px/1.7 system-ui,
+          "Microsoft YaHei",
+          sans-serif;
+        color: #222;
+        background: #fafafa;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      header {
+        padding: 18px 28px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+        background: white;
+      }
+      header a {
+        color: #315e4f;
+      }
+      main {
+        max-width: 1250px;
+        margin: 25px auto;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 30px;
+      }
+      h1 {
+        font-size: 22px;
+        margin: 0 0 10px;
+      }
+      h2 {
+        font-size: 17px;
+        margin: 20px 0 10px;
+      }
+      p {
+        margin: 8px 0;
+      }
+      label {
+        display: block;
+        margin: 16px 0 5px;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        font: inherit;
+      }
+      input,
+      select,
+      textarea {
+        padding: 9px;
+        border: 1px solid #bbb;
+        border-radius: 6px;
+        width: 100%;
+        background: white;
+        color: #222;
+      }
+      textarea {
+        resize: vertical;
+        min-height: 90px;
+      }
+      button {
+        padding: 8px 14px;
+        border: 1px solid #bbb;
+        border-radius: 6px;
+        background: white;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #eee;
+      }
+      button:focus-visible,
+      a:focus-visible,
+      summary:focus-visible {
+        outline: 2px solid #315e4f;
+        outline-offset: 3px;
+      }
+      .primary {
+        background: #222;
+        color: white;
+      }
+      .muted {
+        font-size: 12px;
+        color: #555;
+      }
+      .list {
+        max-height: 68vh;
+        overflow: auto;
+        margin-top: 18px;
+      }
+      .item {
+        width: 100%;
+        display: block;
+        text-align: left;
+        margin: 5px 0;
+        font-size: 12px;
+      }
+      .item.active {
+        border-color: #315e4f;
+        background: #edf3ef;
+      }
+      .item strong {
+        display: block;
+      }
+      .source {
+        white-space: pre-wrap;
+        padding: 14px;
+        border: 1px solid #ddd;
+        border-radius: 7px;
+        background: white;
+        font-size: 13px;
+        margin: 10px 0;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .row input {
+        flex: 1;
+      }
+      .check {
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+        margin: 20px 0;
+      }
+      .check input {
+        width: auto;
+        margin-top: 7px;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 22px 0;
+      }
+      .message {
+        padding: 12px 0;
+        color: #315e4f;
+      }
+      .error {
+        color: #a32929;
+      }
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        font-size: 12px;
+        background: #f0f0f0;
+        padding: 12px;
+      }
+      aside select {
+        margin-bottom: 8px;
+      }
+      .notice {
+        padding: 14px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: white;
+        margin-bottom: 25px;
+      }
+      @media (max-width: 800px) {
+        main {
+          grid-template-columns: 1fr;
+        }
+        .list {
+          max-height: 180px;
+        }
+        header {
+          padding: 14px;
+        }
+        main {
+          padding: 0 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <span>学知 · 开发者评测审阅</span><a href="/">返回学习工作台</a>
+    </header>
+    <main>
+      <aside>
+        <label for="dataset">评测集</label
+        ><select id="dataset"></select
+        ><label for="filter">审阅状态</label
+        ><select id="filter">
+          <option value="pending">待审阅</option>
+          <option value="all">全部</option>
+          <option value="approved">已审阅</option>
+        </select>
+        <p id="progress" class="muted"></p>
+        <div id="list" class="list" aria-label="题目列表"></div>
+        <button id="export">下载当前标注 JSONL</button>
+      </aside>
+      <section>
+        <div class="notice">
+          <h1>把候选题变成可信的评测依据</h1>
+          <p class="muted">
+            这是开发者工具。标记“人工审阅通过”代表你已亲自核对题目、来源或参考答案。AI
+            生成与模型间一致性不能代替人工真值。标注保存在本地；不会改写锁定的公开测试文件。
+          </p>
+        </div>
+        <details class="notice">
+          <summary>查看真实评测运行结果</summary>
+          <p class="muted">
+            运行完成只代表调用结束；评分准确率与答案证据支持率仍需要独立人工标注。
+          </p>
+          <button id="refresh-runs" type="button">刷新结果</button>
+          <div id="runs" role="status"></div>
+        </details>
+        <div id="message" class="message" role="status"></div>
+        <form id="editor" hidden>
+          <h2 id="case-title"></h2>
+          <p id="category" class="muted"></p>
+          <label for="query">评测问题</label
+          ><textarea id="query" required></textarea>
+          <div id="grading" hidden>
+            <h2>待评分作答</h2>
+            <p id="student" class="source"></p>
+            <details>
+              <summary>参考答案及评分约定</summary>
+              <p id="reference" class="source"></p>
+              <ul id="rubric"></ul>
+            </details>
+            <label for="score">人工总分（0–6）</label
+            ><input id="score" type="number" min="0" max="6" />
+          </div>
+          <div id="retrieval">
+            <label for="ids">相关片段 ID（逗号分隔；无答案/对抗题留空）</label
+            ><input id="ids" />
+            <p class="muted">
+              私有题的候选片段只是定位线索，请独立改写问题和核对相关性，避免照抄片段标题。
+            </p>
+          </div>
+          <h2>核对课程证据</h2>
+          <div class="row">
+            <input
+              id="source-id"
+              aria-label="读取片段 ID"
+              placeholder="输入片段 ID 核对完整正文"
+            /><button id="read-source" type="button">读取片段</button>
+          </div>
+          <div id="sources"></div>
+          <label for="reviewer">审阅者</label
+          ><input
+            id="reviewer"
+            required
+            maxlength="80"
+            autocomplete="name"
+          /><label for="notes">审阅依据、争议或修订说明</label
+          ><textarea id="notes" maxlength="2000"></textarea
+          ><label class="check"
+            ><input id="confirmed" type="checkbox" required /><span
+              >我已实际核对以上内容，确认这次提交是人工标注。</span
+            ></label
+          >
+          <div class="actions">
+            <button class="primary" type="submit">保存人工标注并转下一题</button
+            ><button id="next" type="button">跳过本题</button>
+          </div>
+        </form>
+        <details>
+          <summary>如何运行评测与继续未完成批次？</summary>
+          <pre>
+.venv/Scripts/python.exe -m backend.cli eval --dataset sample --split dev
+.venv/Scripts/python.exe -m backend.cli grade-eval --dataset sample --max-batches 2</pre>
+          <p class="muted">
+            评分评测按模型、参数、数据和代码版本保存检查点；相同配置重新执行会跳过已有批次。--max-batches
+            限制本次新增批次数，可控制调用量。记录中的“人工一致性”只有在人工总分已填写后才计算。
+          </p>
+        </details>
+      </section>
+    </main>
+    <script>
+      const $ = (id) => document.getElementById(id);
+      let rows = [],
+        current = null,
+        selected = "";
+      async function api(path, options = {}) {
+        const r = await fetch("/api/evaluation/" + path, {
+          ...options,
+          headers: {
+            "Content-Type": "application/json",
+            "X-Learning-Client": "workbench",
+          },
+        });
+        const d = await r.json();
+        if (!r.ok)
+          throw Error(typeof d.detail === "string" ? d.detail : "请求失败");
+        return d;
+      }
+      function message(text, error = false) {
+        $("message").textContent = text;
+        $("message").className = "message" + (error ? " error" : "");
+      }
+      function renderList() {
+        const reviewed = rows.filter(
+          (r) => r.review_status === "approved",
+        ).length;
+        $("progress").textContent = `已审阅 ${reviewed} / ${rows.length}`;
+        $("list").replaceChildren();
+        for (const r of rows) {
+          if ($("filter").value === "pending" && r.review_status === "approved")
+            continue;
+          if (
+            $("filter").value === "approved" &&
+            r.review_status !== "approved"
+          )
+            continue;
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "item" + (current?.id === r.id ? " active" : "");
+          const strong = document.createElement("strong");
+          strong.textContent =
+            r.id + (r.review_status === "approved" ? " · 已审阅" : "");
+          const p = document.createElement("span");
+          p.textContent = (r.query || r.question?.prompt || "").slice(0, 55);
+          b.append(strong, p);
+          b.onclick = () => openCase(r.id);
+          $("list").append(b);
+        }
+      }
+      function source(s) {
+        const p = document.createElement("p");
+        p.className = "source";
+        p.textContent = s.id + " · " + s.doc_name + "\n" + s.chunk_text;
+        $("sources").append(p);
+      }
+      async function openCase(id) {
+        try {
+          const d = await api(selected + "/cases/" + id);
+          current = d.case;
+          const grade = selected.endsWith("grading");
+          $("editor").hidden = false;
+          $("case-title").textContent = current.id;
+          $("category").textContent =
+            `${current.category || "评分样例"} · ${current.split || "评分对照"} · ${current.review_status}`;
+          $("query").value = current.query || current.question.prompt;
+          $("query").readOnly = !selected.startsWith("private");
+          $("grading").hidden = !grade;
+          $("retrieval").hidden = grade;
+          $("ids").value = (current.relevant_ids || []).join(", ");
+          $("score").value = current.human_expected_total ?? "";
+          $("reviewer").value =
+            current.reviewer || sessionStorage.getItem("eval-reviewer") || "";
+          $("notes").value = current.review_notes || "";
+          $("confirmed").checked = false;
+          $("sources").replaceChildren();
+          d.sources.forEach(source);
+          if (grade) {
+            $("student").textContent = current.answer;
+            $("reference").textContent = current.question.reference_answer;
+            $("rubric").replaceChildren();
+            current.question.rubric.forEach((t) => {
+              const li = document.createElement("li");
+              li.textContent = t;
+              $("rubric").append(li);
+            });
+          }
+          renderList();
+          message("");
+        } catch (e) {
+          message(e.message, true);
+        }
+      }
+      async function load() {
+        selected = $("dataset").value;
+        rows = await api(selected + "/cases");
+        renderList();
+        if (rows.length)
+          await openCase(
+            rows.find((r) => r.review_status !== "approved")?.id || rows[0].id,
+          );
+      }
+      function next() {
+        const index = rows.findIndex((r) => r.id === current.id);
+        const later = [...rows.slice(index + 1), ...rows.slice(0, index)];
+        const n = later.find((r) => r.review_status !== "approved") || later[0];
+        if (n) openCase(n.id);
+      }
+      $("editor").onsubmit = async (e) => {
+        e.preventDefault();
+        try {
+          const grade = selected.endsWith("grading");
+          const payload = {
+            reviewer: $("reviewer").value,
+            human_confirmed: $("confirmed").checked,
+            query: $("query").value,
+            relevant_ids: grade
+              ? []
+              : $("ids")
+                  .value.split(/[,，\s]+/)
+                  .filter(Boolean),
+            human_expected_total: grade ? Number($("score").value) : null,
+            notes: $("notes").value,
+          };
+          if (grade && $("score").value === "") throw Error("请填写人工总分");
+          await api(selected + "/cases/" + current.id, {
+            method: "PUT",
+            body: JSON.stringify(payload),
+          });
+          sessionStorage.setItem("eval-reviewer", payload.reviewer);
+          rows = await api(selected + "/cases");
+          next();
+          renderList();
+          message("已保存人工标注。");
+        } catch (e) {
+          message(e.message, true);
+        }
+      };
+      $("read-source").onclick = async () => {
+        try {
+          source(
+            await api(
+              selected +
+                "/sources/" +
+                encodeURIComponent($("source-id").value.trim()),
+            ),
+          );
+        } catch (e) {
+          message(e.message, true);
+        }
+      };
+      $("next").onclick = next;
+      $("dataset").onchange = () =>
+        load().catch((e) => message(e.message, true));
+      $("filter").onchange = renderList;
+      $("export").onclick = () => {
+        const blob = new Blob(
+          [rows.map((r) => JSON.stringify(r)).join("\n") + "\n"],
+          { type: "application/jsonl" },
+        );
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = selected + "-reviewed.jsonl";
+        a.click();
+        URL.revokeObjectURL(a.href);
+      };
+      async function refreshRuns() {
+        try {
+          const runs = await api("runs");
+          $("runs").replaceChildren();
+          const seen = new Set();
+          for (const r of runs) {
+            const key = r.dataset + ":" + r.id;
+            if (seen.has(key)) continue;
+            seen.add(key);
+            const p = document.createElement("p");
+            p.className = "muted";
+            const labels = {
+              completed_with_errors: "运行结束，含失败",
+              completed_awaiting_human_review: "运行结束，待人工审阅",
+              completed_awaiting_human_claim_review: "运行结束，待主张审阅",
+              interrupted_for_prompt_revision: "提示词修订前中断",
+              interrupted: "已中断",
+              in_progress: "运行中",
+              in_progress_awaiting_human_claim_review: "运行中",
+            };
+            const detail = r.batches
+              ? Object.entries(r.modes)
+                  .map(
+                    ([m, v]) =>
+                      (m === "two_agents" ? "双角色" : "单角色") +
+                      " " +
+                      v.case_count +
+                      " 条成功 / " +
+                      (v.failed_batches || 0) +
+                      " 批失败",
+                  )
+                  .join("；")
+              : r.cases + " 条问答";
+            p.textContent =
+              (labels[r.status] || r.status) + " · " + r.model + " · " + detail;
+            $("runs").append(p);
+          }
+          if (!runs.length) $("runs").textContent = "暂无真实评测记录。";
+        } catch (e) {
+          $("runs").textContent = e.message;
+        }
+      }
+      $("refresh-runs").onclick = refreshRuns;
+      refreshRuns();
+      api("sets")
+        .then((sets) => {
+          for (const s of sets) {
+            const o = document.createElement("option");
+            o.value = s.id;
+            o.textContent = s.id;
+            $("dataset").append(o);
+          }
+          return load();
+        })
+        .catch((e) => message(e.message, true));
+    </script>
+  </body>
+</html>

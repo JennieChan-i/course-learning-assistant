@@ -30,7 +30,20 @@ async def test_mcp_discovers_tool_and_uses_only_basic_search(config, store, monk
 
         yield SimpleNamespace(
             initialize=AsyncMock(),
-            list_tools=AsyncMock(return_value=SimpleNamespace(tools=[SimpleNamespace(name="tavily_search")])),
+            list_tools=AsyncMock(
+                return_value=SimpleNamespace(
+                    tools=[
+                        SimpleNamespace(
+                            name="tavily_search",
+                            inputSchema={
+                                "properties": {
+                                    k: {} for k in ["query", "search_depth", "max_results", "auto_parameters"]
+                                }
+                            },
+                        )
+                    ]
+                )
+            ),
             call_tool=call_tool,
         )
 
@@ -41,6 +54,54 @@ async def test_mcp_discovers_tool_and_uses_only_basic_search(config, store, monk
     assert calls[0][0] == "tavily_search"
     assert calls[0][1]["search_depth"] == "basic"
     assert calls[0][1]["auto_parameters"] is False
+    assert store.search_usage() == 1
+
+
+async def test_keyless_quota_envelope_is_not_treated_as_success(config, store, monkeypatch):
+    config.tavily_allow_keyless = True
+
+    @asynccontextmanager
+    async def transport(*args, **kwargs):
+        assert kwargs["http_client"].headers["X-Tavily-Access-Mode"] == "keyless"
+        assert "Authorization" not in kwargs["http_client"].headers
+        yield None, None, lambda: None
+
+    @asynccontextmanager
+    async def session(*args):
+        async def call(name, params):
+            assert "auto_parameters" not in params
+            return SimpleNamespace(
+                isError=False,
+                content=[
+                    SimpleNamespace(
+                        type="text",
+                        text='{"code":"monthly_cap_reached_bonus_eligible","next_actions":[{"type":"agentic_payment"}]}',
+                    )
+                ],
+            )
+
+        yield SimpleNamespace(
+            initialize=AsyncMock(),
+            list_tools=AsyncMock(
+                return_value=SimpleNamespace(
+                    tools=[
+                        SimpleNamespace(
+                            name="tavily_search",
+                            inputSchema={
+                                "properties": {k: {} for k in ["query", "search_depth", "max_results"]}
+                            },
+                        )
+                    ]
+                )
+            ),
+            call_tool=call,
+        )
+
+    monkeypatch.setattr("backend.websearch.streamable_http_client", transport)
+    monkeypatch.setattr("backend.websearch.ClientSession", session)
+    result = await WebSearch(config, store).search("公开文档")
+    assert not result["sources"]
+    assert "额度" in result["warning"]
     assert store.search_usage() == 1
 
 

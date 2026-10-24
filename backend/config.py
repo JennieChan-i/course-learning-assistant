@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from typing import Literal
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -22,11 +23,14 @@ class Settings(BaseSettings):
     llm_context_tokens: int = 16384
     llm_max_output_tokens: int = 1800
     llm_temperature: float | None = None
+    llm_reasoning_effort: Literal["low", "medium", "high", "max"] | None = None
+    llm_coach_reasoning_effort: Literal["low", "medium", "high", "max"] | None = None
     llm_timeout_seconds: float = 120
     llm_structured_output_tokens: int = 3500
     llm_input_price_per_million: float | None = None
     llm_output_price_per_million: float | None = None
     tavily_api_key: str = ""
+    tavily_allow_keyless: bool = False
     search_monthly_limit: int = 300
     embedding_model: str = "BAAI/bge-small-zh-v1.5"
     rerank_model: str = "BAAI/bge-reranker-base"

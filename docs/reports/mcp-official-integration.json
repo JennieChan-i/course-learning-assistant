@@ -1,0 +1,93 @@
+{
+  "query": "请联网搜索 Tavily 当前免费额度和 basic 搜索消耗，只使用 docs.tavily.com 官方文档，include_domains 必须限定 docs.tavily.com。课程没提供当前数值。",
+  "answer": "**结论**：按 Tavily 官方文档，免费额度为每月 1,000 个 API credit，basic 搜索每次请求消耗 1 个 credit，即免费额度约可支持每月 1,000 次 basic 搜索。[W1][W3]\n\n**本次联网检索结果（均来自 docs.tavily.com，按要求限定域名）**：\n\n- **免费额度**：注册免费 API key 即可获得每月 1,000 credits，无需信用卡 [W1][W3]。此外还有一种免 key 的 keyless 访问方式，免费但有速率限制，适合探索和轻度使用 [W2]。\n- **搜索消耗**：费用由搜索深度决定——basic 搜索每请求 1 credit，advanced 搜索每请求 2 credits [W1]。\n- **超额后的参考价**：按量付费约 $0.008/credit，月度套餐约 $0.0075–$0.005/credit，企业版为定制报价 [W1]。\n\n**需要注意的边界**：\n\n- 以上为外部补充信息，课程内容本身并未提供这些数值。课程明确提醒：最新价格、产品版本和接口限制可能变化，不能凭记忆当作确定结论 [S03]。\n- 因此这些数字的效力以本次检索到的官方文档为准，具有时效性。若用于正式决策（如预算或接入方案），建议在执行前再次核对 docs.tavily.com 的 Credits & Pricing 页面，确认额度或单价是否已调整 [S03][W1]。\n- 另外课程还指出，协议或工具本身不决定服务是否免费，额度控制属于服务端规则 [S12]——所以即使通过 MCP 等方式接入 Tavily，实际消耗仍受上述 credit 规则约束。",
+  "source_ids": [
+    "S03",
+    "S16",
+    "S12",
+    "W1",
+    "W2",
+    "W3"
+  ],
+  "external_urls": [
+    "https://docs.tavily.com/documentation/api-credits",
+    "https://docs.tavily.com/documentation/keyless",
+    "https://docs.tavily.com"
+  ],
+  "first_content_ms": 38154,
+  "elapsed_ms": 45730,
+  "events": [
+    {
+      "name": "llm_call",
+      "at": "2026-10-25T02:01:29.455829+08:00",
+      "agent": "coach",
+      "elapsed_ms": 7487,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "name": "intent",
+      "at": "2026-10-25T02:01:29.455829+08:00",
+      "intent": "current",
+      "merged_with": "search_course"
+    },
+    {
+      "name": "tool_call",
+      "at": "2026-10-25T02:01:29.491468+08:00",
+      "agent": "coach",
+      "tool": "search_course",
+      "source_ids": [
+        "S08",
+        "S14",
+        "S13",
+        "S12",
+        "S16",
+        "S03"
+      ],
+      "elapsed_ms": 36,
+      "warning": ""
+    },
+    {
+      "name": "llm_call",
+      "at": "2026-10-25T02:01:32.084843+08:00",
+      "agent": "coach",
+      "elapsed_ms": 2593,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "name": "tool_call",
+      "at": "2026-10-25T02:01:36.395827+08:00",
+      "agent": "coach",
+      "tool": "search_web",
+      "source_ids": [
+        "W3",
+        "W1",
+        "W4",
+        "W5",
+        "W2"
+      ],
+      "elapsed_ms": 4311,
+      "warning": ""
+    },
+    {
+      "name": "first_content",
+      "at": "2026-10-25T02:02:00.118167+08:00",
+      "elapsed_ms": 23720
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 3686,
+    "completion_tokens": 1784
+  },
+  "parameters": {
+    "temperature": null,
+    "reasoning_effort": null,
+    "max_output_tokens": 1800,
+    "structured_output_tokens": 6000,
+    "context_tokens": 32768,
+    "timeout_seconds": 120.0
+  },
+  "warnings": [],
+  "status": "completed",
+  "transport": "real MCP Streamable HTTP",
+  "model": "kimi-k3"
+}

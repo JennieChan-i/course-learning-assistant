@@ -6,7 +6,9 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+from .evaluation_review import EvaluationReview, ReviewInput
 from starlette.middleware.trustedhost import TrustedHostMiddleware
+from starlette.datastructures import Headers, MutableHeaders
 
 from .agents import Agents, demo_answers
 from .config import ROOT, settings
@@ -25,6 +27,59 @@ def public_practice(p):
     if p.get("demo"):
         result["demo_answers"] = demo_answers()
     return result
+
+
+async def cancellable(request, work):
+    task = asyncio.create_task(work)
+    try:
+        while not task.done():
+            if await request.is_disconnected():
+                raise asyncio.CancelledError()
+            await asyncio.wait({task}, timeout=0.25)
+        return await task
+    finally:
+        if not task.done():
+            task.cancel()
+            try:
+                await task
+            except asyncio.CancelledError:
+                pass
+
+
+class LocalRequestGuard:
+    """Pure ASGI: preserve disconnect signals while enforcing the local API boundary."""
+
+    def __init__(self, app, port):
+        self.app, self.port = app, port
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            return await self.app(scope, receive, send)
+        headers = Headers(scope=scope)
+        reason = None
+        if scope["method"] in ("POST", "PUT", "DELETE") and scope["path"].startswith("/api/"):
+            if headers.get("X-Learning-Client") != "workbench":
+                reason = "缺少本地工作台请求标识。"
+            origin = headers.get("Origin")
+            if origin and origin not in (
+                f"http://127.0.0.1:{self.port}",
+                f"http://localhost:{self.port}",
+                "http://127.0.0.1:5173",
+                "http://localhost:5173",
+            ):
+                reason = "不允许的请求来源。"
+
+        async def guarded_send(message):
+            if message["type"] == "http.response.start":
+                response_headers = MutableHeaders(scope=message)
+                response_headers["X-Content-Type-Options"] = "nosniff"
+                response_headers["Referrer-Policy"] = "no-referrer"
+                response_headers["Cache-Control"] = "no-store"
+            await send(message)
+
+        if reason:
+            return await JSONResponse({"detail": reason}, status_code=403)(scope, receive, guarded_send)
+        await self.app(scope, receive, guarded_send)
 
 
 def create_app(config=settings, knowledge=None, store=None):
@@ -51,24 +106,7 @@ def create_app(config=settings, knowledge=None, store=None):
         allow_headers=["Content-Type", "X-Learning-Client"],
     )
 
-    @app.middleware("http")
-    async def local_request_guard(request: Request, call_next):
-        if request.method in ("POST", "PUT", "DELETE") and request.url.path.startswith("/api/"):
-            if request.headers.get("X-Learning-Client") != "workbench":
-                return JSONResponse({"detail": "缺少本地工作台请求标识。"}, status_code=403)
-            origin = request.headers.get("Origin")
-            if origin and origin not in (
-                f"http://127.0.0.1:{config.app_port}",
-                f"http://localhost:{config.app_port}",
-                "http://127.0.0.1:5173",
-                "http://localhost:5173",
-            ):
-                return JSONResponse({"detail": "不允许的请求来源。"}, status_code=403)
-        response = await call_next(request)
-        response.headers["X-Content-Type-Options"] = "nosniff"
-        response.headers["Referrer-Policy"] = "no-referrer"
-        response.headers["Cache-Control"] = "no-store"
-        return response
+    app.add_middleware(LocalRequestGuard, port=config.app_port)
 
     @app.exception_handler(ValueError)
     async def bad_input(request, exc):
@@ -91,8 +129,15 @@ def create_app(config=settings, knowledge=None, store=None):
             "dataset": config.dataset,
             "llm_ready": config.llm_ready,
             "llm_model": config.llm_model or None,
-            "search_ready": bool(config.tavily_api_key),
-            "search_used": app.state.store.search_usage(),
+            "coach_reasoning_effort": config.llm_coach_reasoning_effort or config.llm_reasoning_effort,
+            "assessor_reasoning_effort": config.llm_reasoning_effort,
+            "search_ready": bool(config.tavily_api_key) or config.tavily_allow_keyless,
+            "search_access_mode": "key"
+            if config.tavily_api_key
+            else "keyless"
+            if config.tavily_allow_keyless
+            else "disabled",
+            "search_used": app.state.agents.web.store.search_usage(),
             "search_limit": config.search_monthly_limit,
             "device": kb.models.device,
             "index_ready": (kb.index_path / "manifest.json").exists(),
@@ -191,7 +236,7 @@ def create_app(config=settings, knowledge=None, store=None):
         return public_practice(app.state.store.practice(practice_id))
 
     @app.post("/api/practices")
-    async def new_practice(body: PracticeInput):
+    async def new_practice(body: PracticeInput, request: Request):
         ensure_idle()
         ensure_course(body.course_id)
         async with app.state.lock:
@@ -199,9 +244,12 @@ def create_app(config=settings, knowledge=None, store=None):
             run["dataset_version"] = app.state.knowledge.corpus.version
             start = time.perf_counter()
             try:
-                result = await app.state.agents.create_practice(body, run)
+                result = await cancellable(request, app.state.agents.create_practice(body, run))
                 run["status"] = "completed"
                 return public_practice(result)
+            except asyncio.CancelledError:
+                run["status"] = "cancelled"
+                raise
             except Exception as exc:
                 run["status"] = "failed"
                 if isinstance(exc, ValueError):
@@ -212,7 +260,7 @@ def create_app(config=settings, knowledge=None, store=None):
                 app.state.store.trace(run)
 
     @app.post("/api/practices/{practice_id}/submit")
-    async def submit(practice_id: str, body: Submission):
+    async def submit(practice_id: str, body: Submission, request: Request):
         ensure_idle()
         async with app.state.lock:
             p = app.state.store.practice(practice_id)
@@ -222,10 +270,13 @@ def create_app(config=settings, knowledge=None, store=None):
             run["dataset_version"] = app.state.knowledge.corpus.version
             start = time.perf_counter()
             try:
-                result = await app.state.agents.grade(p, body.answers, run)
+                result = await cancellable(request, app.state.agents.grade(p, body.answers, run))
                 app.state.store.finish_practice(practice_id, result)
                 run["status"] = "completed"
                 return public_practice(app.state.store.practice(practice_id))
+            except asyncio.CancelledError:
+                run["status"] = "cancelled"
+                raise
             except Exception as exc:
                 run["status"] = "failed"
                 if isinstance(exc, ValueError):
@@ -264,6 +315,58 @@ def create_app(config=settings, knowledge=None, store=None):
     @app.get("/api/traces")
     def traces():
         return app.state.store.traces()
+
+    @app.get("/evaluation", include_in_schema=False)
+    def evaluation_page():
+        return FileResponse(ROOT / "frontend/public/evaluation.html")
+
+    @app.get("/api/evaluation/sets")
+    def evaluation_sets():
+        return EvaluationReview().sets()
+
+    @app.get("/api/evaluation/runs")
+    def evaluation_runs():
+        runs = {}
+        for folder in ("live-sample", "live-private"):
+            directory = ROOT / "runtime" / folder / "reports"
+            if not directory.exists():
+                continue
+            for path in directory.glob("*.json"):
+                if not path.name.startswith(("grading-", "answers-")):
+                    continue
+                try:
+                    data = json.loads(path.read_text(encoding="utf-8"))
+                except (ValueError, OSError):
+                    continue
+                if not data.get("fingerprint"):
+                    continue
+                runs[(folder, data["fingerprint"])] = {
+                    "id": data["fingerprint"],
+                    "dataset": folder,
+                    "status": data.get("status"),
+                    "model": data.get("model"),
+                    "cases": len(data.get("records", [])),
+                    "batches": len(data.get("batches", [])),
+                    "modes": data.get("modes", {}),
+                    "updated_at": path.stat().st_mtime,
+                }
+        return sorted(runs.values(), key=lambda r: r["updated_at"], reverse=True)[:8]
+
+    @app.get("/api/evaluation/{name}/cases")
+    def evaluation_cases(name: str):
+        return EvaluationReview().rows(name)
+
+    @app.get("/api/evaluation/{name}/cases/{case_id}")
+    def evaluation_case(name: str, case_id: str):
+        return EvaluationReview().case(name, case_id)
+
+    @app.put("/api/evaluation/{name}/cases/{case_id}")
+    def save_evaluation_case(name: str, case_id: str, body: ReviewInput):
+        return EvaluationReview().save(name, case_id, body)
+
+    @app.get("/api/evaluation/{name}/sources/{source_id}")
+    def evaluation_source(name: str, source_id: str):
+        return EvaluationReview().source(name, source_id)
 
     @app.get("/{path:path}", include_in_schema=False)
     def frontend(path: str):

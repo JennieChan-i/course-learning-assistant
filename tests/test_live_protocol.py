@@ -6,6 +6,7 @@ This is a protocol regression test, not evidence of real model quality.
 import json
 
 import httpx
+import pytest
 from openai import AsyncOpenAI
 
 from backend.agents import Agents, demo_answers, demo_grades, demo_questions
@@ -15,7 +16,8 @@ from backend.llm import new_run
 from backend.schemas import ChatInput, PracticeInput
 
 
-async def test_live_agent_flow_over_native_tool_and_stream_protocol(store):
+@pytest.mark.parametrize("effort", [None, "low"])
+async def test_live_agent_flow_over_native_tool_and_stream_protocol(store, effort):
     demo_config = Settings(_env_file=None, app_mode="demo", dataset="sample")
     config = Settings(
         _env_file=None,
@@ -23,6 +25,7 @@ async def test_live_agent_flow_over_native_tool_and_stream_protocol(store):
         dataset="sample",
         llm_api_key="test-only",
         llm_model="mock-model",
+        llm_reasoning_effort=effort,
         llm_base_url="https://mock.invalid/v1",
     )
     knowledge = Knowledge(demo_config)
@@ -133,5 +136,6 @@ async def test_live_agent_flow_over_native_tool_and_stream_protocol(store):
         assert run["usage"]["prompt_tokens"] > 0
         assert any(b.get("stream") for b in calls)
         assert all("temperature" not in b for b in calls)
+        assert all(b.get("reasoning_effort") == effort for b in calls)
     finally:
         await agent.llm.close()

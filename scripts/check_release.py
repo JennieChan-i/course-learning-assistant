@@ -4,6 +4,7 @@ import csv
 import re
 import subprocess
 from pathlib import Path
+from dotenv import dotenv_values
 
 ROOT = Path(__file__).resolve().parents[1]
 DENIED = ("chunk/", "runtime/", "models/", ".cache/", ".venv/", "artifacts/private/")
@@ -13,6 +14,9 @@ def main():
     result = subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, capture_output=True, check=True)
     paths = [p for p in result.stdout.decode("utf-8").split("\0") if p]
     problems = []
+    local_values = dotenv_values(ROOT / ".env") if (ROOT / ".env").exists() else {}
+    secrets = [local_values.get(k, "") for k in ("LLM_API_KEY", "TAVILY_API_KEY")]
+    secrets = [s for s in secrets if s and len(s) >= 8]
     private_snippets = []
     course = ROOT / "chunk/all_course_chunks_clean_v1.csv"
     if course.exists():
@@ -32,6 +36,8 @@ def main():
         if path.suffix.lower() in (".png", ".jpg", ".webp", ".ico"):
             continue
         text = path.read_text(encoding="utf-8-sig", errors="replace")
+        if any(secret in text for secret in secrets):
+            problems.append(f"Configured credential found: {name}")
         if re.search(
             r"(?:sk-[A-Za-z0-9_-]{20,}|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|tvly-[A-Za-z0-9_-]{20,})",
             text,

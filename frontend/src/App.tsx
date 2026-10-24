@@ -294,6 +294,7 @@ export default function App() {
   }
   async function makePractice(review?: any) {
     if (busy) return;
+    controller.current = new AbortController();
     setBusy(true);
     setStage(isDemo ? "准备固定练习回放" : "教练正在出题，评估员将独立检查");
     setError("");
@@ -302,6 +303,7 @@ export default function App() {
     try {
       const p = await api("/practices", {
         method: "POST",
+        signal: controller.current.signal,
         body: JSON.stringify({
           course_id: review?.course_id || courseId || null,
           topic: review?.topic || topic,
@@ -312,25 +314,35 @@ export default function App() {
       setAnswers(p.demo_answers || {});
       await refresh();
     } catch (e: any) {
-      setError(e.message);
+      setError(
+        e.name === "AbortError"
+          ? "已停止生成练习。已完成的练习仍可在学习记录中查看。"
+          : e.message,
+      );
     } finally {
       setBusy(false);
       setStage("");
     }
   }
   async function submitPractice() {
+    controller.current = new AbortController();
     setBusy(true);
     setError("");
     setStage(isDemo ? "播放固定反馈" : "评估员正在核对作答与课程依据");
     try {
       const p = await api(`/practices/${practice.id}/submit`, {
         method: "POST",
+        signal: controller.current.signal,
         body: JSON.stringify({ answers }),
       });
       setPractice(p);
       await refresh();
     } catch (e: any) {
-      setError(e.message);
+      setError(
+        e.name === "AbortError"
+          ? "已停止等待评分，可在学习记录中检查完成状态或稍后重试。"
+          : e.message,
+      );
     } finally {
       setBusy(false);
       setStage("");
@@ -958,6 +970,15 @@ export default function App() {
               <div className="thinking" role="status">
                 <Loader2 size={15} className="spin" />
                 {stage}
+                {busy && (
+                  <button
+                    type="button"
+                    className="text-button"
+                    onClick={() => controller.current?.abort()}
+                  >
+                    停止任务
+                  </button>
+                )}
               </div>
             )}
           </section>
@@ -1213,6 +1234,14 @@ export default function App() {
               </dd>
               <dt>语言模型</dt>
               <dd>{status?.llm_ready ? status.llm_model : "未配置"}</dd>
+              <dt>回答推理强度</dt>
+              <dd>
+                {status?.coach_reasoning_effort === "low"
+                  ? "轻度推理"
+                  : status?.coach_reasoning_effort || "服务默认"}
+              </dd>
+              <dt>评分推理强度</dt>
+              <dd>{status?.assessor_reasoning_effort || "服务默认"}</dd>
               <dt>本地索引</dt>
               <dd>{status?.index_ready ? "已构建" : "尚未构建"}</dd>
               <dt>推理设备</dt>
@@ -1223,8 +1252,13 @@ export default function App() {
               </dd>
               <dt>联网搜索</dt>
               <dd>
-                {status?.search_ready ? "已配置" : "未配置"} · 本月{" "}
-                {status?.search_used || 0}/{status?.search_limit || 300} 次
+                {status?.search_access_mode === "keyless"
+                  ? "免密免费访问（受服务限额约束）"
+                  : status?.search_ready
+                    ? "已配置密钥"
+                    : "未配置"}{" "}
+                · 本月 {status?.search_used || 0}/{status?.search_limit || 300}{" "}
+                次
               </dd>
             </dl>
             <details className="setup-help">

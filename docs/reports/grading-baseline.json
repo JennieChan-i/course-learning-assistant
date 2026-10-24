@@ -1,0 +1,1734 @@
+{
+  "fingerprint": "9c064c547cdecd07",
+  "model": "kimi-k3",
+  "status": "completed_with_errors",
+  "batches": [
+    {
+      "id": "single_coach:0",
+      "mode": "single_coach",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A01",
+          "question_group": "q1",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生未提供任何实质性内容，仅表示“完全不知道”，无法体现对 RAG 概念的任何理解。",
+            "missing": "缺少全部要点：RAG 在生成前检索资料并把证据交给语言模型组织答案；课程助手可先检索讲义再作答并给出来源；RAG 能引入训练外知识但不保证正确（检索可能遗漏、讲义可能过时、生成可能超出证据）；需要分别检查检索质量、引用支持程度和最终回答 [S01]。",
+            "misconception": "未表达具体错误观念，但完全没有展示对 RAG 的认识。",
+            "suggestion": "请先阅读课程材料《检索增强生成》[S01]，重点记住一句话：RAG 是“先检索、再生成”的方法；再尝试用自己的话说明它为什么有用以及为什么不能盲信其答案。",
+            "source_ids": [
+              "S01"
+            ]
+          }
+        },
+        {
+          "id": "A02",
+          "question_group": "q1",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 3,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 0,
+            "understood": "学生准确掌握了 RAG 的核心定义：在生成前先检索资料，再把相关证据交给语言模型组织答案，与课程表述一致 [S01]。",
+            "missing": "缺少以下要点：1) 应用示例——课程助手先检索讲义再回答学员问题并给出来源；2) 局限性——RAG 能引入训练外知识但不自动保证正确，检索可能遗漏关键片段、讲义可能过时、模型可能生成超出证据的说法；3) 因此需要分别检查检索质量、引用支持程度和最终回答 [S01]。",
+            "misconception": "无明显错误观念，答案所陈述内容正确，只是覆盖不全。",
+            "suggestion": "在答出核心定义后，建议补两层：一是结合场景举例（如课程助手检索讲义并附来源），二是说明局限与对策（为什么不保证正确、要分别检查检索、引用与最终回答），可参考 [S01] 后半部分。",
+            "source_ids": [
+              "S01"
+            ]
+          }
+        },
+        {
+          "id": "A03",
+          "question_group": "q1",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学生正确给出 RAG 的核心定义，并加入了应用示例：课程助手先检索讲义、再回答学员问题并给出来源；还开始提到 RAG 能引入模型训练之外的课程内容，均与 [S01] 一致。",
+            "missing": "答案在“它能引入模型训练之外的课程”处中断，缺少：1) 完整表述“引入训练之外的课程知识”；2) 关键局限性——不自动保证答案正确，检索可能遗漏关键片段、讲义可能过时、模型可能生成超出证据的说法；3) 结论——需要分别检查检索质量、引用支持程度和最终回答 [S01]。",
+            "misconception": "无明显错误观念，已写内容与课程一致，问题主要在答案被截断、要点不完整。",
+            "suggestion": "请注意完整作答、避免句子中断。结尾应补上局限性与验证方法：RAG 不保证正确，需分别检查检索质量、引用支持程度和最终回答 [S01]。提交前通读一遍确认句子完整。",
+            "source_ids": [
+              "S01"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 51.03,
+      "usage": {
+        "prompt_tokens": 1902,
+        "completion_tokens": 1873
+      }
+    },
+    {
+      "id": "single_coach:3",
+      "mode": "single_coach",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A04",
+          "question_group": "q1",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "答案与课程定义一致：RAG 在生成前检索资料，把相关证据交给语言模型组织答案，可引入训练之外的课程知识并给出来源 [S01]。",
+            "missing": "无关键遗漏：已覆盖定义、课程助手应用场景、RAG 不保证正确（检索遗漏、讲义过时、模型超出证据）以及需分别检查检索质量、引用支持程度和最终回答 [S01]。",
+            "misconception": "未发现错误概念。",
+            "suggestion": "内容完整但与课程原文逐字相同，建议用自己的话复述，并补一个具体例子（如某次检索遗漏讲义片段导致答案不全），以体现真正的理解与运用。",
+            "source_ids": [
+              "S01"
+            ]
+          }
+        },
+        {
+          "id": "A05",
+          "question_group": "q2",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学员表示完全不知道，未提供任何可评判的内容。",
+            "missing": "全部要点：重排应放在召回之后、生成之前；重排在召回得到的候选片段中重新判断相关性；关键词相似但语义无关的文本可能被降权；未被召回的资料不会因重排出现；需同时观察召回率、排序质量和新增延迟来决定是否保留重排 [S02]。",
+            "misconception": "无法判断，因未作答。",
+            "suggestion": "建议重读课程中关于检索与重排的部分 [S02]，先记住流程顺序：召回 → 重排 → 生成，再理解重排只能在召回候选内调整顺序这一限制。",
+            "source_ids": [
+              "S02"
+            ]
+          }
+        },
+        {
+          "id": "A06",
+          "question_group": "q2",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 3,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 0,
+            "understood": "已正确写出召回从知识库找出可能相关的片段、重排在候选中重新判断问题与文本的相关性 [S02]，所述内容本身无错误。",
+            "missing": "未直接回答题目所问的顺序：重排一般放在召回之后、生成之前；也未提及语义无关文本会被降到后面、未被召回的正确资料不会凭空出现在重排结果里，以及需同时观察召回率、排序质量和新增延迟来决定是否保留重排 [S02]。",
+            "misconception": "未发现明确错误概念，但只停留在定义，未得出“召回之后、生成之前”的结论。",
+            "suggestion": "建议在定义之后明确写出结论：重排在召回之后、生成之前，并说明理由——重排只能在召回候选中重新排序，且要结合召回率、排序质量与延迟权衡是否使用 [S02]。",
+            "source_ids": [
+              "S02"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 30.25,
+      "usage": {
+        "prompt_tokens": 2065,
+        "completion_tokens": 1216
+      }
+    },
+    {
+      "id": "single_coach:6",
+      "mode": "single_coach",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A07",
+          "question_group": "q2",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 3,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 0,
+            "understood": "学生正确写出：召回从知识库找出可能相关片段，重排在候选中重新判断问题与文本相关性，且重排放在召回之后、生成之前。已写内容与课程一致，无错误。[S02]",
+            "missing": "答案在“关键词相似但语义无”处被截断，缺少：关键词相似但语义无关的文本可能被降到后面；未被召回的正确资料不会凭空出现在重排结果里；需要同时观察召回率、排序质量和新增延迟才能决定是否保留重排。[S02]",
+            "misconception": "未见明确错误概念，主要问题是内容不完整。",
+            "suggestion": "补全答案：说明重排只能改善已召回候选的排序而无法找回漏召回的资料，并指出需结合召回率、排序质量与新增延迟三项指标权衡是否启用重排。",
+            "source_ids": [
+              "S02"
+            ]
+          }
+        },
+        {
+          "id": "A08",
+          "question_group": "q2",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "答案完整覆盖：召回与重排的分工、重排位于召回之后生成之前、语义无关文本会被降权、未召回资料不会凭空出现、需综合召回率/排序质量/延迟评估是否保留重排，与课程表述一致。[S02]",
+            "missing": "无遗漏要点。",
+            "misconception": "无。",
+            "suggestion": "保持。可进一步用自己的话概括，以体现理解而非复述原文。",
+            "source_ids": [
+              "S02"
+            ]
+          }
+        },
+        {
+          "id": "A09",
+          "question_group": "q3",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生仅答“完全不知道”，未提供任何与题目相关的内容。",
+            "missing": "缺少全部要点：课程未覆盖时应说明资料不足并请学员补充条件；价格、版本、接口限制等时效信息不能凭记忆下结论；经允许联网时应查官方资料并区分外部补充与课程内容；未核实时明确标注；来源冲突时展示差异和时间信息。[S03]",
+            "misconception": "未表现出具体错误概念，但完全没有作答内容，无法体现对知识点的掌握。",
+            "suggestion": "即使不确定，也应基于课程原则作答：说明资料不足、区分课程与外部信息、标注未核实内容。建议重读课程中关于证据不足与时效性的部分后重新作答。",
+            "source_ids": [
+              "S03"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 22.65,
+      "usage": {
+        "prompt_tokens": 2097,
+        "completion_tokens": 903
+      }
+    },
+    {
+      "id": "single_coach:9",
+      "mode": "single_coach",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A10",
+          "question_group": "q3",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 3,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 0,
+            "reasoning": 1,
+            "understood": "学员正确掌握了核心原则：课程未覆盖时应说明资料不足，并请学员补充条件，与课程表述一致 [S03]。",
+            "missing": "缺少三个必要要点：①最新价格、产品版本、接口限制可能变化，不能凭记忆给出确定结论；②用户允许联网时可查找官方资料，并区分外部补充与课程内容，未核实时明确标注；③来源冲突时展示差异和时间信息，不能悄悄把网络说法写回课程 [S03]。",
+            "misconception": "无明显错误概念，所答内容本身正确，只是覆盖不全。",
+            "suggestion": "在说明资料不足之后，补充时效性风险（价格/版本/接口限制会变）、联网核实与未核实标注的规则，以及来源冲突的处理方式，可对照 [S03] 逐条检查要点。",
+            "source_ids": [
+              "S03"
+            ]
+          }
+        },
+        {
+          "id": "A11",
+          "question_group": "q3",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学员掌握了资料不足的说明义务，以及价格、版本、接口限制可能变化、不能凭记忆下确定结论的时效性原则 [S03]。",
+            "missing": "答案在『用户允许联』处被截断，联网查找官方资料、区分外部补充与课程内容、未核实标注的要点未完整呈现；来源冲突时展示差异和时间信息、不把网络说法悄悄写回课程的内容完全缺失 [S03]。",
+            "misconception": "无明显错误概念，问题在于答案不完整且中途截断。",
+            "suggestion": "提交前检查答案是否完整：补全联网核实与未核实标注部分，并加上来源冲突处理（展示差异与时间信息、不写回课程）的要点 [S03]。",
+            "source_ids": [
+              "S03"
+            ]
+          }
+        },
+        {
+          "id": "A12",
+          "question_group": "q3",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "学员完整覆盖了全部要点：说明资料不足并请学员补充条件；时效性内容不能凭记忆下结论；允许联网时查官方资料并区分外部补充与课程内容、未核实时明确标注；来源冲突时展示差异和时间信息且不写回课程 [S03]。",
+            "missing": "无遗漏要点。",
+            "misconception": "无错误概念。",
+            "suggestion": "掌握良好。可进一步用自己的话举例说明，例如课程外的最新产品价格问题如何处理，以加深对规则应用场景的理解。",
+            "source_ids": [
+              "S03"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 27.55,
+      "usage": {
+        "prompt_tokens": 2013,
+        "completion_tokens": 1116
+      }
+    },
+    {
+      "id": "single_coach:12",
+      "mode": "single_coach",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A13",
+          "question_group": "q4",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生自述完全不知道，未提供任何与混合检索相关的内容。",
+            "missing": "全部要点缺失：关键词检索擅长精确术语、缩写和名称匹配，向量检索擅长语义相近但措辞不同的表达，二者互补；混合检索同时使用两者；RRF 按排名融合结果而非直接相加不同量纲的原始分数；混合检索需用实际问题测试，多一路召回不一定总有收益且增加候选与处理时间。",
+            "misconception": "未作答，无法判断具体误解。",
+            "suggestion": "先回顾课程中混合检索一节：理解关键词检索与向量检索各自的优势为何互补，再弄清 RRF 是按排名而非原始分数融合，最后记住需要用真实问题验证混合检索是否真的有收益。",
+            "source_ids": [
+              "S04"
+            ]
+          }
+        },
+        {
+          "id": "A14",
+          "question_group": "q4",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学生正确指出关键词检索擅长精确术语、缩写和名称匹配，向量检索擅长语义相近但措辞不同的表达，二者能力互补，这与课程表述一致。",
+            "missing": "缺少：混合检索同时使用两路检索这一机制；RRF 根据候选在各列表中的排名融合结果、避免直接相加不同量纲原始分数的说明；以及混合检索仍需用实际问题测试、多一路召回不一定总有收益且带来更多候选和处理时间的权衡。",
+            "misconception": "所述内容本身无误，未发现明显误解，但把回答停留在两类检索各自优势，未说明如何融合及其实际代价。",
+            "suggestion": "在互补优势的基础上补充两点：一是融合方式，即 RRF 按排名合并两路候选而非直接加分数；二是工程权衡，即混合检索要用真实问题验证收益，并非召回越多路越好。",
+            "source_ids": [
+              "S04"
+            ]
+          }
+        },
+        {
+          "id": "A15",
+          "question_group": "q4",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学生正确复述了两类检索的互补优势，并指出混合检索同时使用两者，开始提到 RRF，但句子在'RRF 根据候选在各列表中的'处被截断，未说明 RRF 如何融合结果。",
+            "missing": "RRF 部分不完整：未写出按排名融合、避免直接相加不同量纲原始分数的关键机制；同时完全缺少混合检索需用实际问题测试、多一路召回不一定总有收益、会增加候选和处理时间的权衡说明。",
+            "misconception": "已写内容无误，未见错误观念；主要问题是答案不完整，RRF 的解释半途而废。",
+            "suggestion": "补全 RRF 一句：它按候选在各列表中的排名融合结果，而不是把关键词分数和向量分数直接相加；再补一句实践提醒：混合检索要用真实问题测试，多一路召回不保证有收益，还会增加处理开销。同时注意作答时检查句子是否完整。",
+            "source_ids": [
+              "S04"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 35.49,
+      "usage": {
+        "prompt_tokens": 1855,
+        "completion_tokens": 1386
+      }
+    },
+    {
+      "id": "single_coach:15",
+      "mode": "single_coach",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A16",
+          "question_group": "q4",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "学员完整掌握了混合检索的核心概念：关键词检索擅长精确术语、缩写和名称匹配，向量检索擅长语义相近但措辞不同的表达，两者互补；并正确说明了 RRF 按排名融合而非直接相加不同量纲的原始分数 [S04]。",
+            "missing": "无实质遗漏。关键词与向量检索的互补性、RRF 的排名融合机制、以及混合检索需要实测且可能带来额外候选与处理时间的权衡，均已覆盖 [S04]。",
+            "misconception": "未发现错误概念。",
+            "suggestion": "回答已完整准确。可进一步思考：在自己的应用场景中，如何设计评测来验证混合检索相比单一路召回是否真有收益。",
+            "source_ids": [
+              "S04"
+            ]
+          }
+        },
+        {
+          "id": "A17",
+          "question_group": "q5",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学员回答\"完全不知道\"，未展示对父子片段检索机制的任何理解。",
+            "missing": "缺少全部要点：完整段落作为父片段、较短子片段用于检索 [S05]；子片段需记录父片段标识和原文位置以便命中后回到上下文并显示可核对来源 [S05]；切分长度应按实际 tokenizer 检查而非把字符数当 token 数 [S05]；重叠可减少边界信息丢失但过大重叠会增加重复证据和索引成本 [S05]。",
+            "misconception": "无具体错误陈述，但完全未作答。",
+            "suggestion": "建议重新阅读 S05 中关于父子片段的讲解：先理解\"为什么短片段利于检索匹配、完整段落利于提供上下文\"，再理解子片段如何通过父片段标识和位置信息回溯到可核对的原文来源。",
+            "source_ids": [
+              "S05"
+            ]
+          }
+        },
+        {
+          "id": "A18",
+          "question_group": "q5",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 3,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 0,
+            "understood": "学员正确复述了父子片段的基本结构：完整段落作为父片段，较短的子片段用于检索 [S05]。所述内容与课程材料一致，无概念错误。",
+            "missing": "缺少关键机制与理由：子片段必须记录父片段标识和原文位置，检索命中后才能回到上下文并显示可核对的来源 [S05]；未说明为什么这样设计（短片段利于精确匹配，父段落提供完整上下文与可核对引用）；也未提及切分长度应按实际 tokenizer 检查、以及重叠减少边界信息丢失但过大重叠增加重复证据和索引成本的权衡 [S05]。",
+            "misconception": "未发现错误概念，但回答仅停留在结构描述，未触及\"为什么\"这一题目核心。",
+            "suggestion": "题目问的是\"为什么\"，建议补充因果链条：短子片段检索精度高，但单靠它上下文不足且无法核对来源，因此保留父片段并通过标识和位置信息回溯 [S05]；同时可补充 tokenizer 检查与重叠取舍这两个实践要点 [S05]。",
+            "source_ids": [
+              "S05"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 34.73,
+      "usage": {
+        "prompt_tokens": 2009,
+        "completion_tokens": 1383
+      }
+    },
+    {
+      "id": "single_coach:18",
+      "mode": "single_coach",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A19",
+          "question_group": "q5",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学生正确阐述了核心机制：完整段落作为父片段，较短的子片段用于检索；子片段记录父片段标识和原文位置，命中后可回到上下文并显示可核对的来源。这与课程证据 [S05] 一致，且直接回答了“为何短片段检索却保留完整段落”。",
+            "missing": "答案在“切分长”处被截断，遗漏了 [S05] 中两个必要要点：(1) 切分长度应按实际 tokenizer 检查，不能把字符数直接当作 token 数；(2) 重叠的作用与代价——重叠可减少边界处信息丢失，但过大重叠会增加重复证据和索引成本。",
+            "misconception": "未发现明显概念错误，问题主要是答案不完整（疑似截断）。",
+            "suggestion": "补全被截断部分：说明用 tokenizer 实际核对切分长度而非按字符数估算，并解释重叠在减少边界信息丢失与增加重复证据、索引成本之间的权衡，可对照 [S05] 自查。",
+            "source_ids": [
+              "S05"
+            ]
+          }
+        },
+        {
+          "id": "A20",
+          "question_group": "q5",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "学生完整覆盖 [S05] 全部要点：父片段（完整段落）与子片段（用于检索）的分工、子片段需记录父片段标识与原文位置以回到上下文并给出可核对来源、按实际 tokenizer 检查切分长度而非字符数、以及重叠减少边界信息丢失但过大重叠增加重复证据与索引成本。",
+            "missing": "无遗漏，与课程证据 [S05] 完全对应。",
+            "misconception": "无。",
+            "suggestion": "内容已完整准确。若想进一步巩固，可尝试用自己的话概括或举一个具体例子（如某段讲义被切成多个子片段后如何回溯到原文），以检验是否真正内化而非复述。",
+            "source_ids": [
+              "S05"
+            ]
+          }
+        },
+        {
+          "id": "A21",
+          "question_group": "q6",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生回答“完全不知道”，未展示对 Embedding 在课程检索中作用的任何理解。",
+            "missing": "遗漏 [S06] 的全部要点：(1) Embedding 模型把文本编码成向量，使语义相近的文本更易被检索到；(2) 文档与问题需使用相匹配的编码方式和同一向量空间；(3) 更换模型或向量维度后原索引通常需重建，不能混用两种模型的向量；(4) 小模型在有限课程集合上可能已够用，应结合召回效果、内存和延迟判断。",
+            "misconception": "未给出具体内容，无法判断是否有错误概念，属于完全未作答。",
+            "suggestion": "请重读课程材料 [S06]：先理解 Embedding 是把文本变成向量以支持语义检索，再记住“文档与问题须同一向量空间、换模型需重建索引”这一工程约束，最后思考为何小模型在小规模课程库上可能已经够用。",
+            "source_ids": [
+              "S06"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 44.41,
+      "usage": {
+        "prompt_tokens": 2051,
+        "completion_tokens": 1468
+      }
+    },
+    {
+      "id": "single_coach:21",
+      "mode": "single_coach",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A22",
+          "question_group": "q6",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 3,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 0,
+            "understood": "正确定位了 Embedding 的核心作用：把文本编码成向量，使语义相近的文本更容易被检索到 [S06]，概念表述无误。",
+            "missing": "缺少三个必要要点：①文档与问题需使用相匹配的编码方式和同一向量空间；②更换模型或向量维度后索引通常需重建，不能混用两种模型的向量；③小模型在有限课程集合上可能已够用，应结合召回效果、内存和延迟判断 [S06]。",
+            "misconception": "无明显错误概念，问题是内容过简、要点大量缺失。",
+            "suggestion": "在定义之外补充向量空间一致性与索引重建的要求，并结合课程规模说明选择模型时召回、内存、延迟的权衡。",
+            "source_ids": [
+              "S06"
+            ]
+          }
+        },
+        {
+          "id": "A23",
+          "question_group": "q6",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 3,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 0,
+            "understood": "正确覆盖了前两点：文本编码为向量便于语义检索，以及文档与问题需要相匹配的编码方式和同一向量空间 [S06]，已写内容无错误。",
+            "missing": "答案在“更换模型或向”处被截断，未完整说明更换模型或维度后索引需重建、不能混用向量；也完全缺少小模型在有限课程集合上够用、应结合召回效果/内存/延迟判断的要点 [S06]。",
+            "misconception": "无错误概念；主要问题是回答中断、要点不完整，且未给出任何应用层面的理由或权衡。",
+            "suggestion": "补全被截断的句子，说明混用向量的后果，并加入模型选择依据（课程规模、召回、内存、延迟）以体现应用理由。",
+            "source_ids": [
+              "S06"
+            ]
+          }
+        },
+        {
+          "id": "A24",
+          "question_group": "q6",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "完整覆盖全部要点：向量化编码支持语义检索、文档与问题需同一向量空间、换模型或维度后索引需重建且不能混用、小模型在有限课程集合上可能够用并需按召回/内存/延迟权衡 [S06]。",
+            "missing": "无实质遗漏。",
+            "misconception": "无。",
+            "suggestion": "回答与课程原文一致，建议下一步用自己的话复述，并结合具体情境（如课程库扩大后何时更换更大模型）展示迁移运用能力。",
+            "source_ids": [
+              "S06"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 65.52,
+      "usage": {
+        "prompt_tokens": 1943,
+        "completion_tokens": 2500
+      }
+    },
+    {
+      "id": "single_coach:24",
+      "mode": "single_coach",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A25",
+          "question_group": "q7",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生仅表示“完全不知道”，没有给出与上下文预算或删除优先级有关的可评价内容。",
+            "missing": "缺少全部要点：上下文窗口有上限；系统规则、任务、证据、学习偏好、历史消息和输出空间都计入预算；应优先保留当前任务和必要证据，裁剪无关历史与重复片段，而不是无限追加；摘要属于派生信息，要保留来源和更新时间，不能把摘要中的推测当成用户明确说过的事实[S07]。",
+            "misconception": "未表现出具体错误概念；主要问题是知识缺失。",
+            "suggestion": "先通读 S07，再用一句话直接回答：满了先删无关历史和重复片段，保留当前任务与必要证据；同时说明预算构成和摘要只能作为带来源/更新时间的派生信息。",
+            "source_ids": [
+              "S07"
+            ]
+          }
+        },
+        {
+          "id": "A26",
+          "question_group": "q7",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 2,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生只写出“模型的上下文窗口有上限”，该前提与 S07 一致，但没有回答“应该先删什么”。",
+            "missing": "缺少预算构成：系统规则、任务、证据、学习偏好、历史消息和输出空间；缺少核心处置：优先保留当前任务和必要证据，裁剪无关历史与重复片段，而不是无限追加；缺少摘要边界：摘要为派生信息，需保留来源和更新时间，不能把推测当成用户明确事实[S07]。",
+            "misconception": "没有明确错误陈述；风险在于把“知道有上限”误当成已经掌握裁剪策略。",
+            "suggestion": "在“窗口有上限”后补上动作句：先裁剪无关历史和重复片段，保留当前任务与必要证据；再列预算计入项，并说明摘要的来源、更新时间与推测限制。",
+            "source_ids": [
+              "S07"
+            ]
+          }
+        },
+        {
+          "id": "A27",
+          "question_group": "q7",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学生正确写出窗口上限、预算计入项，以及“优先保留当前任务和必要证据”的前半原则；但句子停在逗号处，未说出要删除的对象。",
+            "missing": "最关键的删除对象缺失：应裁剪无关历史与重复片段，而不是无限追加对话；还缺少摘要部分：摘要属于派生信息，应保留来源和更新时间，不能把摘要中的推测当成用户明确说过的事实[S07]。",
+            "misconception": "所述内容本身无错误；但若只强调“保留当前任务和必要证据”而不说“裁剪无关历史/重复片段”，就没有完成题目要求的删除判断。",
+            "suggestion": "把句子补全为“……并裁剪无关历史与重复片段，而不是无限追加对话”；再补一句摘要治理：保留来源和更新时间，区分摘要推测与用户明确事实。",
+            "source_ids": [
+              "S07"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 89.59,
+      "usage": {
+        "prompt_tokens": 1847,
+        "completion_tokens": 2497
+      }
+    },
+    {
+      "id": "single_coach:27",
+      "mode": "single_coach",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A28",
+          "question_group": "q7",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "学生完整复述了上下文预算的核心概念：窗口有上限，各类内容（系统规则、任务、证据、偏好、历史、输出空间）都计入预算；裁剪时应优先保留当前任务与必要证据，删无关历史与重复片段；并指出摘要属派生信息，需保留来源与更新时间，不能把摘要中的推测当作用户明确事实。与课程材料 [S07] 完全一致。",
+            "missing": "无实质遗漏。四个要点（预算构成、裁剪优先级、不无限追加、摘要的派生属性与来源标注）均已覆盖。",
+            "misconception": "未发现错误概念。",
+            "suggestion": "答案与参考一致。若想体现真正理解而非复述，可补一个自己的例子，例如说明在多轮长对话中如何用'保留最近证据+带时间戳摘要'替代逐字保留全部历史。",
+            "source_ids": [
+              "S07"
+            ]
+          }
+        },
+        {
+          "id": "A29",
+          "question_group": "q8",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生回答'完全不知道'，未展示对数据版本与质量主题的任何理解。",
+            "missing": "全部要点缺失：(1) 直接回答问题——格式完整并不代表知识准确；(2) 需记录版本、切分规则和模型版本；(3) 重复导入不应重复增加相同片段；(4) 课堂闲聊、转写残缺、过时表述需单独标记；(5) 纯事务性签到内容不参与学习检索；(6) 疑点知识应提交复核而非由清洗模型改写结论。依据 [S08]。",
+            "misconception": "无具体表述，无法判断误解；属于知识空白而非错误概念。",
+            "suggestion": "建议重读课程材料 [S08]，先记住一句话结论'格式正确≠知识正确'，再按'版本记录—去重—质量标记—存疑复核'四个环节组织答案，并尝试用自己的话解释为什么转写残缺的文本即使格式合法也不能直接入库。",
+            "source_ids": [
+              "S08"
+            ]
+          }
+        },
+        {
+          "id": "A30",
+          "question_group": "q8",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 1,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 1,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生正确复述了'知识库需要记录数据文件的版本、切分规则和模型版本'这一句，与 [S08] 原文一致，说明对版本记录这一点有记忆。",
+            "missing": "未直接回答题目所问：格式正确不能证明知识正确（这是本题核心结论）。同时遗漏：重复导入不应重复增加相同片段；课堂闲聊、转写残缺、过时表述需单独标记；纯事务性签到内容可不参与学习检索；疑点表述应提交复核而非由清洗模型擅自改写。依据 [S08]。",
+            "misconception": "未发现明确错误表述，但只答版本记录而回避'格式能否证明知识正确'，暗示可能把'记录了版本/格式合规'误认为知识可靠性的充分条件，需注意区分。",
+            "suggestion": "回答此类判断题时先给出明确结论（'不能证明'），再解释原因：格式只保证机器可解析，不保证内容真实、时效和完整。可结合 [S08] 中'转写残缺、过时表述需单独标记'和'存疑提交复核、不让清洗模型改写结论'来支撑论证。",
+            "source_ids": [
+              "S08"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 33.86,
+      "usage": {
+        "prompt_tokens": 1992,
+        "completion_tokens": 1407
+      }
+    },
+    {
+      "id": "single_coach:30",
+      "mode": "single_coach",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A31",
+          "question_group": "q8",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "答案已写出的部分与课程一致：知识库需记录数据文件版本、切分规则和模型版本；重复导入不应重复增加片段；并指出“格式完整并不代表知识准确”，这正面回应了题目——格式正确不能证明知识正确 [S08]。",
+            "missing": "回答在“课堂闲聊、转写残缺和过”处中断，缺失：1) “过时表述都需要单独标记”的完整结论；2) 纯事务性签到内容可不参与学习检索；3) 存在疑点的表述应提交复核，而非让清洗模型擅自改写为另一种结论；4) 未以“不能证明，因为……”的句式直接、完整地回答这个情境问题。",
+            "misconception": "未发现明确错误概念，主要问题是作答不完整、句子被截断。",
+            "suggestion": "补全被截断的句子，并先明确回答“不能证明”，再说明原因：格式只保证可读性，知识的准确性还需通过标记闲聊、转写残缺、过时表述以及疑点复核机制来保障；最后补上签到内容不参与检索和提交复核这两点 [S08]。",
+            "source_ids": [
+              "S08"
+            ]
+          }
+        },
+        {
+          "id": "A32",
+          "question_group": "q8",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "答案完整覆盖课程要点：记录数据版本、切分规则与模型版本；重复导入去重；格式完整不等于知识准确；课堂闲聊、转写残缺、过时表述需单独标记；事务性签到内容不参与检索；疑点表述提交复核而非由清洗模型改写。核心判断“格式完整并不代表知识准确”直接回答了题目 [S08]。",
+            "missing": "课程内容层面无明显遗漏。唯一可改进处是未以“不能证明”开头作直接判断，而是间接给出结论。",
+            "misconception": "未发现错误概念。",
+            "suggestion": "内容与课程资料高度一致，建议今后用自己的话复述并以“不能证明，因为……”开头直接回应情境问题，再展开版本管理、去重、标记与复核机制，以体现个人理解而非原文复述 [S08]。",
+            "source_ids": [
+              "S08"
+            ]
+          }
+        },
+        {
+          "id": "A33",
+          "question_group": "q9",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生回答“完全不知道”，未展示对工具调用流程的任何理解。",
+            "missing": "全部要点缺失：1) 模型提出请求不等于系统必须执行；2) 应用需验证工具名称、参数类型、权限和次数限制；3) 验证后再运行工具并返回结果；4) 不应把任意 SQL 或文件执行能力交给模型；5) 工具错误需明确反馈，不能伪装成成功结果 [S09]。",
+            "misconception": "未表达具体错误概念，但完全缺乏对“模型只提出请求、应用负责验证与执行”这一核心分工的认识。",
+            "suggestion": "复习课程“Agent 与工具”一节 [S09]，重点记住：语言模型只产生结构化请求，应用层必须做验证（工具名、参数类型、权限、次数限制）后再执行，并把真实结果或明确错误反馈给模型。",
+            "source_ids": [
+              "S09"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 51.29,
+      "usage": {
+        "prompt_tokens": 2021,
+        "completion_tokens": 2150
+      }
+    },
+    {
+      "id": "single_coach:33",
+      "mode": "single_coach",
+      "status": "failed",
+      "records": [],
+      "error_type": "ValidationError",
+      "elapsed_seconds": 43.89,
+      "usage": {
+        "prompt_tokens": 1943,
+        "completion_tokens": 2077
+      }
+    },
+    {
+      "id": "single_coach:36",
+      "mode": "single_coach",
+      "status": "failed",
+      "records": [],
+      "error_type": "APITimeoutError",
+      "elapsed_seconds": 120.01,
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      }
+    },
+    {
+      "id": "single_coach:39",
+      "mode": "single_coach",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A40",
+          "question_group": "q10",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "学生准确指出：分工不取决于是否使用不同模型，学习教练负责解释、出题和辅导，练习评估员负责核对题目并按标准评估作答；同一语言模型可通过不同的上下文和权限实现角色分离，且评估员不需要知道教练对学员的主观判断 [S10]。",
+            "missing": "无。参考答案的要点（两角色职责、同模型但上下文与权限不同、信息隔离、额外调用与延迟成本、共享偏差风险、需单角色对照实验验证收益）均已覆盖 [S10]。",
+            "misconception": "未发现错误概念。学生没有陷入“分工必须用不同模型”的误区，明确说明分工体现在上下文与权限的差异上 [S10]。",
+            "suggestion": "可进一步思考：在自己的学习场景中，哪些信息应对评估员隔离（如教练的鼓励性话术），以及如何设计单角色对照实验来量化分工带来的评分质量提升与延迟成本的权衡。",
+            "source_ids": [
+              "S10"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 20.34,
+      "usage": {
+        "prompt_tokens": 2040,
+        "completion_tokens": 991
+      }
+    },
+    {
+      "id": "two_agents:0",
+      "mode": "two_agents",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A01",
+          "question_group": "q1",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生作答为“完全不知道”，没有提供任何可评分的实质内容。",
+            "missing": "缺少全部要点：RAG 的定义（生成前检索资料、把证据交给语言模型组织答案）、课程助手先检索讲义再回答并给出来源的应用示例、RAG 能引入训练外知识但不保证正确（检索遗漏、讲义过时、生成超出证据），以及需分别检查检索质量、引用支持和最终回答的结论 [S01]。",
+            "misconception": "无明显错误陈述，但“完全不知道”表明对本主题缺乏基本理解。",
+            "suggestion": "建议重新阅读 S01，先记住一句话定义：RAG 是生成前先检索资料、再把证据交给模型组织答案的方法；然后补充一个应用场景和至少一个局限（如检索遗漏或讲义过时）。",
+            "source_ids": [
+              "S01"
+            ]
+          }
+        },
+        {
+          "id": "A02",
+          "question_group": "q1",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 3,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 0,
+            "understood": "学生准确写出了 RAG 的核心定义：在生成前检索资料，再把相关证据交给语言模型组织答案，与 S01 原文一致。",
+            "missing": "只覆盖了定义，缺少：课程助手先检索讲义再回答并给出来源的应用示例；RAG 能引入模型训练之外的课程知识；其不保证正确的原因（检索遗漏、讲义过时、生成超出证据）；以及需分别检查检索质量、引用支持程度和最终回答 [S01]。",
+            "misconception": "无错误陈述，但仅有定义容易让人误以为 RAG 天然可靠，忽略了其局限与验证需求。",
+            "suggestion": "在定义之后补充两点：一是举一个应用例子（课程助手检索讲义并给出来源），二是说明 RAG 不保证正确及需要分别检查的三个环节 [S01]。",
+            "source_ids": [
+              "S01"
+            ]
+          }
+        },
+        {
+          "id": "A03",
+          "question_group": "q1",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学生给出准确定义，并补充了课程助手先检索讲义、回答学员问题并给出来源的应用示例，还开始说明 RAG 能引入模型训练之外的知识，均与 S01 一致。",
+            "missing": "答案在“课程”处中断，句子不完整；缺少 RAG 不自动保证答案正确的局限（检索可能遗漏关键片段、讲义可能过时、模型可能生成超出证据的说法），以及需分别检查检索质量、引用支持程度和最终回答的结论 [S01]。",
+            "misconception": "无错误陈述，但因内容截断，未呈现 RAG 的局限，可能形成“检索后回答即可靠”的不完整印象。",
+            "suggestion": "注意完整作答：在现有内容后补上 RAG 的三类局限和一个结论——检索、引用支持、最终回答要分别检查 [S01]；提交前检查答案是否被截断。",
+            "source_ids": [
+              "S01"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 50.07,
+      "usage": {
+        "prompt_tokens": 2807,
+        "completion_tokens": 2214
+      }
+    },
+    {
+      "id": "two_agents:3",
+      "mode": "two_agents",
+      "status": "failed",
+      "records": [],
+      "error_type": "ValidationError",
+      "elapsed_seconds": 33.81,
+      "usage": {
+        "prompt_tokens": 2065,
+        "completion_tokens": 1266
+      }
+    },
+    {
+      "id": "two_agents:6",
+      "mode": "two_agents",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A07",
+          "question_group": "q2",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学生已写出的部分与课程一致：召回先从知识库取候选，重排在候选中重新判断相关性，位置在召回之后、生成之前 [S02]。核心概念无错误。",
+            "missing": "答案在“关键词相似但语义无”处截断，缺少：1) 重排会把关键词相似但语义无关的文本降权这一完整效果说明；2) 重排的局限——未被召回的正确资料不会凭空出现；3) 需同时观察召回率、排序质量和新增延迟来决定是否保留重排 [S02]。",
+            "misconception": "未发现错误概念，主要问题是内容不完整（疑似截断），而非理解错误。",
+            "suggestion": "请补全答案：说明重排只能在召回候选内调整顺序、无法找回漏召回的资料，并给出用召回率、排序质量、延迟三项指标权衡是否启用重排的完整结论 [S02]。",
+            "source_ids": [
+              "S02"
+            ]
+          }
+        },
+        {
+          "id": "A08",
+          "question_group": "q2",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "答案完整覆盖课程要点：重排位置（召回之后、生成之前）、作用（对候选重判相关性、降权语义无关文本）、局限（无法找回未召回资料）以及评估权衡（召回率、排序质量、延迟）[S02]。",
+            "missing": "无实质遗漏；所有必要要点均已覆盖 [S02]。",
+            "misconception": "无错误概念。提示：该答案与课程原文逐字一致，建议用自己的话复述以体现真正理解。",
+            "suggestion": "掌握程度良好。可尝试结合具体场景（如问答系统延迟预算紧张时）说明何时可能选择关闭重排，以加深对权衡指标的理解 [S02]。",
+            "source_ids": [
+              "S02"
+            ]
+          }
+        },
+        {
+          "id": "A09",
+          "question_group": "q3",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生仅回答“完全不知道”，未给出任何关于助手应如何应对课程未覆盖问题的内容。",
+            "missing": "全部要点缺失：1) 应说明资料不足、必要时请学员补充条件；2) 时效性内容（价格、版本、接口限制）不能凭记忆下结论；3) 联网时需区分外部补充与课程内容、未核实时明确标注；4) 来源冲突时展示差异和时间信息，不把网络说法悄悄写回课程 [S03]。",
+            "misconception": "无具体错误陈述，但答案本身不构成对题目的回应；需注意：作为学习助手场景题，“不知道”也应表达为说明资料不足并请学员补充，而非简单放弃 [S03]。",
+            "suggestion": "请复习 [S03]：正确的答复策略是说明资料不足→请学员补充条件→（用户允许时）查官方资料并区分内外来源→未核实要标注→冲突要展示差异和时间。可按此结构重写答案。",
+            "source_ids": [
+              "S03"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 60.99,
+      "usage": {
+        "prompt_tokens": 3012,
+        "completion_tokens": 2164
+      }
+    },
+    {
+      "id": "two_agents:9",
+      "mode": "two_agents",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A10",
+          "question_group": "q3",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 2,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生正确指出：课程未覆盖时应说明资料不足，必要时请学员补充条件，与课程表述一致 [S03]。",
+            "missing": "遗漏其余四个必要要点：①最新价格、产品版本和接口限制可能变化，不能凭记忆给出确定结论；②用户允许联网时可查官方资料，并区分外部补充与课程内容；③未能联网核实时应明确标注未核实；④来源冲突时展示差异和时间信息，不能悄悄把网络说法写回课程 [S03]。",
+            "misconception": "无明显错误概念，所述内容本身正确，只是覆盖范围过窄。",
+            "suggestion": "在'说明资料不足'之外，补全时效性风险、联网核实与标注、来源冲突处理三个层面，并说明为什么不能凭记忆直接回答（信息可能已变化）[S03]。",
+            "source_ids": [
+              "S03"
+            ]
+          }
+        },
+        {
+          "id": "A11",
+          "question_group": "q3",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学生正确说明了资料不足时的处理方式，并指出价格、版本、接口限制等时效性信息不能凭记忆给出确定结论，与前半部分课程要点一致 [S03]。",
+            "missing": "答案在'用户允许联'处中断，导致后半部分缺失：联网后应区分外部补充与课程内容、未核实时明确标注、来源冲突时展示差异和时间信息且不写回课程，均未完整呈现 [S03]。",
+            "misconception": "无明显错误概念；主要问题是作答不完整、句子被截断。",
+            "suggestion": "完成被截断的句子，并补全联网核实、标注未核实、冲突展示差异三个要点；可简要说明这样处理的理由是避免把未核实或过时信息当作课程结论 [S03]。",
+            "source_ids": [
+              "S03"
+            ]
+          }
+        },
+        {
+          "id": "A12",
+          "question_group": "q3",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "学生完整覆盖了全部要点：说明资料不足并请学员补充条件、时效性信息不能凭记忆下结论、联网查官方资料并区分外部补充、未核实时明确标注、冲突时展示差异和时间信息且不写回课程，与课程内容一致 [S03]。",
+            "missing": "无实质遗漏，五个必要要点均已包含 [S03]。",
+            "misconception": "无错误概念。",
+            "suggestion": "回答已完整；若想更进一步，可用自己的话举例说明（如某产品接口限制更新后如何处理），以体现对要点的应用而非仅复述 [S03]。",
+            "source_ids": [
+              "S03"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 60.87,
+      "usage": {
+        "prompt_tokens": 2851,
+        "completion_tokens": 2828
+      }
+    },
+    {
+      "id": "two_agents:12",
+      "mode": "two_agents",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A13",
+          "question_group": "q4",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生回答“完全不知道”，未提供任何与混合检索相关的内容，无法体现对关键词检索、向量检索、RRF 或混合检索评估的理解。",
+            "missing": "缺少全部要点：关键词检索擅长精确术语、缩写和名称匹配；向量检索擅长语义相近但措辞不同的表达；混合检索同时使用两者；RRF 按排名融合结果、避免直接相加不同量纲的原始分数；混合检索需用实际问题测试且会带来更多候选和处理时间。",
+            "misconception": "无实质作答内容，无法判断具体误解。",
+            "suggestion": "建议重读课程材料 S04 中关于混合检索的段落，先记住两路检索各自的强项（精确匹配 vs. 语义相近），再理解 RRF 的排名融合作用以及混合检索需要实测验证、并非总有收益这一实践结论。",
+            "source_ids": [
+              "S04"
+            ]
+          }
+        },
+        {
+          "id": "A14",
+          "question_group": "q4",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学生正确复述了两路检索的互补强项：关键词检索擅长精确术语、缩写和名称匹配，向量检索擅长语义相近但措辞不同的表达，与 S04 一致，无事实错误。",
+            "missing": "缺少：明确指出混合检索同时使用两者；RRF 根据候选在各列表中的排名融合结果、避免把不同量纲的原始分数直接相加；混合检索仍需用实际问题测试，多一路召回不一定总有收益，还会带来更多候选和处理时间。",
+            "misconception": "未发现明显误解；所述内容与课程一致，只是不完整。",
+            "suggestion": "在现有两点基础上，补全“混合检索同时使用两者”的结论，说明 RRF 按排名而非原始分数融合的原因，并指出混合检索需要实测、存在额外候选与处理成本，以完整回答“为什么还保留关键词检索”。",
+            "source_ids": [
+              "S04"
+            ]
+          }
+        },
+        {
+          "id": "A15",
+          "question_group": "q4",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学生正确写出了两路检索的互补强项，并指出混合检索同时使用两者，与 S04 一致；已尝试引入 RRF，但句子在“RRF 根据候选在各列表中的”处中断，未完成对 RRF 机制的解释。已写部分无事实错误。",
+            "missing": "RRF 要点不完整：未说明 RRF 按排名融合结果、避免把不同量纲的原始分数直接相加；完全缺少混合检索需用实际问题测试、多一路召回不一定总有收益、会带来更多候选和处理时间这一实践要点。",
+            "misconception": "未发现明显误解；问题在于答案被截断且遗漏了评估与成本方面的内容。",
+            "suggestion": "请先补完 RRF 一句：它根据候选在各列表中的排名融合结果，避免直接相加不同量纲的原始分数；再补充混合检索并非必然更优、需要用实际问题测试，并会引入更多候选和处理时间，从而形成完整回答。",
+            "source_ids": [
+              "S04"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 72.55,
+      "usage": {
+        "prompt_tokens": 2773,
+        "completion_tokens": 2575
+      }
+    },
+    {
+      "id": "two_agents:15",
+      "mode": "two_agents",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A16",
+          "question_group": "q4",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "学员准确说明了关键词检索与向量检索的互补优势，并正确指出 RRF 按排名融合以避免不同量纲分数直接相加，同时提到混合检索需实测、存在额外候选与处理成本的权衡。",
+            "missing": "无明显遗漏，覆盖了互补性、RRF 排名融合原理及实际测试必要性与成本三个要点。",
+            "misconception": "无。",
+            "suggestion": "可进一步思考在自己的业务语料上如何设计评估集来验证混合检索相对单一路召回是否确有收益。",
+            "source_ids": [
+              "S04"
+            ]
+          }
+        },
+        {
+          "id": "A17",
+          "question_group": "q5",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学员表示完全不知道，未提供任何可评判的内容。",
+            "missing": "全部要点缺失：父子片段的分工（子片段检索、父片段提供上下文）、子片段须记录父片段标识与原文位置以支持可核对引用、按实际 tokenizer 检查切分长度、重叠的利弊权衡。",
+            "misconception": "无法判断，因未作答。",
+            "suggestion": "建议重读课程资料 S05《知识库与上下文》，重点理解：短子片段提高检索精度，命中后通过父片段标识回到完整段落以提供上下文和可核对来源；可结合一个具体文档切分示例练习。",
+            "source_ids": [
+              "S05"
+            ]
+          }
+        },
+        {
+          "id": "A18",
+          "question_group": "q5",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 3,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 0,
+            "understood": "学员正确复述了父子片段的基本设定：完整段落作为父片段，较短的子片段用于检索。",
+            "missing": "缺少对'为什么'的解释：子片段须记录父片段标识和原文位置，命中后才能回到上下文并显示可核对的来源；也未提及按实际 tokenizer 检查切分长度（不能将字符数当 token 数）以及重叠减少边界信息丢失但过大会增加重复证据和索引成本的权衡。",
+            "misconception": "无错误表述，但仅停留在现象描述，未体现机制层面的理解。",
+            "suggestion": "在回答'为什么'类问题时，除陈述做法外，应说明目的与机制：短片段提升检索匹配精度，父片段标识保证可回溯到完整上下文与可核对引用；建议结合 S05 补充 token 计量与重叠策略两个实践要点。",
+            "source_ids": [
+              "S05"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 69.97,
+      "usage": {
+        "prompt_tokens": 2800,
+        "completion_tokens": 2221
+      }
+    },
+    {
+      "id": "two_agents:18",
+      "mode": "two_agents",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A19",
+          "question_group": "q5",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学生正确说明了父片段（完整段落）与子片段（较短、用于检索）的关系，以及子片段需记录父片段标识和原文位置以便回到上下文、显示可核对来源，与课程一致 [S05]。",
+            "missing": "答案在『切分长』处被截断，缺少两个必要要点：(1) 切分长度应按实际 tokenizer 检查，不能把字符数直接当 token 数；(2) 重叠可减少边界信息丢失，但过大重叠会增加重复证据和索引成本 [S05]。",
+            "misconception": "已写出的部分无概念错误；主要问题是内容不完整（疑似中途截断），而非理解错误。",
+            "suggestion": "补全答案：说明用 tokenizer 而非字符数核对切分长度，并给出重叠设置的权衡理由（边界完整性 vs 索引成本），使应用理由完整 [S05]。",
+            "source_ids": [
+              "S05"
+            ]
+          }
+        },
+        {
+          "id": "A20",
+          "question_group": "q5",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "答案完整覆盖课程要点：父片段保留完整原文、子片段用于检索；子片段记录父标识与原文位置以支持回溯与可核对引用；切分长度须用实际 tokenizer 校验；重叠的取舍（减少边界丢失 vs 增加重复证据与索引成本）[S05]。",
+            "missing": "无实质遗漏。",
+            "misconception": "未发现错误概念。",
+            "suggestion": "回答已完整准确；若想更进一步，可用自己的话举一个检索命中子片段后回到父段落取上下文的例子，以体现独立理解而非复述 [S05]。",
+            "source_ids": [
+              "S05"
+            ]
+          }
+        },
+        {
+          "id": "A21",
+          "question_group": "q6",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生作答『完全不知道。』，未提供任何可评判的内容，无法体现对 Embedding 在课程检索中角色的理解。",
+            "missing": "全部要点缺失：(1) Embedding 把文本编码为向量，使语义相近文本更易被检索；(2) 文档与问题须用相匹配的编码方式和同一向量空间；(3) 更换模型或向量维度后索引通常需重建，不能混用两种模型的向量；(4) 小模型在有限课程集合上可能已够用，应结合召回效果、内存与延迟判断 [S06]。",
+            "misconception": "未作答，无从判断具体误解；属于知识缺口而非错误概念。",
+            "suggestion": "重读课程材料『知识库与上下文』[S06]，先用一句话概括 Embedding 的作用（文本→向量、语义相近可检索），再补充向量空间一致性与更换模型需重建索引这两点实践约束。",
+            "source_ids": [
+              "S06"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 50.2,
+      "usage": {
+        "prompt_tokens": 2923,
+        "completion_tokens": 2222
+      }
+    },
+    {
+      "id": "two_agents:21",
+      "mode": "two_agents",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A22",
+          "question_group": "q6",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 3,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 0,
+            "understood": "学员正确理解了 Embedding 的核心作用：把文本编码成向量，使语义相近的文本更容易被检索到 [S06]。",
+            "missing": "缺少文档与问题必须使用相匹配编码方式和同一向量空间；缺少更换模型或向量维度后原索引通常要重建且不能混用两种模型向量；缺少小模型在有限课程集合上可能够用，并应结合召回效果、内存和延迟判断 [S06]。",
+            "misconception": "无明确概念错误；主要是只答出编码作用，未覆盖课程检索中的关键约束。",
+            "suggestion": "在“编码成向量”后补充：查询和文档要在同一向量空间，换模型/维度要重建索引，并用召回效果、内存、延迟来论证模型选择 [S06]。",
+            "source_ids": [
+              "S06"
+            ]
+          }
+        },
+        {
+          "id": "A23",
+          "question_group": "q6",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学员除基本作用外，还说到了文档与问题需要相匹配编码方式和同一向量空间 [S06]。",
+            "missing": "“更换模型或向”被截断，未完整说明更换模型或向量维度后原索引通常要重建、不能混用两种模型向量；也未说明小模型在有限课程集合上可能够用，以及应按召回效果、内存和延迟判断 [S06]。",
+            "misconception": "无明确错误概念；但答案中断，导致模型更换后的索引处理这一关键约束不完整。",
+            "suggestion": "先补完被截断句子，再明确写出应用后果：不同模型/维度向量不能混用，变更后需重建索引；最后给出小模型是否够用的判断标准 [S06]。",
+            "source_ids": [
+              "S06"
+            ]
+          }
+        },
+        {
+          "id": "A24",
+          "question_group": "q6",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "学员完整覆盖了 Embedding 的检索作用、同一编码方式/向量空间要求、更换模型或维度后的索引重建与不可混用，以及小模型在有限课程集合上的适用性和评估维度 [S06]。",
+            "missing": "无；与课程证据一致 [S06]。",
+            "misconception": "无。",
+            "suggestion": "可进一步加一个落地检查清单，例如固定 embedding 模型版本、记录向量维度、变更后触发重建索引，并用召回率、内存和延迟做回归验证 [S06]。",
+            "source_ids": [
+              "S06"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 86.87,
+      "usage": {
+        "prompt_tokens": 2754,
+        "completion_tokens": 3373
+      }
+    },
+    {
+      "id": "two_agents:24",
+      "mode": "two_agents",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A25",
+          "question_group": "q7",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生明确表示不知道，未给出任何与上下文预算相关的内容。",
+            "missing": "缺少全部要点：上下文窗口有上限；系统规则、任务、证据、偏好、历史和输出空间都计入预算；应优先保留当前任务和必要证据、裁剪无关历史与重复片段；摘要需保留来源和更新时间，不能把摘要中的推测当成事实。",
+            "misconception": "无明显错误陈述，但完全缺乏概念。",
+            "suggestion": "建议重新阅读 [S07]，先记住两点：上下文有上限，满了要先裁掉无关和重复的历史，保留当前任务与必要证据。",
+            "source_ids": [
+              "S07"
+            ]
+          }
+        },
+        {
+          "id": "A26",
+          "question_group": "q7",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 2,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生知道模型的上下文窗口有上限，这一前提与课程一致。",
+            "missing": "没有回答题目核心“应该先删什么”：未提优先保留当前任务和必要证据、裁剪无关历史与重复片段；也未提哪些内容计入预算，以及摘要的来源/时间戳与推测风险。",
+            "misconception": "无错误概念，但把背景前提当成了完整答案。",
+            "suggestion": "在“窗口有上限”的基础上补一句操作结论：优先裁剪无关和重复的历史，保留当前任务与必要证据，并注意摘要只是派生信息 [S07]。",
+            "source_ids": [
+              "S07"
+            ]
+          }
+        },
+        {
+          "id": "A27",
+          "question_group": "q7",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学生复述了上下文上限、计入预算的各项内容，并指出应优先保留当前任务和必要证据，方向正确。",
+            "missing": "句子在“必要证据”处中断，未给出关键的裁剪动作（裁剪无关历史与重复片段、不无限追加），也缺少摘要应保留来源和更新时间、不能把摘要中的推测当成事实这一点。",
+            "misconception": "无明显误解，但答案不完整，且看起来是未完成的复述而非自己的归纳。",
+            "suggestion": "把答案补完：说明先删无关和重复的历史，并加上摘要使用的注意事项；尝试用自己的话说明为什么这样取舍 [S07]。",
+            "source_ids": [
+              "S07"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 57.87,
+      "usage": {
+        "prompt_tokens": 2601,
+        "completion_tokens": 2285
+      }
+    },
+    {
+      "id": "two_agents:27",
+      "mode": "two_agents",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A28",
+          "question_group": "q7",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "回答与课程材料一致：上下文窗口有上限，系统规则、任务、证据、偏好、历史与输出空间都计入预算；应优先保留当前任务与必要证据，裁剪无关和重复历史；摘要属派生信息，需保留来源与更新时间，不能把推测当成用户明确说过的事实。",
+            "missing": "无实质性遗漏。注意：该回答与课程原文逐字一致，无法判断是否真正理解，建议结合其他题目验证。",
+            "misconception": "未发现误解。",
+            "suggestion": "尝试用自己的话说明\"为什么先删无关历史而不是系统规则或当前证据\"，以展示理解而非复述。",
+            "source_ids": [
+              "S07"
+            ]
+          }
+        },
+        {
+          "id": "A29",
+          "question_group": "q8",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生表示\"完全不知道\"，未给出任何可评内容。",
+            "missing": "全部要点缺失：①格式完整不代表知识准确；②知识库需记录数据版本、切分规则和模型版本；③重复导入不应重复增加相同片段；④课堂闲聊、转写残缺、过时表述需单独标记；⑤纯事务性签到内容可不参与学习检索；⑥疑点表述应提交复核，不能让清洗模型擅自改写结论。",
+            "misconception": "无法判断，因未作答。",
+            "suggestion": "先直接回答\"不能\"：格式正确只说明文件能被解析，与知识是否准确是两回事；再按上述要点逐条展开。",
+            "source_ids": [
+              "S08"
+            ]
+          }
+        },
+        {
+          "id": "A30",
+          "question_group": "q8",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 3,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 0,
+            "understood": "正确复述了知识库需记录数据文件版本、切分规则和模型版本这一点。",
+            "missing": "未直接回答场景问题（格式正确不能证明知识正确）；缺少：重复导入不应重复增加片段；闲聊、转写残缺、过时表述需单独标记；签到等纯事务内容不参与学习检索；疑点表述应提交复核而非由清洗模型改写。",
+            "misconception": "未发现明确错误，但只答了版本记录，可能误以为格式/元数据完整即等于知识可靠。",
+            "suggestion": "先明确判断\"不能证明\"，再区分文件层面（版本、切分、去重）与知识层面（准确性标记、复核流程）两类质量控制。",
+            "source_ids": [
+              "S08"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 65.09,
+      "usage": {
+        "prompt_tokens": 2783,
+        "completion_tokens": 2202
+      }
+    },
+    {
+      "id": "two_agents:30",
+      "mode": "two_agents",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A31",
+          "question_group": "q8",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "学生已陈述的内容与课程一致：知识库需记录数据文件版本、切分规则和模型版本；重复导入不应重复增加相同片段；格式完整并不代表知识准确，这正面回应了题目所问。对“课堂闲聊、转写残缺”需要标记的要点也已触及。",
+            "missing": "答案在“转写残缺和过”处被截断，缺少：过时表述需要单独标记；纯事务性的签到内容可以不参与学习检索；存在疑点的知识表述应提交复核而不是让清洗模型擅自改写结论（依据S08）。应用理由只停留在“格式不等于准确”，未展开说明为何仍需版本记录与人工复核来保障知识质量。",
+            "misconception": "已呈现的部分没有概念错误，主要问题是内容不完整而非误解。",
+            "suggestion": "请补全答案：说明格式校验只能保证可读性，知识准确性还需靠版本与切分规则记录、导入去重、问题内容标记以及疑点提交人工复核来保障，并明确清洗模型不应擅自改写结论。",
+            "source_ids": [
+              "S08"
+            ]
+          }
+        },
+        {
+          "id": "A32",
+          "question_group": "q8",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "学生完整覆盖了课程要点：记录数据文件版本、切分规则和模型版本；重复导入不去重会增加相同片段；格式完整不代表知识准确；课堂闲聊、转写残缺、过时表述需单独标记；事务性签到内容不参与学习检索；疑点表述应提交复核而非由清洗模型改写。",
+            "missing": "无明显遗漏，与课程要求（S08）一致。",
+            "misconception": "未发现误解。需提醒：若该答案为直接复述课程原文，建议用自己的话组织，以体现真正理解而非照搬。",
+            "suggestion": "在保持要点完整的基础上，可进一步用自己的语言解释每个措施的作用，例如说明版本记录如何帮助追溯过时表述，以展示对因果关系的掌握。",
+            "source_ids": [
+              "S08"
+            ]
+          }
+        },
+        {
+          "id": "A33",
+          "question_group": "q9",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "学生表示“完全不知道”，未提供任何关于工具调用流程的内容，无法确认任何理解。",
+            "missing": "缺少全部要点：模型只是提出结构化的操作请求，提出请求不等于系统必须执行；应用应验证工具名称、参数类型、权限和次数限制后再运行并返回结果；不应把任意SQL或文件执行能力交给模型；工具错误需明确反馈，不能伪装成成功结果（依据S09）。",
+            "misconception": "无具体作答，无法判断误解；但从零作答看，工具调用的验证与权限概念尚未建立。",
+            "suggestion": "请复习课程S09《Agent 与工具》：重点理解“模型提议、应用裁决”的分工——应用收到工具请求后要做名称、参数、权限、次数四类校验，执行后如实返回结果，出错时明确反馈错误而非伪造成功。",
+            "source_ids": [
+              "S09"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 51.76,
+      "usage": {
+        "prompt_tokens": 2938,
+        "completion_tokens": 2218
+      }
+    },
+    {
+      "id": "two_agents:33",
+      "mode": "two_agents",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A34",
+          "question_group": "q9",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 1,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 1,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "答对了工具调用是模型提出结构化操作请求，并给出检索课程/读取来源的例子。[S09]",
+            "missing": "未回答“提出请求后”的应用职责：请求不等于必须执行；应验证工具名称、参数类型、权限和次数限制；通过后再运行并返回结果；不得开放任意 SQL 或文件执行；工具错误要明确反馈且不能伪装成功。[S09]",
+            "misconception": "无明显错误陈述；主要风险是把定义当成了后续处理，缺少安全守门。",
+            "suggestion": "用一句总起“模型请求不等于执行”，再列验证项、执行与返回、能力边界、错误处理，并说明这是为了权限和用量安全。",
+            "source_ids": [
+              "S09"
+            ]
+          }
+        },
+        {
+          "id": "A35",
+          "question_group": "q9",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "已说明工具请求是结构化操作请求，且模型提出请求不等于系统必须执行；还开始列举要验证工具名称、参数类型等。[S09]",
+            "missing": "答案在“权”处截断：权限未完整写出，且缺次数限制、验证通过后运行工具并返回结果、禁止任意 SQL/文件执行、工具错误须明确反馈且不可伪装成功。[S09]",
+            "misconception": "无明显错误概念；问题是验证清单不完整，后续执行边界和错误处理缺失。",
+            "suggestion": "先补全“权限和次数限制”，再补执行/返回与安全边界；最后写清错误要返回明确失败信息。",
+            "source_ids": [
+              "S09"
+            ]
+          }
+        },
+        {
+          "id": "A36",
+          "question_group": "q9",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "完整覆盖：结构化请求、请求≠执行、验证工具名称/参数类型/权限/次数限制、运行并返回结果、不开放任意 SQL 或文件执行、错误明确反馈且不伪装成功。[S09]",
+            "missing": "无必要要点遗漏。",
+            "misconception": "无。",
+            "suggestion": "可额外举一个验证失败或工具超时返回明确错误的例子，但按本证据已满分。",
+            "source_ids": [
+              "S09"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 99.32,
+      "usage": {
+        "prompt_tokens": 2691,
+        "completion_tokens": 4082
+      }
+    },
+    {
+      "id": "two_agents:36",
+      "mode": "two_agents",
+      "status": "failed",
+      "records": [],
+      "error_type": "ValueError",
+      "elapsed_seconds": 138.95,
+      "usage": {
+        "prompt_tokens": 2801,
+        "completion_tokens": 5979
+      }
+    },
+    {
+      "id": "two_agents:39",
+      "mode": "two_agents",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A40",
+          "question_group": "q10",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "学员准确指出：分工不取决于是否使用不同模型，教练与评估员可用同一语言模型，区别在于上下文与权限不同；教练负责解释、出题和辅导，评估员负责核对题目并按标准评分，且评估员无需知道教练的主观判断[S10]。",
+            "missing": "无实质遗漏，已覆盖课程全部要点：角色职责、同模型下的上下文/权限隔离、信息隔离、成本与共享偏差风险、需单角色对照实验验证收益[S10]。",
+            "misconception": "未发现误解。",
+            "suggestion": "内容完整准确。可进一步用自己的话举一个具体例子（如教练看到学员情绪记录而评估员只看作答原文），以展示对'上下文隔离'的迁移理解，而非仅复述课程表述。",
+            "source_ids": [
+              "S10"
+            ]
+          }
+        }
+      ],
+      "elapsed_seconds": 41.38,
+      "usage": {
+        "prompt_tokens": 2891,
+        "completion_tokens": 1929
+      }
+    }
+  ],
+  "expected_cases_per_mode": 40,
+  "gold_status": "pending_independent_human_review",
+  "modes": {
+    "single_coach": {
+      "case_count": 34,
+      "human_scored_count": 0,
+      "within_one_point": null,
+      "elapsed_seconds": 670.61,
+      "failed_batches": 2,
+      "usage": {
+        "prompt_tokens": 25778,
+        "completion_tokens": 20967
+      }
+    },
+    "two_agents": {
+      "case_count": 34,
+      "human_scored_count": 0,
+      "within_one_point": null,
+      "elapsed_seconds": 939.7,
+      "failed_batches": 2,
+      "usage": {
+        "prompt_tokens": 38690,
+        "completion_tokens": 37558
+      }
+    }
+  },
+  "score_disagreement": {
+    "paired_cases": 31,
+    "different_scores": 4,
+    "note": "Agreement is not accuracy; independent human gold is still required."
+  }
+}

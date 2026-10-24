@@ -1,1 +1,1 @@
-{"name":"explain","version":"1.0.0","triggers":["explain","compare","example","current"],"allowed_tools":["search_course","get_source","search_web"],"input":"question, course scope, evidence, preferences","output":"Chinese explanation with source IDs; uncertainty explicit"}
+{"name":"explain","version":"1.0.1","triggers":["explain","compare","example","current"],"allowed_tools":["search_course","get_source","search_web"],"input":"question, course scope, evidence, preferences","output":"Chinese explanation with source IDs; uncertainty explicit"}

@@ -15,7 +15,7 @@
 - 一个可选的 Tavily MCP 基础搜索集成，默认关闭，项目月度上限 300 次。
 - 自编课程、120 条公开检索评测候选、40 条评分候选、私有课程评测准备脚本、测试与产品决策档案。
 
-**运行边界：**默认是明确标注的固定演示回放，不调用 LLM，也不评价用户能力。真实模式需要自行配置 API。真实模型回答质量、真实 MCP 联通和学习效果不能由演示回放证明。人工评测标签尚待审阅；当前结果见 [验证记录](docs/validation.md)。
+**运行边界：**默认是明确标注的固定演示回放，不调用 LLM，也不评价用户能力。真实模式需要自行配置 API。真实模型和 MCP 已在本机接入验证；演示回放不能证明模型质量或学习效果。人工评测标签尚待审阅；当前结果见 [验证记录](docs/validation.md)。
 
 ## 快速体验（Windows）
 
@@ -48,11 +48,13 @@ DATASET=sample
 LLM_BASE_URL=https://你的服务商提供的地址/v1
 LLM_MODEL=你的模型名称
 LLM_API_KEY=你的密钥
-# 可选：免费搜索账户的密钥
+# 可选：免费搜索账户的密钥（教程见 docs/search-setup.md）
 TAVILY_API_KEY=
 ```
 
 我使用兼容 OpenAI Chat Completions 的接口约定，要求模型支持原生工具调用和流式输出。部分兼容服务并不支持完整协议，先执行检查：
+
+推理强度默认不发送。服务支持时可选填 `LLM_REASONING_EFFORT`；只调整学习教练时用 `LLM_COACH_REASONING_EFFORT=low`，评估员仍采用通用设置或服务默认。参数并非所有模型都支持，先小样本实测；本次Kimi对照与限制见验证记录。
 
 温度参数默认不发送，采用服务商默认值。仅当所选模型支持自定义温度时，才在 `.env` 中设置 `LLM_TEMPERATURE`；例如某些仅思考模型不接受 `0.2`。
 
@@ -98,10 +100,14 @@ cd frontend
 npm run build
 cd ..
 powershell -ExecutionPolicy Bypass -File scripts/evaluate.ps1 -Dataset sample -Split dev
-.venv/Scripts/python.exe -m backend.cli grade-eval
+.venv/Scripts/python.exe -m backend.cli grade-eval --dataset sample
 ```
 
 检索评测比较 BM25、向量、混合检索、混合检索＋rerank。评分消融比较单教练和教练＋评估员，真实调用需密钥。所有原始报告写入 `runtime/`，公开发布时只复制自编数据报告。
+
+打开 [开发者评测审阅页](http://127.0.0.1:8765/evaluation)，逐题核对课程来源并保存人工标注；标注留在本地，不覆盖锁定测试文件。页面也显示真实评测的运行状态。
+
+评分评测支持检查点和 `--max-batches 2`；问答支持 `answer-eval --dataset sample --split dev`。真实调用会消耗所配置 LLM 的 Token。没有人工 gold 时不报告评分准确率。
 
 公开候选标签及审阅方法见 [评测说明](evals/README.md)。私有课程运行 `scripts/prepare_private_evals.py` 后，还需人工改写问题并独立标注相关片段；候选来源不是 gold label。
 
@@ -124,6 +130,7 @@ runtime/       数据库、索引、报告、日志（Git 忽略）
 ## 我的决策与复盘
 
 - [产品需求与验收](docs/product.md)
+- [免费搜索配置教程](docs/search-setup.md)
 - [架构和接口](docs/architecture.md)
 - [决策档案](docs/decisions.md)
 - [验证结果与未完成项](docs/validation.md)

@@ -1,0 +1,403 @@
+{
+  "model": "kimi-k3",
+  "conditions": "self-authored sample; models warmed; sequential requests; three prompts per mode; exploratory, not an acceptance P95; account billing not configured",
+  "quality_status": "not_independently_human_scored",
+  "records": [
+    {
+      "query": "RAG是什么？",
+      "answer": "RAG（检索增强生成）是“先检索、再生成”的方法：在回答前先检索资料，把相关证据交给语言模型组织答案。比如课程助手可以先检索讲义，再回答问题并附来源。[S01]\n\n它的好处是能引入模型训练之外的知识（如你的课程内容），但并不自动保证正确——检索可能漏掉关键片段，讲义可能过时，模型也可能说出超出证据的话，所以要分别检查检索质量、引用支持和最终回答。[S01]",
+      "source_ids": [
+        "S01",
+        "S09",
+        "S08",
+        "S05",
+        "S04",
+        "S11"
+      ],
+      "external_urls": [],
+      "first_content_ms": 14810,
+      "elapsed_ms": 16904,
+      "events": [
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T02:02:17.686635+08:00",
+          "agent": "coach",
+          "elapsed_ms": 9978,
+          "finish_reason": "tool_calls"
+        },
+        {
+          "name": "intent",
+          "at": "2026-10-25T02:02:17.686635+08:00",
+          "intent": "explain",
+          "merged_with": "search_course"
+        },
+        {
+          "name": "tool_call",
+          "at": "2026-10-25T02:02:17.712918+08:00",
+          "agent": "coach",
+          "tool": "search_course",
+          "source_ids": [
+            "S04",
+            "S08",
+            "S05",
+            "S11",
+            "S01",
+            "S09"
+          ],
+          "elapsed_ms": 26,
+          "warning": ""
+        },
+        {
+          "name": "first_content",
+          "at": "2026-10-25T02:02:22.515025+08:00",
+          "elapsed_ms": 4800
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 1631,
+        "completion_tokens": 511
+      },
+      "parameters": {
+        "temperature": null,
+        "reasoning_effort": null,
+        "max_output_tokens": 1800,
+        "structured_output_tokens": 6000,
+        "context_tokens": 32768,
+        "timeout_seconds": 120.0
+      },
+      "warnings": [],
+      "status": "completed",
+      "reasoning_effort": null
+    },
+    {
+      "query": "重排能补回没有召回的资料吗？",
+      "answer": "不能。重排位于召回之后、生成之前，只在召回返回的那批候选内重新判断相关性、调整先后次序，未被召回的正确资料不会凭空出现在重排结果里 [S02]。所以召回漏掉的内容要从召回端补救，例如用关键词加向量的混合检索扩大覆盖 [S04]，或检查切分是否破坏了上下文完整性 [S05]。评估时也要分开看：Recall 反映资料有没有被找回来，NDCG 反映排得好不好，别把好重排误当成能弥补召回不足，必要时可用关闭重排的消融实验单独衡量它的贡献 [S15]。",
+      "source_ids": [
+        "S02",
+        "S01",
+        "S15",
+        "S05",
+        "S04",
+        "S08"
+      ],
+      "external_urls": [],
+      "first_content_ms": 27334,
+      "elapsed_ms": 30017,
+      "events": [
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T02:02:35.253306+08:00",
+          "agent": "coach",
+          "elapsed_ms": 10629,
+          "finish_reason": "tool_calls"
+        },
+        {
+          "name": "intent",
+          "at": "2026-10-25T02:02:35.253818+08:00",
+          "intent": "explain",
+          "merged_with": "search_course"
+        },
+        {
+          "name": "tool_call",
+          "at": "2026-10-25T02:02:35.277071+08:00",
+          "agent": "coach",
+          "tool": "search_course",
+          "source_ids": [
+            "S04",
+            "S08",
+            "S15",
+            "S02",
+            "S05",
+            "S01"
+          ],
+          "elapsed_ms": 23,
+          "warning": ""
+        },
+        {
+          "name": "first_content",
+          "at": "2026-10-25T02:02:51.954943+08:00",
+          "elapsed_ms": 16677
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 1649,
+        "completion_tokens": 1238
+      },
+      "parameters": {
+        "temperature": null,
+        "reasoning_effort": null,
+        "max_output_tokens": 1800,
+        "structured_output_tokens": 6000,
+        "context_tokens": 32768,
+        "timeout_seconds": 120.0
+      },
+      "warnings": [],
+      "status": "completed",
+      "reasoning_effort": null
+    },
+    {
+      "query": "学习偏好和作答记录应该怎样区分？",
+      "answer": "核心区别在来源和证据效力：学习偏好是用户**明确提供**的声明（如\"我喜欢用例题讲解\"），可直接当作事实对待；作答记录是**原始行为数据**（某次答题选了什么、是否正确），本身不等于能力结论——一次答错不能证明学员不懂，读过答案也不能宣称已经掌握 [S13]。\n\n两者的相同点：都属于长期记忆，都要计入上下文预算 [S07]；都可用于支持复习建议，但都不应被包装成精确的人格、能力或心理诊断 [S13]。\n\n还要注意第三类容易混淆的信息：**模型推断**（如\"该学员几何薄弱\"）。它是派生信息，应保留来源和更新时间，不能当成用户明确说过的事实 [S07]；学员删除记忆后，也不应再从缓存或摘要中取回 [S13]。\n\n简例帮助区分：学员说\"我偏好视频\"＝偏好；某次简答题答错＝作答记录；\"所以他不擅长这门课\"＝推断。前两者可如实记录和使用，第三个只是待验证的假设，需要与实际数据、因果证据分开 [S16]。",
+      "source_ids": [
+        "S13",
+        "S16",
+        "S07",
+        "S10",
+        "S14",
+        "S03"
+      ],
+      "external_urls": [],
+      "first_content_ms": 33076,
+      "elapsed_ms": 37447,
+      "events": [
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T02:03:00.139040+08:00",
+          "agent": "coach",
+          "elapsed_ms": 5486,
+          "finish_reason": "tool_calls"
+        },
+        {
+          "name": "intent",
+          "at": "2026-10-25T02:03:00.139040+08:00",
+          "intent": "explain",
+          "merged_with": "search_course"
+        },
+        {
+          "name": "tool_call",
+          "at": "2026-10-25T02:03:00.162913+08:00",
+          "agent": "coach",
+          "tool": "search_course",
+          "source_ids": [
+            "S07",
+            "S14",
+            "S13",
+            "S10",
+            "S16",
+            "S03"
+          ],
+          "elapsed_ms": 24,
+          "warning": ""
+        },
+        {
+          "name": "first_content",
+          "at": "2026-10-25T02:03:27.725627+08:00",
+          "elapsed_ms": 27561
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 1619,
+        "completion_tokens": 1626
+      },
+      "parameters": {
+        "temperature": null,
+        "reasoning_effort": null,
+        "max_output_tokens": 1800,
+        "structured_output_tokens": 6000,
+        "context_tokens": 32768,
+        "timeout_seconds": 120.0
+      },
+      "warnings": [],
+      "status": "completed",
+      "reasoning_effort": null
+    },
+    {
+      "query": "RAG是什么？",
+      "answer": "RAG（检索增强生成）是“先检索、再生成”：回答前从知识库找相关片段，把证据交给语言模型组织成答案，并尽量给出可核对来源；课程助手就是先检索讲义再答疑[S01]。它能引入模型训练外的课程知识，但不自动等于正确：可能漏检、资料过时或模型超证据发挥，所以要分别看检索质量、引用支持和最终表述[S01]。",
+      "source_ids": [
+        "S01",
+        "S08",
+        "S13",
+        "S05",
+        "S16",
+        "S09"
+      ],
+      "external_urls": [],
+      "first_content_ms": 9267,
+      "elapsed_ms": 11514,
+      "events": [
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T02:03:37.452595+08:00",
+          "agent": "coach",
+          "elapsed_ms": 5345,
+          "finish_reason": "tool_calls"
+        },
+        {
+          "name": "intent",
+          "at": "2026-10-25T02:03:37.452595+08:00",
+          "intent": "explain",
+          "merged_with": "search_course"
+        },
+        {
+          "name": "tool_call",
+          "at": "2026-10-25T02:03:37.475564+08:00",
+          "agent": "coach",
+          "tool": "search_course",
+          "source_ids": [
+            "S08",
+            "S13",
+            "S05",
+            "S01",
+            "S16",
+            "S09"
+          ],
+          "elapsed_ms": 23,
+          "warning": ""
+        },
+        {
+          "name": "first_content",
+          "at": "2026-10-25T02:03:41.370848+08:00",
+          "elapsed_ms": 3894
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 1620,
+        "completion_tokens": 412
+      },
+      "parameters": {
+        "temperature": null,
+        "reasoning_effort": "low",
+        "max_output_tokens": 1800,
+        "structured_output_tokens": 6000,
+        "context_tokens": 32768,
+        "timeout_seconds": 120.0
+      },
+      "warnings": [],
+      "status": "completed",
+      "reasoning_effort": "low"
+    },
+    {
+      "query": "重排能补回没有召回的资料吗？",
+      "answer": "不能。重排只对**已经召回的候选片段**重新评估相关性并调整顺序；如果正确资料在召回阶段就没被取回，它不会凭空进入重排结果，因此也无法靠重排补回。[S02]\n\n实践上要分开看两类指标：召回阶段看 **Recall** 是否找回资料，重排阶段看 **NDCG** 是否把相关资料排得更靠前；判断是否保留重排可用消融实验，同时比较质量、延迟和成本。[S15]\n\n理解检查：若答案缺失源于召回遗漏，优先改检索/混合召回/索引，而不是加重排。",
+      "source_ids": [
+        "S02",
+        "S15",
+        "S01",
+        "S05",
+        "S06",
+        "S04"
+      ],
+      "external_urls": [],
+      "first_content_ms": 7356,
+      "elapsed_ms": 10575,
+      "events": [
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T02:03:48.309576+08:00",
+          "agent": "coach",
+          "elapsed_ms": 4675,
+          "finish_reason": "tool_calls"
+        },
+        {
+          "name": "intent",
+          "at": "2026-10-25T02:03:48.309576+08:00",
+          "intent": "explain",
+          "merged_with": "search_course"
+        },
+        {
+          "name": "tool_call",
+          "at": "2026-10-25T02:03:48.330712+08:00",
+          "agent": "coach",
+          "tool": "search_course",
+          "source_ids": [
+            "S04",
+            "S15",
+            "S06",
+            "S02",
+            "S05",
+            "S01"
+          ],
+          "elapsed_ms": 21,
+          "warning": ""
+        },
+        {
+          "name": "first_content",
+          "at": "2026-10-25T02:03:50.986188+08:00",
+          "elapsed_ms": 2654
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 1654,
+        "completion_tokens": 381
+      },
+      "parameters": {
+        "temperature": null,
+        "reasoning_effort": "low",
+        "max_output_tokens": 1800,
+        "structured_output_tokens": 6000,
+        "context_tokens": 32768,
+        "timeout_seconds": 120.0
+      },
+      "warnings": [],
+      "status": "completed",
+      "reasoning_effort": "low"
+    },
+    {
+      "query": "学习偏好和作答记录应该怎样区分？",
+      "answer": "学习偏好是学员明确表达的意愿（如\"我喜欢用例子学习\"），作答记录是学员在某次题目中的原始回答，二者应作为不同类型数据分开存储和使用，不能互相推断。[S13]\n\n关键区别：\n\n- **来源不同**：偏好来自用户主动声明；作答记录是具体任务的原始数据，评估结果则是对作答的评分，三者都不等于\"学员懂了或没懂\"。一次提问不能证明学员不懂，读过答案也不等于已经掌握。[S13]\n- **用途不同**：偏好用于调整讲解方式；作答记录可用于生成复习建议，但不能被包装成精确的人格、能力或心理诊断。[S13]\n- **生命周期不同**：用户删除记忆后，后续请求不应再从缓存或摘要中取回这些偏好。[S13]\n\n另外注意：摘要属于派生信息，应保留来源和更新时间，不能把摘要里的推测当成用户明确说过的事实。[S07]\n\n简单自查：如果一条记录只是\"某题答错了\"，你能据此说学员\"基础薄弱\"吗？——不能，这只是单次作答数据，还缺多次评估证据。",
+      "source_ids": [
+        "S13",
+        "S07",
+        "S03",
+        "S16",
+        "S10",
+        "S05"
+      ],
+      "external_urls": [],
+      "first_content_ms": 7956,
+      "elapsed_ms": 13957,
+      "events": [
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T02:04:00.371574+08:00",
+          "agent": "coach",
+          "elapsed_ms": 6150,
+          "finish_reason": "tool_calls"
+        },
+        {
+          "name": "intent",
+          "at": "2026-10-25T02:04:00.371574+08:00",
+          "intent": "explain",
+          "merged_with": "search_course"
+        },
+        {
+          "name": "tool_call",
+          "at": "2026-10-25T02:04:00.396029+08:00",
+          "agent": "coach",
+          "tool": "search_course",
+          "source_ids": [
+            "S07",
+            "S13",
+            "S05",
+            "S10",
+            "S16",
+            "S03"
+          ],
+          "elapsed_ms": 24,
+          "warning": ""
+        },
+        {
+          "name": "first_content",
+          "at": "2026-10-25T02:04:02.173524+08:00",
+          "elapsed_ms": 1776
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 1631,
+        "completion_tokens": 457
+      },
+      "parameters": {
+        "temperature": null,
+        "reasoning_effort": "low",
+        "max_output_tokens": 1800,
+        "structured_output_tokens": 6000,
+        "context_tokens": 32768,
+        "timeout_seconds": 120.0
+      },
+      "warnings": [],
+      "status": "completed",
+      "reasoning_effort": "low"
+    }
+  ]
+}

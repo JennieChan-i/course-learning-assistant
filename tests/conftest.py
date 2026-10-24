@@ -13,7 +13,14 @@ def store(tmp_path):
 
 @pytest.fixture
 def config():
-    return Settings(_env_file=None, app_mode="demo", dataset="sample", llm_api_key="", tavily_api_key="")
+    return Settings(
+        _env_file=None,
+        app_mode="demo",
+        dataset="sample",
+        llm_api_key="",
+        tavily_api_key="",
+        tavily_allow_keyless=False,
+    )
 
 
 @pytest.fixture

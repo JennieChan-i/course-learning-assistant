@@ -1,0 +1,85 @@
+{
+  "status": "completed",
+  "model": "kimi-k3",
+  "query": "请联网查 Tavily 官方文档，核实当前免费账户每月额度和 basic 搜索单次消耗。课程没提供当前额度，请明确区分外部补充。",
+  "answer": "**结论（以下为外部补充，非课程内容）：** 免费 Researcher 计划每月 1,000 API 额度（credits），一次 basic 搜索消耗 1 credit [W1][W2][W3]。\n\n由此推算：免费额度大约可支持每月 1,000 次 basic 搜索；若按量付费（$0.008/credit），一次 basic 搜索约 $0.008，advanced 搜索为 2 credits 即约 $0.016 [W1][W2]。\n\n需要说明证据的局限：这三条来源都是第三方整理文章（标注核实日期为 2026 年 10 月 12 日 / 15 日），并非 Tavily 官网定价页的原始内容，价格信息可能随后变动 [W1][W3]。正如课程强调的，最新价格和额度限制应以官方资料为准，且外部补充要与课程内容分开 [S03]。建议你正式使用前到 tavily.com 的 Pricing / Credits 页面再确认一次。",
+  "source_ids": [
+    "S07",
+    "S12",
+    "S03",
+    "W1",
+    "W2",
+    "W3"
+  ],
+  "external_urls": [
+    "https://katteb.com/blog/tavily-ai-agent",
+    "https://www.morphllm.com/tavily",
+    "https://reachkit.ai/directory/tools/tavily"
+  ],
+  "warnings": [],
+  "events": [
+    {
+      "name": "llm_call",
+      "at": "2026-10-25T01:56:24.700707+08:00",
+      "agent": "coach",
+      "elapsed_ms": 12263,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "name": "intent",
+      "at": "2026-10-25T01:56:24.700707+08:00",
+      "intent": "current",
+      "merged_with": "search_course"
+    },
+    {
+      "name": "tool_call",
+      "at": "2026-10-25T01:56:34.101134+08:00",
+      "agent": "coach",
+      "tool": "search_course",
+      "source_ids": [
+        "S11",
+        "S03",
+        "S08",
+        "S07",
+        "S12",
+        "S16"
+      ],
+      "elapsed_ms": 9400,
+      "warning": ""
+    },
+    {
+      "name": "llm_call",
+      "at": "2026-10-25T01:56:38.867175+08:00",
+      "agent": "coach",
+      "elapsed_ms": 4766,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "name": "tool_call",
+      "at": "2026-10-25T01:56:43.376377+08:00",
+      "agent": "coach",
+      "tool": "search_web",
+      "source_ids": [
+        "W1",
+        "W3",
+        "W2",
+        "W4",
+        "W5"
+      ],
+      "elapsed_ms": 4509,
+      "warning": ""
+    },
+    {
+      "name": "first_content",
+      "at": "2026-10-25T01:56:49.191290+08:00",
+      "elapsed_ms": 5813
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 3737,
+    "completion_tokens": 1056
+  },
+  "elapsed_seconds": 41.62,
+  "search_requests_in_isolated_database": 1,
+  "note": "Self-authored sample corpus; real MCP, not a mock; this is one integration check, not factual quality acceptance."
+}

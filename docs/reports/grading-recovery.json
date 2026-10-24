@@ -1,0 +1,1383 @@
+{
+  "fingerprint": "02f1fc2df575a6fa",
+  "model": "kimi-k3",
+  "status": "completed_awaiting_human_review",
+  "batches": [
+    {
+      "id": "single_coach:33",
+      "mode": "single_coach",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A34",
+          "question_group": "q9",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 2,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "正确写出工具调用的基本概念：模型提出结构化操作请求[S09]。",
+            "missing": "缺少核心部分：请求不等于必须执行；需验证工具名、参数、权限、次数限制后再运行并返回结果；不交出任意SQL/文件能力；错误需明确反馈[S09]。",
+            "misconception": "",
+            "suggestion": "重读S09，把答案组织为：概念→应用验证与执行→安全限制→错误处理四层。",
+            "source_ids": [
+              "S09"
+            ]
+          }
+        },
+        {
+          "id": "A35",
+          "question_group": "q9",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "答出请求不等于必须执行，应用应验证工具名称、参数类型等要点[S09]。",
+            "missing": "答案在“权限和次数限制”处被截断；缺少运行工具并返回结果、不授予任意SQL/文件能力、错误需明确反馈而非伪装成功[S09]。",
+            "misconception": "",
+            "suggestion": "补全被截断的验证清单，并补写执行返回与错误处理两个环节。",
+            "source_ids": [
+              "S09"
+            ]
+          }
+        },
+        {
+          "id": "A36",
+          "question_group": "q9",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "完整覆盖：请求需验证后执行、限制权限范围、错误明确反馈，与课程一致[S09]。",
+            "missing": "",
+            "misconception": "",
+            "suggestion": "可进一步说明各要点背后的安全理由，如防止注入与越权，加深应用理解。",
+            "source_ids": [
+              "S09"
+            ]
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T01:52:11.309445+08:00",
+          "agent": "coach",
+          "elapsed_ms": 7458,
+          "finish_reason": "tool_calls"
+        },
+        {
+          "name": "intent",
+          "at": "2026-10-25T01:52:11.309445+08:00",
+          "intent": "explain",
+          "merged_with": "search_course"
+        },
+        {
+          "name": "tool_call",
+          "at": "2026-10-25T01:52:22.218792+08:00",
+          "agent": "coach",
+          "tool": "search_course",
+          "source_ids": [
+            "S11",
+            "S16",
+            "S03",
+            "S12",
+            "S09",
+            "S13"
+          ],
+          "elapsed_ms": 10906,
+          "warning": ""
+        },
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T01:52:42.789659+08:00",
+          "agent": "coach",
+          "elapsed_ms": 20547,
+          "finish_reason": "stop"
+        }
+      ],
+      "elapsed_seconds": 38.94,
+      "usage": {
+        "prompt_tokens": 2532,
+        "completion_tokens": 1073
+      }
+    },
+    {
+      "id": "single_coach:36",
+      "mode": "single_coach",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A37",
+          "question_group": "q10",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "",
+            "missing": "全部要点：两角色职责、同模型不同上下文与权限、评估员信息隔离、成本与共享偏差、需对照实验验证 [S10]",
+            "misconception": "",
+            "suggestion": "先阅读课程中 Agent 分工段落，再用自己的话复述两角色职责与取舍。",
+            "source_ids": [
+              "S10"
+            ]
+          }
+        },
+        {
+          "id": "A38",
+          "question_group": "q10",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 3,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 0,
+            "understood": "正确写出教练与评估员各自的职责分工。",
+            "missing": "同模型但上下文和权限不同、评估员无需教练主观判断、增加调用与延迟、共享偏差、需单角色对照实验验证 [S10]",
+            "misconception": "",
+            "suggestion": "补充回答“同模型是否仍算分工”的判断依据及额外角色的代价与验证方法。",
+            "source_ids": [
+              "S10"
+            ]
+          }
+        },
+        {
+          "id": "A39",
+          "question_group": "q10",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "职责分工、同一模型但上下文与权限不同，并提到评估员信息隔离。",
+            "missing": "答案被截断；还缺多角色的调用与延迟成本、同模型共享偏差、需单角色对照实验验证收益 [S10]",
+            "misconception": "",
+            "suggestion": "写完整答案，并加上分工的代价与需对照实验验证这一论证。",
+            "source_ids": [
+              "S10"
+            ]
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T01:52:49.704731+08:00",
+          "agent": "coach",
+          "elapsed_ms": 6911,
+          "finish_reason": "tool_calls"
+        },
+        {
+          "name": "intent",
+          "at": "2026-10-25T01:52:49.705244+08:00",
+          "intent": "explain",
+          "merged_with": "search_course"
+        },
+        {
+          "name": "tool_call",
+          "at": "2026-10-25T01:52:49.736751+08:00",
+          "agent": "coach",
+          "tool": "search_course",
+          "source_ids": [
+            "S01",
+            "S16",
+            "S10",
+            "S05",
+            "S03",
+            "S12"
+          ],
+          "elapsed_ms": 32,
+          "warning": ""
+        },
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T01:53:05.531689+08:00",
+          "agent": "coach",
+          "elapsed_ms": 15794,
+          "finish_reason": "stop"
+        }
+      ],
+      "elapsed_seconds": 22.74,
+      "usage": {
+        "prompt_tokens": 2486,
+        "completion_tokens": 1013
+      }
+    },
+    {
+      "id": "two_agents:3",
+      "mode": "two_agents",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A04",
+          "question_group": "q1",
+          "draft_tier": 6,
+          "human_expected_total": null,
+          "score": 6,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 2,
+            "completeness": 2,
+            "reasoning": 2,
+            "understood": "准确定义RAG并指出其不保证正确，需分别检查检索、引用与回答。",
+            "missing": "",
+            "misconception": "",
+            "suggestion": "可结合S05了解片段切分与来源核对，进一步巩固。",
+            "source_ids": [
+              "S01"
+            ]
+          }
+        },
+        {
+          "id": "A05",
+          "question_group": "q2",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "",
+            "missing": "未作答。应说明重排在召回之后、生成之前，及其作用、局限与评估指标。",
+            "misconception": "",
+            "suggestion": "复习S02：重排作用于召回候选，无法找回未召回资料，需权衡质量与延迟。",
+            "source_ids": [
+              "S02"
+            ]
+          }
+        },
+        {
+          "id": "A06",
+          "question_group": "q2",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "正确区分召回与重排职责，隐含重排须在召回之后。",
+            "missing": "未明确回答顺序（召回后、生成前）；缺关键词相似被降权、未召回内容无法出现、质量与延迟权衡等要点。",
+            "misconception": "",
+            "suggestion": "按S02补全：先答顺序，再举语义无关被降权之例，最后说明需观察召回率、排序质量与延迟。",
+            "source_ids": [
+              "S02"
+            ]
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T01:53:10.454579+08:00",
+          "agent": "assessor",
+          "elapsed_ms": 4920,
+          "finish_reason": "tool_calls"
+        },
+        {
+          "name": "tool_call",
+          "at": "2026-10-25T01:53:10.478758+08:00",
+          "agent": "assessor",
+          "tool": "search_course",
+          "source_ids": [
+            "S01",
+            "S15",
+            "S04",
+            "S02",
+            "S05",
+            "S08"
+          ],
+          "elapsed_ms": 24,
+          "warning": ""
+        },
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T01:53:31.955630+08:00",
+          "agent": "assessor",
+          "elapsed_ms": 21476,
+          "finish_reason": "stop"
+        },
+        {
+          "name": "handoff",
+          "at": "2026-10-25T01:53:31.955630+08:00",
+          "from_agent": "assessor",
+          "to_agent": "coach",
+          "task": "targeted_feedback"
+        },
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T01:53:50.591509+08:00",
+          "agent": "coach",
+          "elapsed_ms": 18636,
+          "finish_reason": "stop"
+        }
+      ],
+      "elapsed_seconds": 45.06,
+      "usage": {
+        "prompt_tokens": 3159,
+        "completion_tokens": 1995
+      }
+    },
+    {
+      "id": "two_agents:36",
+      "mode": "two_agents",
+      "status": "completed",
+      "records": [
+        {
+          "id": "A37",
+          "question_group": "q10",
+          "draft_tier": 0,
+          "human_expected_total": null,
+          "score": 0,
+          "grade": {
+            "question_id": "q0",
+            "correctness": 0,
+            "completeness": 0,
+            "reasoning": 0,
+            "understood": "",
+            "missing": "未作答。需说明教练与评估员的角色分工、可用同一模型但上下文与权限不同、成本与共享偏差及单角色对照验证[S10]。",
+            "misconception": "",
+            "suggestion": "先读 S10，回答『同一模型能否算分工』：分工在角色与上下文，而非模型本身，并补充代价与验证方法。",
+            "source_ids": [
+              "S10"
+            ]
+          }
+        },
+        {
+          "id": "A38",
+          "question_group": "q10",
+          "draft_tier": 2,
+          "human_expected_total": null,
+          "score": 3,
+          "grade": {
+            "question_id": "q1",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 0,
+            "understood": "正确写出教练与评估员各自的职责分工[S10]。",
+            "missing": "未回答『同一模型是否算分工』：可用同一模型但上下文与权限不同；评估员不需知道教练判断；还缺成本、共享偏差与单角色对照验证[S10]。",
+            "misconception": "",
+            "suggestion": "在职责之外补一句：分工看上下文与权限而非模型，并说明多角色的代价及需对照实验验证收益。",
+            "source_ids": [
+              "S10"
+            ]
+          }
+        },
+        {
+          "id": "A39",
+          "question_group": "q10",
+          "draft_tier": 4,
+          "human_expected_total": null,
+          "score": 4,
+          "grade": {
+            "question_id": "q2",
+            "correctness": 2,
+            "completeness": 1,
+            "reasoning": 1,
+            "understood": "指出两角色可用同一模型，靠上下文与权限区分，并提到评估员不需知道教练判断[S10]。",
+            "missing": "答案被截断；缺多角色增加调用与延迟、同一模型仍共享偏差、需单角色对照实验验证收益[S10]。",
+            "misconception": "",
+            "suggestion": "补全结尾：说明同模型分工的代价（延迟、共享偏差），并强调用单角色对照实验确认分工有收益。",
+            "source_ids": [
+              "S10"
+            ]
+          }
+        }
+      ],
+      "events": [
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T01:54:05.565321+08:00",
+          "agent": "assessor",
+          "elapsed_ms": 14971,
+          "finish_reason": "tool_calls"
+        },
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T01:54:30.027607+08:00",
+          "agent": "assessor",
+          "elapsed_ms": 24462,
+          "finish_reason": "stop"
+        },
+        {
+          "name": "handoff",
+          "at": "2026-10-25T01:54:30.027607+08:00",
+          "from_agent": "assessor",
+          "to_agent": "coach",
+          "task": "targeted_feedback"
+        },
+        {
+          "name": "llm_call",
+          "at": "2026-10-25T01:54:56.989131+08:00",
+          "agent": "coach",
+          "elapsed_ms": 26961,
+          "finish_reason": "stop"
+        }
+      ],
+      "elapsed_seconds": 66.4,
+      "usage": {
+        "prompt_tokens": 2659,
+        "completion_tokens": 2329
+      }
+    }
+  ],
+  "expected_cases_per_mode": 40,
+  "gold_status": "pending_independent_human_review",
+  "retry_origin": {
+    "fingerprint": "9c064c547cdecd07",
+    "sha256": "43d723e07a481feedcfc985d11eced9f5c1009296327804452d1a62b4c013654"
+  },
+  "scope": {
+    "model": "kimi-k3",
+    "parameters": {
+      "temperature": null,
+      "max_output_tokens": 1800,
+      "structured_output_tokens": 6000,
+      "context_tokens": 32768,
+      "timeout_seconds": 120.0
+    },
+    "cases": [
+      {
+        "id": "A01",
+        "question": {
+          "id": "q1",
+          "topic": "RAG 的职责",
+          "kind": "short_answer",
+          "prompt": "RAG 在输出回答前做了什么？",
+          "reference_answer": "RAG 是在生成前检索资料，再把相关证据交给语言模型组织答案的方法。课程助手可以先检索讲义，再回答学员问题并给出来源。它能引入模型训练之外的课程知识，但不会自动保证答案正确：检索可能遗漏关键片段，讲义可能过时，模型也可能生成超出证据的说法。因此需要分别检查检索质量、引用支持程度和最终回答。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S01"
+          ]
+        },
+        "answer": "完全不知道。",
+        "draft_expected_total": 0,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A02",
+        "question": {
+          "id": "q1",
+          "topic": "RAG 的职责",
+          "kind": "short_answer",
+          "prompt": "RAG 在输出回答前做了什么？",
+          "reference_answer": "RAG 是在生成前检索资料，再把相关证据交给语言模型组织答案的方法。课程助手可以先检索讲义，再回答学员问题并给出来源。它能引入模型训练之外的课程知识，但不会自动保证答案正确：检索可能遗漏关键片段，讲义可能过时，模型也可能生成超出证据的说法。因此需要分别检查检索质量、引用支持程度和最终回答。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S01"
+          ]
+        },
+        "answer": "RAG 是在生成前检索资料，再把相关证据交给语言模型组织答案的方法。",
+        "draft_expected_total": 2,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A03",
+        "question": {
+          "id": "q1",
+          "topic": "RAG 的职责",
+          "kind": "short_answer",
+          "prompt": "RAG 在输出回答前做了什么？",
+          "reference_answer": "RAG 是在生成前检索资料，再把相关证据交给语言模型组织答案的方法。课程助手可以先检索讲义，再回答学员问题并给出来源。它能引入模型训练之外的课程知识，但不会自动保证答案正确：检索可能遗漏关键片段，讲义可能过时，模型也可能生成超出证据的说法。因此需要分别检查检索质量、引用支持程度和最终回答。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S01"
+          ]
+        },
+        "answer": "RAG 是在生成前检索资料，再把相关证据交给语言模型组织答案的方法。课程助手可以先检索讲义，再回答学员问题并给出来源。它能引入模型训练之外的课程",
+        "draft_expected_total": 4,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A04",
+        "question": {
+          "id": "q1",
+          "topic": "RAG 的职责",
+          "kind": "short_answer",
+          "prompt": "RAG 在输出回答前做了什么？",
+          "reference_answer": "RAG 是在生成前检索资料，再把相关证据交给语言模型组织答案的方法。课程助手可以先检索讲义，再回答学员问题并给出来源。它能引入模型训练之外的课程知识，但不会自动保证答案正确：检索可能遗漏关键片段，讲义可能过时，模型也可能生成超出证据的说法。因此需要分别检查检索质量、引用支持程度和最终回答。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S01"
+          ]
+        },
+        "answer": "RAG 是在生成前检索资料，再把相关证据交给语言模型组织答案的方法。课程助手可以先检索讲义，再回答学员问题并给出来源。它能引入模型训练之外的课程知识，但不会自动保证答案正确：检索可能遗漏关键片段，讲义可能过时，模型也可能生成超出证据的说法。因此需要分别检查检索质量、引用支持程度和最终回答。",
+        "draft_expected_total": 6,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A05",
+        "question": {
+          "id": "q2",
+          "topic": "检索与重排",
+          "kind": "scenario",
+          "prompt": "重排应该放在检索之前还是之后？",
+          "reference_answer": "召回负责从知识库中找出一批可能相关的片段，重排则在这批候选中重新判断问题与文本的相关性。重排一般放在召回之后、生成之前。关键词相似但语义无关的文本可能被降到后面。不过，未被召回的正确资料不会凭空出现在重排结果里。需要同时观察召回率、排序质量和新增延迟，才能决定重排是否值得保留。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S02"
+          ]
+        },
+        "answer": "完全不知道。",
+        "draft_expected_total": 0,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A06",
+        "question": {
+          "id": "q2",
+          "topic": "检索与重排",
+          "kind": "scenario",
+          "prompt": "重排应该放在检索之前还是之后？",
+          "reference_answer": "召回负责从知识库中找出一批可能相关的片段，重排则在这批候选中重新判断问题与文本的相关性。重排一般放在召回之后、生成之前。关键词相似但语义无关的文本可能被降到后面。不过，未被召回的正确资料不会凭空出现在重排结果里。需要同时观察召回率、排序质量和新增延迟，才能决定重排是否值得保留。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S02"
+          ]
+        },
+        "answer": "召回负责从知识库中找出一批可能相关的片段，重排则在这批候选中重新判断问题与文本的相关性。",
+        "draft_expected_total": 2,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A07",
+        "question": {
+          "id": "q2",
+          "topic": "检索与重排",
+          "kind": "scenario",
+          "prompt": "重排应该放在检索之前还是之后？",
+          "reference_answer": "召回负责从知识库中找出一批可能相关的片段，重排则在这批候选中重新判断问题与文本的相关性。重排一般放在召回之后、生成之前。关键词相似但语义无关的文本可能被降到后面。不过，未被召回的正确资料不会凭空出现在重排结果里。需要同时观察召回率、排序质量和新增延迟，才能决定重排是否值得保留。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S02"
+          ]
+        },
+        "answer": "召回负责从知识库中找出一批可能相关的片段，重排则在这批候选中重新判断问题与文本的相关性。重排一般放在召回之后、生成之前。关键词相似但语义无",
+        "draft_expected_total": 4,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A08",
+        "question": {
+          "id": "q2",
+          "topic": "检索与重排",
+          "kind": "scenario",
+          "prompt": "重排应该放在检索之前还是之后？",
+          "reference_answer": "召回负责从知识库中找出一批可能相关的片段，重排则在这批候选中重新判断问题与文本的相关性。重排一般放在召回之后、生成之前。关键词相似但语义无关的文本可能被降到后面。不过，未被召回的正确资料不会凭空出现在重排结果里。需要同时观察召回率、排序质量和新增延迟，才能决定重排是否值得保留。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S02"
+          ]
+        },
+        "answer": "召回负责从知识库中找出一批可能相关的片段，重排则在这批候选中重新判断问题与文本的相关性。重排一般放在召回之后、生成之前。关键词相似但语义无关的文本可能被降到后面。不过，未被召回的正确资料不会凭空出现在重排结果里。需要同时观察召回率、排序质量和新增延迟，才能决定重排是否值得保留。",
+        "draft_expected_total": 6,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A09",
+        "question": {
+          "id": "q3",
+          "topic": "证据不足与时效性",
+          "kind": "short_answer",
+          "prompt": "课程没讲某个知识点时应如何答复？",
+          "reference_answer": "当课程没有覆盖某个问题时，学习助手应说明资料不足，必要时请学员补充条件。最新价格、产品版本和接口限制可能变化，不能凭记忆给出确定结论。用户允许联网时，可以查找官方资料，并把外部补充与课程内容区分开；未能联网核实时，应明确标注未核实。来源冲突时展示差异和时间信息，不能悄悄把网络说法写回课程。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S03"
+          ]
+        },
+        "answer": "完全不知道。",
+        "draft_expected_total": 0,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A10",
+        "question": {
+          "id": "q3",
+          "topic": "证据不足与时效性",
+          "kind": "short_answer",
+          "prompt": "课程没讲某个知识点时应如何答复？",
+          "reference_answer": "当课程没有覆盖某个问题时，学习助手应说明资料不足，必要时请学员补充条件。最新价格、产品版本和接口限制可能变化，不能凭记忆给出确定结论。用户允许联网时，可以查找官方资料，并把外部补充与课程内容区分开；未能联网核实时，应明确标注未核实。来源冲突时展示差异和时间信息，不能悄悄把网络说法写回课程。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S03"
+          ]
+        },
+        "answer": "当课程没有覆盖某个问题时，学习助手应说明资料不足，必要时请学员补充条件。",
+        "draft_expected_total": 2,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A11",
+        "question": {
+          "id": "q3",
+          "topic": "证据不足与时效性",
+          "kind": "short_answer",
+          "prompt": "课程没讲某个知识点时应如何答复？",
+          "reference_answer": "当课程没有覆盖某个问题时，学习助手应说明资料不足，必要时请学员补充条件。最新价格、产品版本和接口限制可能变化，不能凭记忆给出确定结论。用户允许联网时，可以查找官方资料，并把外部补充与课程内容区分开；未能联网核实时，应明确标注未核实。来源冲突时展示差异和时间信息，不能悄悄把网络说法写回课程。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S03"
+          ]
+        },
+        "answer": "当课程没有覆盖某个问题时，学习助手应说明资料不足，必要时请学员补充条件。最新价格、产品版本和接口限制可能变化，不能凭记忆给出确定结论。用户允许联",
+        "draft_expected_total": 4,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A12",
+        "question": {
+          "id": "q3",
+          "topic": "证据不足与时效性",
+          "kind": "short_answer",
+          "prompt": "课程没讲某个知识点时应如何答复？",
+          "reference_answer": "当课程没有覆盖某个问题时，学习助手应说明资料不足，必要时请学员补充条件。最新价格、产品版本和接口限制可能变化，不能凭记忆给出确定结论。用户允许联网时，可以查找官方资料，并把外部补充与课程内容区分开；未能联网核实时，应明确标注未核实。来源冲突时展示差异和时间信息，不能悄悄把网络说法写回课程。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S03"
+          ]
+        },
+        "answer": "当课程没有覆盖某个问题时，学习助手应说明资料不足，必要时请学员补充条件。最新价格、产品版本和接口限制可能变化，不能凭记忆给出确定结论。用户允许联网时，可以查找官方资料，并把外部补充与课程内容区分开；未能联网核实时，应明确标注未核实。来源冲突时展示差异和时间信息，不能悄悄把网络说法写回课程。",
+        "draft_expected_total": 6,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A13",
+        "question": {
+          "id": "q4",
+          "topic": "混合检索",
+          "kind": "scenario",
+          "prompt": "语义搜索很好了，为什么还保留关键词检索？",
+          "reference_answer": "关键词检索擅长精确术语、缩写和名称匹配，向量检索擅长语义相近但措辞不同的表达。混合检索同时使用两者。RRF 根据候选在各列表中的排名融合结果，避免把不同量纲的原始分数直接相加。混合检索仍需用实际问题测试；多一路召回不一定总有收益，也会带来更多候选和处理时间。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S04"
+          ]
+        },
+        "answer": "完全不知道。",
+        "draft_expected_total": 0,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A14",
+        "question": {
+          "id": "q4",
+          "topic": "混合检索",
+          "kind": "scenario",
+          "prompt": "语义搜索很好了，为什么还保留关键词检索？",
+          "reference_answer": "关键词检索擅长精确术语、缩写和名称匹配，向量检索擅长语义相近但措辞不同的表达。混合检索同时使用两者。RRF 根据候选在各列表中的排名融合结果，避免把不同量纲的原始分数直接相加。混合检索仍需用实际问题测试；多一路召回不一定总有收益，也会带来更多候选和处理时间。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S04"
+          ]
+        },
+        "answer": "关键词检索擅长精确术语、缩写和名称匹配，向量检索擅长语义相近但措辞不同的表达。",
+        "draft_expected_total": 2,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A15",
+        "question": {
+          "id": "q4",
+          "topic": "混合检索",
+          "kind": "scenario",
+          "prompt": "语义搜索很好了，为什么还保留关键词检索？",
+          "reference_answer": "关键词检索擅长精确术语、缩写和名称匹配，向量检索擅长语义相近但措辞不同的表达。混合检索同时使用两者。RRF 根据候选在各列表中的排名融合结果，避免把不同量纲的原始分数直接相加。混合检索仍需用实际问题测试；多一路召回不一定总有收益，也会带来更多候选和处理时间。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S04"
+          ]
+        },
+        "answer": "关键词检索擅长精确术语、缩写和名称匹配，向量检索擅长语义相近但措辞不同的表达。混合检索同时使用两者。RRF 根据候选在各列表中的",
+        "draft_expected_total": 4,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A16",
+        "question": {
+          "id": "q4",
+          "topic": "混合检索",
+          "kind": "scenario",
+          "prompt": "语义搜索很好了，为什么还保留关键词检索？",
+          "reference_answer": "关键词检索擅长精确术语、缩写和名称匹配，向量检索擅长语义相近但措辞不同的表达。混合检索同时使用两者。RRF 根据候选在各列表中的排名融合结果，避免把不同量纲的原始分数直接相加。混合检索仍需用实际问题测试；多一路召回不一定总有收益，也会带来更多候选和处理时间。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S04"
+          ]
+        },
+        "answer": "关键词检索擅长精确术语、缩写和名称匹配，向量检索擅长语义相近但措辞不同的表达。混合检索同时使用两者。RRF 根据候选在各列表中的排名融合结果，避免把不同量纲的原始分数直接相加。混合检索仍需用实际问题测试；多一路召回不一定总有收益，也会带来更多候选和处理时间。",
+        "draft_expected_total": 6,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A17",
+        "question": {
+          "id": "q5",
+          "topic": "父子片段与引用",
+          "kind": "short_answer",
+          "prompt": "为什么用短片段检索却保留完整原文段落？",
+          "reference_answer": "课程讲义中的完整段落可作为父片段，较短的子片段用于检索。子片段必须记录父片段标识和原文位置，检索命中后才能回到上下文并显示可核对的来源。切分长度应按实际 tokenizer 检查，而不是把字符数直接当作 token 数。重叠可以减少边界处的信息丢失，但过大重叠会增加重复证据和索引成本。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S05"
+          ]
+        },
+        "answer": "完全不知道。",
+        "draft_expected_total": 0,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A18",
+        "question": {
+          "id": "q5",
+          "topic": "父子片段与引用",
+          "kind": "short_answer",
+          "prompt": "为什么用短片段检索却保留完整原文段落？",
+          "reference_answer": "课程讲义中的完整段落可作为父片段，较短的子片段用于检索。子片段必须记录父片段标识和原文位置，检索命中后才能回到上下文并显示可核对的来源。切分长度应按实际 tokenizer 检查，而不是把字符数直接当作 token 数。重叠可以减少边界处的信息丢失，但过大重叠会增加重复证据和索引成本。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S05"
+          ]
+        },
+        "answer": "课程讲义中的完整段落可作为父片段，较短的子片段用于检索。",
+        "draft_expected_total": 2,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A19",
+        "question": {
+          "id": "q5",
+          "topic": "父子片段与引用",
+          "kind": "short_answer",
+          "prompt": "为什么用短片段检索却保留完整原文段落？",
+          "reference_answer": "课程讲义中的完整段落可作为父片段，较短的子片段用于检索。子片段必须记录父片段标识和原文位置，检索命中后才能回到上下文并显示可核对的来源。切分长度应按实际 tokenizer 检查，而不是把字符数直接当作 token 数。重叠可以减少边界处的信息丢失，但过大重叠会增加重复证据和索引成本。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S05"
+          ]
+        },
+        "answer": "课程讲义中的完整段落可作为父片段，较短的子片段用于检索。子片段必须记录父片段标识和原文位置，检索命中后才能回到上下文并显示可核对的来源。切分长",
+        "draft_expected_total": 4,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A20",
+        "question": {
+          "id": "q5",
+          "topic": "父子片段与引用",
+          "kind": "short_answer",
+          "prompt": "为什么用短片段检索却保留完整原文段落？",
+          "reference_answer": "课程讲义中的完整段落可作为父片段，较短的子片段用于检索。子片段必须记录父片段标识和原文位置，检索命中后才能回到上下文并显示可核对的来源。切分长度应按实际 tokenizer 检查，而不是把字符数直接当作 token 数。重叠可以减少边界处的信息丢失，但过大重叠会增加重复证据和索引成本。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S05"
+          ]
+        },
+        "answer": "课程讲义中的完整段落可作为父片段，较短的子片段用于检索。子片段必须记录父片段标识和原文位置，检索命中后才能回到上下文并显示可核对的来源。切分长度应按实际 tokenizer 检查，而不是把字符数直接当作 token 数。重叠可以减少边界处的信息丢失，但过大重叠会增加重复证据和索引成本。",
+        "draft_expected_total": 6,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A21",
+        "question": {
+          "id": "q6",
+          "topic": "Embedding 的作用",
+          "kind": "scenario",
+          "prompt": "Embedding 在课程检索里扮演什么角色？",
+          "reference_answer": "Embedding 模型把文本编码成向量，让语义相近的文本更容易被检索到。文档与问题需要使用相匹配的编码方式和同一向量空间。更换模型或向量维度后，原来的索引通常需要重建，不能把两种模型的向量混用。小模型在有限课程集合上可能已经够用，应结合课程问题的召回效果、内存和延迟判断。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S06"
+          ]
+        },
+        "answer": "完全不知道。",
+        "draft_expected_total": 0,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A22",
+        "question": {
+          "id": "q6",
+          "topic": "Embedding 的作用",
+          "kind": "scenario",
+          "prompt": "Embedding 在课程检索里扮演什么角色？",
+          "reference_answer": "Embedding 模型把文本编码成向量，让语义相近的文本更容易被检索到。文档与问题需要使用相匹配的编码方式和同一向量空间。更换模型或向量维度后，原来的索引通常需要重建，不能把两种模型的向量混用。小模型在有限课程集合上可能已经够用，应结合课程问题的召回效果、内存和延迟判断。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S06"
+          ]
+        },
+        "answer": "Embedding 模型把文本编码成向量，让语义相近的文本更容易被检索到。",
+        "draft_expected_total": 2,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A23",
+        "question": {
+          "id": "q6",
+          "topic": "Embedding 的作用",
+          "kind": "scenario",
+          "prompt": "Embedding 在课程检索里扮演什么角色？",
+          "reference_answer": "Embedding 模型把文本编码成向量，让语义相近的文本更容易被检索到。文档与问题需要使用相匹配的编码方式和同一向量空间。更换模型或向量维度后，原来的索引通常需要重建，不能把两种模型的向量混用。小模型在有限课程集合上可能已经够用，应结合课程问题的召回效果、内存和延迟判断。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S06"
+          ]
+        },
+        "answer": "Embedding 模型把文本编码成向量，让语义相近的文本更容易被检索到。文档与问题需要使用相匹配的编码方式和同一向量空间。更换模型或向",
+        "draft_expected_total": 4,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A24",
+        "question": {
+          "id": "q6",
+          "topic": "Embedding 的作用",
+          "kind": "scenario",
+          "prompt": "Embedding 在课程检索里扮演什么角色？",
+          "reference_answer": "Embedding 模型把文本编码成向量，让语义相近的文本更容易被检索到。文档与问题需要使用相匹配的编码方式和同一向量空间。更换模型或向量维度后，原来的索引通常需要重建，不能把两种模型的向量混用。小模型在有限课程集合上可能已经够用，应结合课程问题的召回效果、内存和延迟判断。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S06"
+          ]
+        },
+        "answer": "Embedding 模型把文本编码成向量，让语义相近的文本更容易被检索到。文档与问题需要使用相匹配的编码方式和同一向量空间。更换模型或向量维度后，原来的索引通常需要重建，不能把两种模型的向量混用。小模型在有限课程集合上可能已经够用，应结合课程问题的召回效果、内存和延迟判断。",
+        "draft_expected_total": 6,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A25",
+        "question": {
+          "id": "q7",
+          "topic": "上下文预算",
+          "kind": "short_answer",
+          "prompt": "对话越来越长，上下文满了应该先删什么？",
+          "reference_answer": "模型的上下文窗口有上限。系统规则、任务、证据、学习偏好、历史消息和输出空间都要计入预算。工程上应优先保留当前任务和必要证据，裁剪无关历史与重复片段，而不是无限追加对话。摘要属于派生信息，应保留来源和更新时间，不能把摘要中的推测当成用户明确说过的事实。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S07"
+          ]
+        },
+        "answer": "完全不知道。",
+        "draft_expected_total": 0,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A26",
+        "question": {
+          "id": "q7",
+          "topic": "上下文预算",
+          "kind": "short_answer",
+          "prompt": "对话越来越长，上下文满了应该先删什么？",
+          "reference_answer": "模型的上下文窗口有上限。系统规则、任务、证据、学习偏好、历史消息和输出空间都要计入预算。工程上应优先保留当前任务和必要证据，裁剪无关历史与重复片段，而不是无限追加对话。摘要属于派生信息，应保留来源和更新时间，不能把摘要中的推测当成用户明确说过的事实。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S07"
+          ]
+        },
+        "answer": "模型的上下文窗口有上限。",
+        "draft_expected_total": 2,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A27",
+        "question": {
+          "id": "q7",
+          "topic": "上下文预算",
+          "kind": "short_answer",
+          "prompt": "对话越来越长，上下文满了应该先删什么？",
+          "reference_answer": "模型的上下文窗口有上限。系统规则、任务、证据、学习偏好、历史消息和输出空间都要计入预算。工程上应优先保留当前任务和必要证据，裁剪无关历史与重复片段，而不是无限追加对话。摘要属于派生信息，应保留来源和更新时间，不能把摘要中的推测当成用户明确说过的事实。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S07"
+          ]
+        },
+        "answer": "模型的上下文窗口有上限。系统规则、任务、证据、学习偏好、历史消息和输出空间都要计入预算。工程上应优先保留当前任务和必要证据，",
+        "draft_expected_total": 4,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A28",
+        "question": {
+          "id": "q7",
+          "topic": "上下文预算",
+          "kind": "short_answer",
+          "prompt": "对话越来越长，上下文满了应该先删什么？",
+          "reference_answer": "模型的上下文窗口有上限。系统规则、任务、证据、学习偏好、历史消息和输出空间都要计入预算。工程上应优先保留当前任务和必要证据，裁剪无关历史与重复片段，而不是无限追加对话。摘要属于派生信息，应保留来源和更新时间，不能把摘要中的推测当成用户明确说过的事实。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S07"
+          ]
+        },
+        "answer": "模型的上下文窗口有上限。系统规则、任务、证据、学习偏好、历史消息和输出空间都要计入预算。工程上应优先保留当前任务和必要证据，裁剪无关历史与重复片段，而不是无限追加对话。摘要属于派生信息，应保留来源和更新时间，不能把摘要中的推测当成用户明确说过的事实。",
+        "draft_expected_total": 6,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A29",
+        "question": {
+          "id": "q8",
+          "topic": "数据版本与质量",
+          "kind": "scenario",
+          "prompt": "数据文件格式正确能证明知识正确吗？",
+          "reference_answer": "知识库需要记录数据文件的版本、切分规则和模型版本。重复导入不应重复增加相同片段。格式完整并不代表知识准确，课堂闲聊、转写残缺和过时表述都需要单独标记。纯事务性的签到内容可以不参与学习检索；存在疑点的知识表述应提交复核，而不是让清洗模型擅自改写为另一种结论。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S08"
+          ]
+        },
+        "answer": "完全不知道。",
+        "draft_expected_total": 0,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A30",
+        "question": {
+          "id": "q8",
+          "topic": "数据版本与质量",
+          "kind": "scenario",
+          "prompt": "数据文件格式正确能证明知识正确吗？",
+          "reference_answer": "知识库需要记录数据文件的版本、切分规则和模型版本。重复导入不应重复增加相同片段。格式完整并不代表知识准确，课堂闲聊、转写残缺和过时表述都需要单独标记。纯事务性的签到内容可以不参与学习检索；存在疑点的知识表述应提交复核，而不是让清洗模型擅自改写为另一种结论。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S08"
+          ]
+        },
+        "answer": "知识库需要记录数据文件的版本、切分规则和模型版本。",
+        "draft_expected_total": 2,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A31",
+        "question": {
+          "id": "q8",
+          "topic": "数据版本与质量",
+          "kind": "scenario",
+          "prompt": "数据文件格式正确能证明知识正确吗？",
+          "reference_answer": "知识库需要记录数据文件的版本、切分规则和模型版本。重复导入不应重复增加相同片段。格式完整并不代表知识准确，课堂闲聊、转写残缺和过时表述都需要单独标记。纯事务性的签到内容可以不参与学习检索；存在疑点的知识表述应提交复核，而不是让清洗模型擅自改写为另一种结论。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S08"
+          ]
+        },
+        "answer": "知识库需要记录数据文件的版本、切分规则和模型版本。重复导入不应重复增加相同片段。格式完整并不代表知识准确，课堂闲聊、转写残缺和过",
+        "draft_expected_total": 4,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A32",
+        "question": {
+          "id": "q8",
+          "topic": "数据版本与质量",
+          "kind": "scenario",
+          "prompt": "数据文件格式正确能证明知识正确吗？",
+          "reference_answer": "知识库需要记录数据文件的版本、切分规则和模型版本。重复导入不应重复增加相同片段。格式完整并不代表知识准确，课堂闲聊、转写残缺和过时表述都需要单独标记。纯事务性的签到内容可以不参与学习检索；存在疑点的知识表述应提交复核，而不是让清洗模型擅自改写为另一种结论。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S08"
+          ]
+        },
+        "answer": "知识库需要记录数据文件的版本、切分规则和模型版本。重复导入不应重复增加相同片段。格式完整并不代表知识准确，课堂闲聊、转写残缺和过时表述都需要单独标记。纯事务性的签到内容可以不参与学习检索；存在疑点的知识表述应提交复核，而不是让清洗模型擅自改写为另一种结论。",
+        "draft_expected_total": 6,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A33",
+        "question": {
+          "id": "q9",
+          "topic": "Tool Calling",
+          "kind": "short_answer",
+          "prompt": "语言模型提出工具请求后，应用还需要做什么？",
+          "reference_answer": "工具调用让模型提出结构化的操作请求，例如检索课程或读取一个来源。模型提出请求不等于系统必须执行，应用应验证工具名称、参数类型、权限和次数限制，再运行工具并返回结果。学习助手不应把任意 SQL 或文件执行能力交给模型。工具错误需要明确反馈，不能伪装成成功结果。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S09"
+          ]
+        },
+        "answer": "完全不知道。",
+        "draft_expected_total": 0,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A34",
+        "question": {
+          "id": "q9",
+          "topic": "Tool Calling",
+          "kind": "short_answer",
+          "prompt": "语言模型提出工具请求后，应用还需要做什么？",
+          "reference_answer": "工具调用让模型提出结构化的操作请求，例如检索课程或读取一个来源。模型提出请求不等于系统必须执行，应用应验证工具名称、参数类型、权限和次数限制，再运行工具并返回结果。学习助手不应把任意 SQL 或文件执行能力交给模型。工具错误需要明确反馈，不能伪装成成功结果。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S09"
+          ]
+        },
+        "answer": "工具调用让模型提出结构化的操作请求，例如检索课程或读取一个来源。",
+        "draft_expected_total": 2,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A35",
+        "question": {
+          "id": "q9",
+          "topic": "Tool Calling",
+          "kind": "short_answer",
+          "prompt": "语言模型提出工具请求后，应用还需要做什么？",
+          "reference_answer": "工具调用让模型提出结构化的操作请求，例如检索课程或读取一个来源。模型提出请求不等于系统必须执行，应用应验证工具名称、参数类型、权限和次数限制，再运行工具并返回结果。学习助手不应把任意 SQL 或文件执行能力交给模型。工具错误需要明确反馈，不能伪装成成功结果。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S09"
+          ]
+        },
+        "answer": "工具调用让模型提出结构化的操作请求，例如检索课程或读取一个来源。模型提出请求不等于系统必须执行，应用应验证工具名称、参数类型、权",
+        "draft_expected_total": 4,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A36",
+        "question": {
+          "id": "q9",
+          "topic": "Tool Calling",
+          "kind": "short_answer",
+          "prompt": "语言模型提出工具请求后，应用还需要做什么？",
+          "reference_answer": "工具调用让模型提出结构化的操作请求，例如检索课程或读取一个来源。模型提出请求不等于系统必须执行，应用应验证工具名称、参数类型、权限和次数限制，再运行工具并返回结果。学习助手不应把任意 SQL 或文件执行能力交给模型。工具错误需要明确反馈，不能伪装成成功结果。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S09"
+          ]
+        },
+        "answer": "工具调用让模型提出结构化的操作请求，例如检索课程或读取一个来源。模型提出请求不等于系统必须执行，应用应验证工具名称、参数类型、权限和次数限制，再运行工具并返回结果。学习助手不应把任意 SQL 或文件执行能力交给模型。工具错误需要明确反馈，不能伪装成成功结果。",
+        "draft_expected_total": 6,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A37",
+        "question": {
+          "id": "q10",
+          "topic": "两个 Agent 的分工",
+          "kind": "scenario",
+          "prompt": "教练和评估员用同一个模型还能叫分工吗？",
+          "reference_answer": "学习教练负责解释、出题和辅导，练习评估员负责核对题目和按标准评估作答。两者可以使用同一个语言模型，但上下文和权限不同。评估员不需要知道教练对学员的主观判断。多一个角色会增加调用次数和延迟，而且同一模型仍可能共享偏差；必须用单角色对照实验验证分工是否带来收益。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S10"
+          ]
+        },
+        "answer": "完全不知道。",
+        "draft_expected_total": 0,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A38",
+        "question": {
+          "id": "q10",
+          "topic": "两个 Agent 的分工",
+          "kind": "scenario",
+          "prompt": "教练和评估员用同一个模型还能叫分工吗？",
+          "reference_answer": "学习教练负责解释、出题和辅导，练习评估员负责核对题目和按标准评估作答。两者可以使用同一个语言模型，但上下文和权限不同。评估员不需要知道教练对学员的主观判断。多一个角色会增加调用次数和延迟，而且同一模型仍可能共享偏差；必须用单角色对照实验验证分工是否带来收益。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S10"
+          ]
+        },
+        "answer": "学习教练负责解释、出题和辅导，练习评估员负责核对题目和按标准评估作答。",
+        "draft_expected_total": 2,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A39",
+        "question": {
+          "id": "q10",
+          "topic": "两个 Agent 的分工",
+          "kind": "scenario",
+          "prompt": "教练和评估员用同一个模型还能叫分工吗？",
+          "reference_answer": "学习教练负责解释、出题和辅导，练习评估员负责核对题目和按标准评估作答。两者可以使用同一个语言模型，但上下文和权限不同。评估员不需要知道教练对学员的主观判断。多一个角色会增加调用次数和延迟，而且同一模型仍可能共享偏差；必须用单角色对照实验验证分工是否带来收益。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S10"
+          ]
+        },
+        "answer": "学习教练负责解释、出题和辅导，练习评估员负责核对题目和按标准评估作答。两者可以使用同一个语言模型，但上下文和权限不同。评估员不需",
+        "draft_expected_total": 4,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      },
+      {
+        "id": "A40",
+        "question": {
+          "id": "q10",
+          "topic": "两个 Agent 的分工",
+          "kind": "scenario",
+          "prompt": "教练和评估员用同一个模型还能叫分工吗？",
+          "reference_answer": "学习教练负责解释、出题和辅导，练习评估员负责核对题目和按标准评估作答。两者可以使用同一个语言模型，但上下文和权限不同。评估员不需要知道教练对学员的主观判断。多一个角色会增加调用次数和延迟，而且同一模型仍可能共享偏差；必须用单角色对照实验验证分工是否带来收益。",
+          "rubric": [
+            "概念正确性 0–2",
+            "必要要点完整性 0–2",
+            "应用理由 0–2"
+          ],
+          "source_ids": [
+            "S10"
+          ]
+        },
+        "answer": "学习教练负责解释、出题和辅导，练习评估员负责核对题目和按标准评估作答。两者可以使用同一个语言模型，但上下文和权限不同。评估员不需要知道教练对学员的主观判断。多一个角色会增加调用次数和延迟，而且同一模型仍可能共享偏差；必须用单角色对照实验验证分工是否带来收益。",
+        "draft_expected_total": 6,
+        "human_expected_total": null,
+        "review_status": "draft_requires_human_review"
+      }
+    ],
+    "retry_origin": {
+      "fingerprint": "9c064c547cdecd07",
+      "sha256": "43d723e07a481feedcfc985d11eced9f5c1009296327804452d1a62b4c013654"
+    },
+    "code": [
+      "d28ce1ef5143f95e53bdc23f89577099fcde033536be6e8c6c49d6b42953f287",
+      "511e258254aa67f24acd8789ea0b6985a1449ad015697f0e288483f0d71acda8",
+      "4b915669730492ce4a65b01315d7022f54f4c96b9a553b7ca9ecdc2a2f542127"
+    ]
+  },
+  "modes": {
+    "single_coach": {
+      "case_count": 6,
+      "human_scored_count": 0,
+      "within_one_point": null,
+      "elapsed_seconds": 61.68,
+      "failed_batches": 0,
+      "usage": {
+        "prompt_tokens": 5018,
+        "completion_tokens": 2086
+      }
+    },
+    "two_agents": {
+      "case_count": 6,
+      "human_scored_count": 0,
+      "within_one_point": null,
+      "elapsed_seconds": 111.46,
+      "failed_batches": 0,
+      "usage": {
+        "prompt_tokens": 5818,
+        "completion_tokens": 4324
+      }
+    }
+  },
+  "score_disagreement": {
+    "paired_cases": 3,
+    "different_scores": 0,
+    "note": "Agreement is not accuracy; independent human gold is still required."
+  }
+}
