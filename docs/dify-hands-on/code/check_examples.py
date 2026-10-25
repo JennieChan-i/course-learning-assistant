@@ -19,6 +19,7 @@ def load(name):
 
 router, evidence, gate, commit, save = [load(n) for n in
     ("router", "evidence", "practice_gate", "commit_grade", "save_answer")]
+coaching_guard, web_results = load("coaching_guard"), load("web_results")
 
 
 def dump(value):
@@ -159,6 +160,21 @@ class TutorialChecks(unittest.TestCase):
     def test_15_malformed_audit(self):
         out = gate.main(dump(draft()), "[]", EVIDENCE, "{}")
         self.assertEqual(out["ok"], "no")
+
+    def test_16_coach_cannot_rewrite_scores(self):
+        state = json.loads(pack()["state"])
+        out = run_grade(state, good=True)
+        self.assertEqual(coaching_guard.main("本轮18分，单题满分4分", out["feedback"])["status"], "fallback")
+        self.assertEqual(coaching_guard.main("对照课程重新解释RAG的边界[S01]。", out["feedback"])["status"], "passed")
+
+    def test_17_mcp_json_and_empty_result(self):
+        payload = [{"content": [{"type": "text", "text": dump({"results": [
+            {"title": "Dify文档", "url": "https://docs.dify.ai/", "content": "官方工具说明"}]})}]}]
+        result = web_results.main("", payload)
+        self.assertEqual(result["has_results"], "yes")
+        self.assertIn("https://docs.dify.ai/", result["evidence"])
+        self.assertEqual(web_results.main("", [])["has_results"], "no")
+        self.assertEqual(web_results.main("", [{"isError": True, "error": "quota"}])["status"], "tool_error")
 
 
 if __name__ == "__main__":

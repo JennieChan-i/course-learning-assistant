@@ -136,6 +136,7 @@ runtime/       数据库、索引、报告、日志（Git 忽略）
 - [架构和接口](docs/architecture.md)
 - [整体产品架构与实际调用链](docs/architecture-overview.md)
 - [用Dify搭建同一产品：39步教程与替代方案](docs/dify-build-guide.md)
+- [仿Dify可视化搭建手册：68个节点，点击查看参数与产品决策](docs/dify-hands-on/showcase/课程助手-Dify可视化搭建手册.html)
 - [决策档案](docs/decisions.md)
 - [验证结果与未完成项](docs/validation.md)
 - [面试复习](docs/interview.md)
