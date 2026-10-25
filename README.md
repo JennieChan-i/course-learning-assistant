@@ -132,6 +132,8 @@ runtime/       数据库、索引、报告、日志（Git 忽略）
 - [产品需求与验收](docs/product.md)
 - [免费搜索配置教程](docs/search-setup.md)
 - [架构和接口](docs/architecture.md)
+- [整体产品架构与实际调用链](docs/architecture-overview.md)
+- [用Dify搭建同一产品：39步教程与替代方案](docs/dify-build-guide.md)
 - [决策档案](docs/decisions.md)
 - [验证结果与未完成项](docs/validation.md)
 - [面试复习](docs/interview.md)

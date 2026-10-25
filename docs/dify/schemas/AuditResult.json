@@ -1,0 +1,23 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "approved": {
+      "title": "Approved",
+      "type": "boolean"
+    },
+    "issues": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 10,
+      "title": "Issues",
+      "type": "array"
+    }
+  },
+  "required": [
+    "approved",
+    "issues"
+  ],
+  "title": "AuditResult",
+  "type": "object"
+}

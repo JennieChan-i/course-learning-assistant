@@ -1,0 +1,11 @@
+# Dify 1.18.0 reference override. Requires Docker Compose >= 2.24.4 for !override.
+# Copy beside the official docker-compose.yaml as compose.local.yaml before use.
+# Reference configuration only; not deployed or Docker-validated in this project.
+services:
+  nginx:
+    ports: !override
+      - "127.0.0.1:8088:80"
+      - "127.0.0.1:8448:443"
+  plugin_daemon:
+    # Marketplace installation uses internal connections; do not publish remote debugging.
+    ports: !override []
