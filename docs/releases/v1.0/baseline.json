@@ -1,0 +1,448 @@
+{
+  "schema_version": 1,
+  "product": "学知 · 课程智能学习助手",
+  "version": "1.0.0",
+  "release_ref": "refs/tags/v1.0.0",
+  "freeze_date": "2026-10-25",
+  "timezone": "Asia/Shanghai",
+  "maturity": "personal_pilot_baseline; quality, performance and commercial acceptance incomplete",
+  "source_commit_before_freeze": "edd0f0a13bb546d1a2fbab7dff2fffb5ad2e73e8",
+  "last_functional_commit_before_version_metadata": "1d5eaf13853110a2a9827cd8204b5df611a24828",
+  "version_scope": "v1.0.0 tag contains version-metadata alignment and PM archive; no business-feature expansion",
+  "default_distribution": {
+    "app_mode": "demo",
+    "dataset": "sample",
+    "network_binding": "127.0.0.1",
+    "web_search_default_enabled": false,
+    "llm_requires_user_configuration": true
+  },
+  "sanitized_local_configuration_at_freeze": {
+    "app_mode": "live",
+    "dataset": "private",
+    "app_port": 8765,
+    "llm_model": "kimi-k3",
+    "llm_context_tokens": 32768,
+    "llm_max_output_tokens": 1800,
+    "llm_structured_output_tokens": 6000,
+    "llm_timeout_seconds": 120.0,
+    "llm_temperature": null,
+    "llm_reasoning_effort": null,
+    "llm_coach_reasoning_effort": "low",
+    "embedding_model": "BAAI/bge-small-zh-v1.5",
+    "rerank_model": "BAAI/bge-reranker-base",
+    "device": "auto",
+    "local_inference_batch_size": 8,
+    "tavily_allow_keyless": false,
+    "search_monthly_limit": 300
+  },
+  "excluded_configuration": [
+    "LLM_API_KEY",
+    "TAVILY_API_KEY",
+    "LLM_BASE_URL",
+    "credentials",
+    "personal preferences",
+    "conversation and answer records"
+  ],
+  "prompt_version": "1.1.0",
+  "skills": {
+    "explain": {
+      "version": "1.0.1",
+      "allowed_tools": [
+        "search_course",
+        "get_source",
+        "search_web"
+      ]
+    },
+    "practice": {
+      "version": "1.0.1",
+      "allowed_tools": [
+        "search_course",
+        "get_source"
+      ]
+    },
+    "review": {
+      "version": "1.0.0",
+      "allowed_tools": [
+        "search_course",
+        "get_source"
+      ]
+    }
+  },
+  "model_revisions": {
+    "BAAI/bge-base-zh-v1.5": "f03589ceff5aac7111bd60cfc7d497ca17ecac65",
+    "BAAI/bge-reranker-base": "2cfc18c9415c912f9d8155881c133215df768a70",
+    "BAAI/bge-small-zh-v1.5": "7999e1d3359715c523056ef9478215996d62a620"
+  },
+  "data": {
+    "private_course_count": 14,
+    "private_parent_count": 877,
+    "private_child_count": 2243,
+    "private_corpus_version": "2c1d130913d48e25",
+    "private_content_included": false,
+    "sample_parent_count": 16,
+    "retrieval_candidates": 120,
+    "dev_candidates": 60,
+    "test_candidates": 60,
+    "grading_candidates": 40,
+    "human_gold_status": "pending_independent_human_review_in_published_evidence",
+    "locked_test": {
+      "version": 1,
+      "test_sha256": "63afd8e9fadf950dbd93dcb71d0b1b8da77f6d204312b9f42125b17287779f18",
+      "count": 120,
+      "dev": 60,
+      "test": 60,
+      "human_review": "pending"
+    }
+  },
+  "environment": {
+    "os": "Windows",
+    "python": "3.12.10",
+    "torch": "2.7.1+cu128",
+    "gpu_from_recorded_validation": "NVIDIA RTX 5060 Ti 8GB",
+    "node_from_recorded_validation": "24.16.0"
+  },
+  "freeze_verification": {
+    "existing_suite": "37 passed; 2026-10-25; no new real LLM or search requests made for version archiving",
+    "ruff_check": "passed",
+    "frontend_build": "passed; package version 1.0.0",
+    "ci_for_release": "inspect GitHub Actions checks attached to the v1.0.0 tag commit; not a model quality result"
+  },
+  "historical_feature_ci": "https://github.com/JennieChan-i/course-learning-assistant/actions/runs/40119655598",
+  "source_file_fingerprints": [
+    {
+      "path": ".env.example",
+      "sha256_lf": "1eea9d60bc145f9e57165e9e9859560d928f3c2e914c6b2509a50cb842792228"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256_lf": "27860b5f47491f5ab7d4efe9557122a6d6ec6d5291d54480bcfc774b718b0dbf"
+    },
+    {
+      "path": "backend/__init__.py",
+      "sha256_lf": "34877e9388922ab558dd1e5b81b2ff29384db3e30d2229e21a3b149f0a544cd1"
+    },
+    {
+      "path": "backend/agents.py",
+      "sha256_lf": "c43750452dcff6881efe612f273ff342a0340904a2bcd2931181c28c39b24db0"
+    },
+    {
+      "path": "backend/cli.py",
+      "sha256_lf": "431b40a3a59699f67ad0e590176598516e5363ee38cea883992f748e2c9d918c"
+    },
+    {
+      "path": "backend/config.py",
+      "sha256_lf": "03331a4c19f73fb9a6516ee362d9145e2e58c4d374ca403a866a59ea463102f3"
+    },
+    {
+      "path": "backend/evaluation.py",
+      "sha256_lf": "934bd86e354944f883fbc64153a8c1a5d9899343fd1a92e4f05b9aecbd445a36"
+    },
+    {
+      "path": "backend/evaluation_jobs.py",
+      "sha256_lf": "4c6a083671da2fcae487a8f81598239e0cda5c9a146d83593d9c71e7b5d7628b"
+    },
+    {
+      "path": "backend/evaluation_review.py",
+      "sha256_lf": "cf79bdf7378e9be8f5540ec29619193e5d75a70fc57353bc32791fd4e2ee242a"
+    },
+    {
+      "path": "backend/knowledge.py",
+      "sha256_lf": "53da3d4518327fc91e8dee3f33633090002f39393678a726a2c2a7bd1c766efe"
+    },
+    {
+      "path": "backend/llm.py",
+      "sha256_lf": "652a1b8f8c8caab1d466aa86b6f53f9b46bcf3cd74ddaa6ec2421c88e3144e48"
+    },
+    {
+      "path": "backend/main.py",
+      "sha256_lf": "4cd0c838515b9d4bd6855be7300fbd4a9a7a19f8eff17927277a1d7bc7bef76a"
+    },
+    {
+      "path": "backend/schemas.py",
+      "sha256_lf": "b44320fd2dbc2ce79d563c02fadc6ae07bd0c44a7baed43cb19d24b87ef7e095"
+    },
+    {
+      "path": "backend/store.py",
+      "sha256_lf": "975c96ab48ab991b942898b24ac805812e27ca0857e7f1acd6daf4f2991240f6"
+    },
+    {
+      "path": "backend/websearch.py",
+      "sha256_lf": "c2d0c26b7867c4a42259d3d1e69f5f6598221cc2a47e6b28d297601b8bb03e75"
+    },
+    {
+      "path": "data/sample_courses.csv",
+      "sha256_lf": "79f34728f38f903806da46622a97a98c5f94786a2f2f92f4e72fb927e0bc5bb4"
+    },
+    {
+      "path": "evals/grading.jsonl",
+      "sha256_lf": "d8c593cf085c50a69b15138d22dc4658bf760345de605aeb56812df57173a150"
+    },
+    {
+      "path": "evals/retrieval.jsonl",
+      "sha256_lf": "6599b85956efad96c0032ce9707c1b5190874803726ab9b037ff5c63fd448ca6"
+    },
+    {
+      "path": "evals/test-lock.json",
+      "sha256_lf": "80b451931966d67792e74238f5117ca81010c61b98627ab3717563e06e71fea7"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "sha256_lf": "b51aaf0a87f1a281793576a4376591550d5eece0adb6262a990a094cc2650481"
+    },
+    {
+      "path": "frontend/package.json",
+      "sha256_lf": "6644dd792bfe953d52f69d870642a0744ba05a4ab4fc445f72994f1aaa688562"
+    },
+    {
+      "path": "frontend/src/App.tsx",
+      "sha256_lf": "01ed026d5cdc2a4ad2b5448aa3822349801345b01e2854e19855143f7034fab7"
+    },
+    {
+      "path": "frontend/src/api.ts",
+      "sha256_lf": "c5304d3f58e4986775953b7d54ccf31afb523c42830bfef8979d3f27e717cdaa"
+    },
+    {
+      "path": "frontend/src/main.tsx",
+      "sha256_lf": "e614ac3b211ff46384d74b651f79fed94b722a0b122bd883c7e2d268ea70333a"
+    },
+    {
+      "path": "frontend/src/style.css",
+      "sha256_lf": "4ebb08b4548f2b2da432d986482464a30b026b92920d38e379aa4f5aae8af9b2"
+    },
+    {
+      "path": "frontend/src/tokens.css",
+      "sha256_lf": "78d573ee8b67b7570c47ca43be3d36b19cd9b79e2174e4efdf40e2220b96d35d"
+    },
+    {
+      "path": "models.lock.json",
+      "sha256_lf": "f4bc7bb271496ada9792d61bf3bf93f66748cb3b4127587c69ba560451122dad"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256_lf": "84a15a57071ca2bc5cd91833534637db8ad34c7b9268e10ac71094b707760675"
+    },
+    {
+      "path": "requirements.lock",
+      "sha256_lf": "246f857da9e1211941accd31e4595d7973a726adfc9c8c202bf21dd2bf0a64c7"
+    },
+    {
+      "path": "scripts/benchmark_private.py",
+      "sha256_lf": "2a6ab50def500cb4f53dd79fe4e150fca139b021a1fb79440ac18e7773c6f020"
+    },
+    {
+      "path": "scripts/build-index.ps1",
+      "sha256_lf": "0c8853457c4c12cd05ecb9e85837aaf0304a4fe28598b3fff9a72058db79db23"
+    },
+    {
+      "path": "scripts/check_live.py",
+      "sha256_lf": "e0fc6e3eff26c45c5f061c85dc9d3792374ed40ba96a92c12bf2a8eca4239370"
+    },
+    {
+      "path": "scripts/check_release.py",
+      "sha256_lf": "c46d84855a296f90b4a1f39d655b826e13c59c467cd96c7daa5c5515eb9d0801"
+    },
+    {
+      "path": "scripts/common.ps1",
+      "sha256_lf": "4f9fbbf4be986735299439fd9e668baf3dd6655732c2b98cc734553edfd580d4"
+    },
+    {
+      "path": "scripts/download-models.ps1",
+      "sha256_lf": "56d091cf95e4adc49df571cd29c27ca83c2213e4fcfec653226d7fa800c0ec4f"
+    },
+    {
+      "path": "scripts/evaluate.ps1",
+      "sha256_lf": "ab325fb04df4c297f0d76a1098c4845acab098f78b3c7d7b497b5d99dc09effd"
+    },
+    {
+      "path": "scripts/prepare_private_evals.py",
+      "sha256_lf": "e6b9b8492a13e449862fe22fa0da558c86e028148bb70bd6726fe4c097997b41"
+    },
+    {
+      "path": "scripts/seed_evals.py",
+      "sha256_lf": "5a1bed25f008d0b199dcf441ffdd45ee6e0daf241ee1f32a672980ea3dafc62b"
+    },
+    {
+      "path": "scripts/seed_samples.py",
+      "sha256_lf": "2c280c7a85b19a4f9ef2e726acde0f7b3acc2eae4c830b8131522e6f0105395d"
+    },
+    {
+      "path": "scripts/setup.ps1",
+      "sha256_lf": "ef999fe328b2aecf512be4bb80db14a0d62a3e3ac9f39d0210a7979de1fbc048"
+    },
+    {
+      "path": "scripts/start.ps1",
+      "sha256_lf": "e78f4248a57330ff5b9c734533c7b6837546b792311a42e12791a0274861b226"
+    },
+    {
+      "path": "skills/explain/SKILL.md",
+      "sha256_lf": "eb07dd0f1cff4450005e144b03092c7598a52ec320c0ab7090e149c9d424982e"
+    },
+    {
+      "path": "skills/explain/manifest.json",
+      "sha256_lf": "514491459df55a292fe57dd25debc2b91a86863031ebd8dfb137fceddfb63644"
+    },
+    {
+      "path": "skills/practice/SKILL.md",
+      "sha256_lf": "4b915669730492ce4a65b01315d7022f54f4c96b9a553b7ca9ecdc2a2f542127"
+    },
+    {
+      "path": "skills/practice/manifest.json",
+      "sha256_lf": "37d172b1ca89e7aaa7e0dc6cd3c19676dcb4f3ec2280dad99104b320f3329b0d"
+    },
+    {
+      "path": "skills/review/SKILL.md",
+      "sha256_lf": "756ca2b995663b248fdcf527c7c9bfce8349dc7bab918fa20e4349047cac9689"
+    },
+    {
+      "path": "skills/review/manifest.json",
+      "sha256_lf": "b75e4e1810b574ab5db1926f404be5e6417433cd0a413c61b4e87d24ec1108c9"
+    },
+    {
+      "path": "tests/conftest.py",
+      "sha256_lf": "360f7ef1db4efe47acbb6356b27626d81ff48e1f459b99a1e5d3d2c83ca76193"
+    },
+    {
+      "path": "tests/test_agents.py",
+      "sha256_lf": "9ff65314ee6d63efb7e6e1e6ec0e46512b07df8053d2e38064b1b8683a79b388"
+    },
+    {
+      "path": "tests/test_api.py",
+      "sha256_lf": "83902510d9f7d45c5a056d8fd00f6cf633922ec803a1da99db9494da271c282f"
+    },
+    {
+      "path": "tests/test_cancellation.py",
+      "sha256_lf": "e9bae598bc387ea8ddf3d5106bf80ae1b57b2f83b46539e8d3984cdc27b3ebae"
+    },
+    {
+      "path": "tests/test_config.py",
+      "sha256_lf": "0dc319e30a2879bba9f468c3cb6e18a68cda99142134350108fef444a501ddfa"
+    },
+    {
+      "path": "tests/test_evaluation.py",
+      "sha256_lf": "85d0bb77ed0d5aa92a738f149c13bdc7af292b877a32dfc1b8e84e8563bf952b"
+    },
+    {
+      "path": "tests/test_evaluation_review.py",
+      "sha256_lf": "617cdce78500e524e78c5e5dc14f04a111c3617c5f9ee4d643a713ed39627bbd"
+    },
+    {
+      "path": "tests/test_generation_guards.py",
+      "sha256_lf": "e287daa6a5ab616cc62ed6ad48917343b109049124f2ec59db16ba343f3d6a56"
+    },
+    {
+      "path": "tests/test_http_disconnect.py",
+      "sha256_lf": "04521699b0a508718e237f99e1804ec629671db8e869457e78034d836dc5b2bb"
+    },
+    {
+      "path": "tests/test_knowledge.py",
+      "sha256_lf": "cff46cac46c05ecb4c2cd645bfe5a8b2ffc72d00ed99568386e40a00705b8c8b"
+    },
+    {
+      "path": "tests/test_live_protocol.py",
+      "sha256_lf": "2299d27296679c7ca6959932c11cff422b1780fd5d307d4ccad4d8d28244e0bb"
+    },
+    {
+      "path": "tests/test_store.py",
+      "sha256_lf": "2c37ce6b57a1371929445957ab755de04d2c377240cb8e5b85407a783b39d13a"
+    },
+    {
+      "path": "tests/test_websearch.py",
+      "sha256_lf": "939bb37ab9535d293435c1129f99cc5b9170c69bb6787f490034c857e159ea0b"
+    }
+  ],
+  "historical_report_fingerprints": [
+    {
+      "path": "docs/reports/answer-dev.json",
+      "sha256_lf": "7a9fd245e7737f1f6cbf42a00aaa4d3f085b4ae2a03ddb1d0dee5c0cbe1675e9",
+      "recorded_status": "not_run",
+      "fingerprint": null,
+      "evidence_scope": "historical_self_authored_sample_run; configuration and coverage must be read from each report"
+    },
+    {
+      "path": "docs/reports/answers-dev-baseline.json",
+      "sha256_lf": "fc2f0fe7d30b45a33b6410a5789eeaf3fc12c41cb84076d1746e20c0cd3ce46e",
+      "recorded_status": "completed_awaiting_human_claim_review",
+      "fingerprint": "51e9c70d12dc2dfa",
+      "evidence_scope": "historical_self_authored_sample_run; configuration and coverage must be read from each report"
+    },
+    {
+      "path": "docs/reports/answers-dev-coach-low.json",
+      "sha256_lf": "563316eabe3cf9fa07983ca71527a5379f1f82f56df9862d26d9a48afdd346ec",
+      "recorded_status": "completed_awaiting_human_claim_review",
+      "fingerprint": "f35e5b2ef7ddf6fc",
+      "evidence_scope": "historical_self_authored_sample_run; configuration and coverage must be read from each report"
+    },
+    {
+      "path": "docs/reports/answers-dev-regression.json",
+      "sha256_lf": "3e6ec9c515e80bb4e78ed50c0489cc6528686efbde307406d85ff73265bffc15",
+      "recorded_status": "completed_awaiting_human_claim_review",
+      "fingerprint": "a58db2ace49d0622",
+      "evidence_scope": "historical_self_authored_sample_run; configuration and coverage must be read from each report"
+    },
+    {
+      "path": "docs/reports/grading-ablation.json",
+      "sha256_lf": "265134dd6b80ca9238604ed1e109e9f3af70dcd1ec5798620a5796aae10891e3",
+      "recorded_status": "not_run",
+      "fingerprint": null,
+      "evidence_scope": "historical_self_authored_sample_run; configuration and coverage must be read from each report"
+    },
+    {
+      "path": "docs/reports/grading-baseline.json",
+      "sha256_lf": "eaeaf37359033e29aec8d89af0fa4b4cb96c98f4fa7b172c6c083e4007aeaa5b",
+      "recorded_status": "completed_with_errors",
+      "fingerprint": "9c064c547cdecd07",
+      "evidence_scope": "historical_self_authored_sample_run; configuration and coverage must be read from each report"
+    },
+    {
+      "path": "docs/reports/grading-recovery.json",
+      "sha256_lf": "d098a37860247cbd39315dd9fac71c29d9f39d364760e84729a23319cae9fa3e",
+      "recorded_status": "completed_awaiting_human_review",
+      "fingerprint": "02f1fc2df575a6fa",
+      "evidence_scope": "historical_self_authored_sample_run; configuration and coverage must be read from each report"
+    },
+    {
+      "path": "docs/reports/mcp-live-integration.json",
+      "sha256_lf": "264636ea820f8fd676db446e829444f8d63edb2977516876f3dc69144ba0ce08",
+      "recorded_status": "completed",
+      "fingerprint": null,
+      "evidence_scope": "historical_self_authored_sample_run; configuration and coverage must be read from each report"
+    },
+    {
+      "path": "docs/reports/mcp-official-integration.json",
+      "sha256_lf": "2066748de7f558ce78ba634422b305cdb1d375cb248d27d0aac58909e27f415c",
+      "recorded_status": "completed",
+      "fingerprint": null,
+      "evidence_scope": "historical_self_authored_sample_run; configuration and coverage must be read from each report"
+    },
+    {
+      "path": "docs/reports/reasoning-effort-exploratory.json",
+      "sha256_lf": "7a0f5a1234d4257e62c8b694abb14a64a466f52bf8755d994f643bf7ec088c4c",
+      "recorded_status": null,
+      "fingerprint": null,
+      "evidence_scope": "historical_self_authored_sample_run; configuration and coverage must be read from each report"
+    },
+    {
+      "path": "docs/reports/retrieval-dev-bge-base-zh-v1.5.json",
+      "sha256_lf": "cb469b2298d887af5aae35a7534b90b1c4c4980718274ba3920e98459a78eba3",
+      "recorded_status": "exploratory",
+      "fingerprint": null,
+      "evidence_scope": "historical_self_authored_sample_run; configuration and coverage must be read from each report"
+    },
+    {
+      "path": "docs/reports/retrieval-dev-bge-small-zh-v1.5.json",
+      "sha256_lf": "81cd9d9aab9ad4c2d4ad8e456d404645854dad002e862fc6ca6b6c722ff9fe75",
+      "recorded_status": "exploratory",
+      "fingerprint": null,
+      "evidence_scope": "historical_self_authored_sample_run; configuration and coverage must be read from each report"
+    },
+    {
+      "path": "docs/reports/retrieval-test-bge-small-zh-v1.5.json",
+      "sha256_lf": "2b96e829968bd41b27f64e5c7021baed83e3f67e8f5fee39997834deae2b8baf",
+      "recorded_status": "exploratory",
+      "fingerprint": null,
+      "evidence_scope": "historical_self_authored_sample_run; configuration and coverage must be read from each report"
+    }
+  ],
+  "hash_convention": "SHA-256 of UTF-8 file bytes with CRLF normalized to LF; no self-reference to this manifest; reports retain their original run versions",
+  "restore_limit": "Git restores tracked code and public examples only. Model weights, private data, runtime state, secrets and external API service behavior are not frozen or included."
+}

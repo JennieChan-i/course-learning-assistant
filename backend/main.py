@@ -7,6 +7,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from .evaluation_review import EvaluationReview, ReviewInput
+from . import __version__
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from starlette.datastructures import Headers, MutableHeaders
 
@@ -89,7 +90,7 @@ def create_app(config=settings, knowledge=None, store=None):
         app.state.knowledge.close()
         await app.state.agents.llm.close()
 
-    app = FastAPI(title="课程智能学习助手", version="0.1.0", lifespan=lifespan)
+    app = FastAPI(title="课程智能学习助手", version=__version__, lifespan=lifespan)
     if config.app_mode not in ("demo", "live") or config.dataset not in ("sample", "private"):
         raise ValueError("APP_MODE 必须为 demo/live，DATASET 必须为 sample/private。")
     if config.app_mode == "demo" and config.dataset != "sample":
