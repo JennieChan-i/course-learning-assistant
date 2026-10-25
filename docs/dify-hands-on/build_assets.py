@@ -2,6 +2,7 @@
 import csv
 import json
 from pathlib import Path
+from export_csv import export_csv
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
@@ -29,6 +30,7 @@ def main():
         body = (f"来源编号：{row['chunk_id']}\n课程编号：{row['doc_id']}\n课程：{row['doc_name']}\n"
                 f"主题：{row['subtopic']}\n资料性质：本项目自编演示课程，非完整私人课程\n\n正文：\n{row['chunk_text']}\n")
         (knowledge / f"{row['chunk_id']}.txt").write_text(body, encoding="utf-8")
+    export_csv(ROOT / "data/sample_courses.csv", HERE / "import/course_demo_dify.csv")
     schemas = HERE / "schemas"
     schemas.mkdir(exist_ok=True)
     sid = array(text(), minItems=1, maxItems=6)

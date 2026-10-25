@@ -150,6 +150,11 @@ class TutorialChecks(unittest.TestCase):
             cards = list(csv.DictReader(stream))
         self.assertEqual(len(cards), 20)
         self.assertTrue(all(None not in row for row in cards))
+        with (HERE.parent / "import/course_demo_dify.csv").open(encoding="utf-8-sig", newline="") as stream:
+            sample_csv = list(csv.DictReader(stream))
+        self.assertEqual(len(sample_csv), 16)
+        self.assertTrue(all(set(row) == {"content"} for row in sample_csv))
+        self.assertTrue(all("来源编号：S" in row["content"] for row in sample_csv))
 
     def test_15_malformed_audit(self):
         out = gate.main(dump(draft()), "[]", EVIDENCE, "{}")
