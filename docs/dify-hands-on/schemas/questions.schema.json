@@ -1,0 +1,93 @@
+{
+  "type": "object",
+  "properties": {
+    "topic": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2",
+              "3"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "short_answer",
+              "scenario"
+            ]
+          },
+          "prompt": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "reference_answer": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 800
+          },
+          "rubric": {
+            "type": "object",
+            "properties": {
+              "correctness": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 400
+              },
+              "completeness": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 400
+              },
+              "reasoning": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 400
+              }
+            },
+            "required": [
+              "correctness",
+              "completeness",
+              "reasoning"
+            ],
+            "additionalProperties": false
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "maxItems": 6
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "prompt",
+          "reference_answer",
+          "rubric",
+          "source_ids"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 3,
+      "maxItems": 3
+    }
+  },
+  "required": [
+    "topic",
+    "questions"
+  ],
+  "additionalProperties": false
+}
