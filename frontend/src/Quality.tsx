@@ -574,6 +574,17 @@ export default function Quality({
                           }}
                         />
                       </details>
+                      <details>
+                        <summary>本次复测的证据与检索记录</summary>
+                        <Json
+                          value={{
+                            evidence: latest.evidence,
+                            retrievals: latest.retrievals,
+                            prompt_version: latest.prompt_version,
+                            skill_versions: latest.skill_versions,
+                          }}
+                        />
+                      </details>
                       {latest.status === "completed" && (
                         <form
                           onSubmit={reviewReplay}

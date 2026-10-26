@@ -327,6 +327,31 @@ async def test_replay_never_enables_web_and_uses_historical_memory(store, config
     assert result["status"] == "completed"
 
 
+async def test_current_assessment_refreshes_old_evidence_and_fails_if_source_removed(
+    client, store, config, monkeypatch
+):
+    p = client.post("/api/practices", json={}).json()
+    client.post(f"/api/practices/{p['id']}/submit", json={"answers": p["demo_answers"]})
+    run_id = next(t["id"] for t in store.traces() if t["kind"] == "assessment")
+    snapshot = store.trace_run(run_id)["snapshot"]
+    original = deepcopy(snapshot)
+    current = Knowledge(config)
+    current.corpus.parents["S01"]["chunk_text"] = "当前已更新的课程证据"
+
+    async def check(agent, practice, answers, run):
+        assert practice["sources"][0]["chunk_text"] == "当前已更新的课程证据"
+        return {"fixture": True}
+
+    monkeypatch.setattr(Agents, "grade", check)
+    result = await replay(snapshot, config, store, "current_knowledge", current)
+    assert result["status"] == "completed"
+    assert result["evidence"]["S01"]["chunk_text"] == "当前已更新的课程证据"
+    assert snapshot == original
+    del current.corpus.parents["S01"]
+    failed = await replay(snapshot, config, store, "current_knowledge", current)
+    assert failed["status"] == "failed" and "人工审核题目" in failed["error"]
+
+
 async def test_replay_failure_and_cancellation_cleanup_temp_database(store, config, monkeypatch):
     q, run_id = scene(store, config)
     snapshot = store.trace_run(run_id)["snapshot"]

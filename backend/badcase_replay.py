@@ -5,10 +5,11 @@ import json
 import tempfile
 import time
 from pathlib import Path
+from copy import deepcopy
 
 from .agents import Agents
 from .llm import new_run
-from .observability import build_info, finish_snapshot, start_snapshot
+from .observability import build_info, finish_snapshot, start_snapshot, capture_sources
 from .schemas import ChatInput, PracticeInput, QuestionSet, Submission
 from .store import Store, now
 
@@ -103,7 +104,7 @@ async def replay(snapshot, config, production, strategy, knowledge=None):
         run = new_run(cfg, snapshot["kind"])
         run["is_badcase_replay"] = True
         run["dataset_version"] = selected.corpus.version
-        request = dict(snapshot["request"])
+        request = deepcopy(snapshot["request"])
         start_snapshot(run, cfg, request)
         result["configuration"] = run["snapshot"]["configuration"]
         result["dataset_version"] = selected.corpus.version
@@ -159,6 +160,17 @@ async def replay(snapshot, config, production, strategy, knowledge=None):
                         )
                 result["output"] = await agent.create_practice(PracticeInput.model_validate(request), run)
             elif snapshot["kind"] == "assessment":
+                if strategy == "current_knowledge":
+                    refreshed = []
+                    for source in request["practice"]["sources"]:
+                        try:
+                            refreshed.append(selected.corpus.source(source["id"]))
+                        except ValueError as exc:
+                            raise ValueError(
+                                "原题的课程来源已不在当前知识库，先人工审核题目与评分标准是否仍适用。"
+                            ) from exc
+                    request["practice"]["sources"] = refreshed
+                capture_sources(run, request["practice"]["sources"])
                 result["output"] = await agent.grade(request["practice"], request["answers"], run)
             else:
                 raise ValueError("此类历史运行不支持复测。")
@@ -176,6 +188,10 @@ async def replay(snapshot, config, production, strategy, knowledge=None):
             result.update(
                 usage=run["usage"],
                 events=run["events"],
+                evidence=run["snapshot"]["source_pool"],
+                retrievals=run["snapshot"]["retrievals"],
+                prompt_version=run["prompt_version"],
+                skill_versions=run["skill_versions"],
                 elapsed_ms=round((time.perf_counter() - started) * 1000),
             )
     result["checks"] = {
