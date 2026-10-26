@@ -12,10 +12,13 @@ export async function api<T = any>(
   });
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
-    throw new Error(
-      typeof body.detail === "string"
-        ? body.detail
-        : `请求失败 (${response.status})`,
+    throw Object.assign(
+      new Error(
+        typeof body.detail === "string"
+          ? body.detail
+          : `请求失败 (${response.status})`,
+      ),
+      { runId: body.run_id },
     );
   }
   return response.json();

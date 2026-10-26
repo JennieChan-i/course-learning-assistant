@@ -31,6 +31,8 @@ class Store:
             CREATE TABLE IF NOT EXISTS traces(id TEXT PRIMARY KEY,payload TEXT,created_at TEXT);
             CREATE TABLE IF NOT EXISTS usage(month TEXT PRIMARY KEY,search_count INTEGER NOT NULL);
             CREATE TABLE IF NOT EXISTS context_boundary(id INTEGER PRIMARY KEY,changed_at TEXT);
+            CREATE TABLE IF NOT EXISTS feedback(id TEXT PRIMARY KEY,run_id TEXT,case_id TEXT,payload TEXT,created_at TEXT,UNIQUE(run_id,payload));
+            CREATE TABLE IF NOT EXISTS badcases(id TEXT PRIMARY KEY,signature TEXT UNIQUE,status TEXT,severity TEXT,category TEXT,payload TEXT,created_at TEXT,updated_at TEXT);
             """)
 
     @contextmanager
@@ -87,6 +89,7 @@ class Store:
 
     def delete_session(self, session_id):
         with self.connect() as c:
+            self.purge_quality(c, session_id=session_id)
             c.execute("DELETE FROM messages WHERE session_id=?", (session_id,))
             c.execute("DELETE FROM sessions WHERE id=?", (session_id,))
             # Traces may contain a derived answer; clear them together with history deletion.
@@ -98,18 +101,26 @@ class Store:
 
     def preference(self, key, value):
         with self.connect() as c:
+            previous = c.execute("SELECT value FROM preferences WHERE key=?", (key,)).fetchone()
+            if previous and previous[0] != value:
+                self.purge_quality(c, preference_key=key)
             c.execute("INSERT OR REPLACE INTO preferences VALUES (?,?,?)", (key, value, now()))
             c.execute("INSERT OR REPLACE INTO context_boundary VALUES (1,?)", (now(),))
 
     def delete_preference(self, key):
         with self.connect() as c:
+            self.purge_quality(c, preference_key=key)
             c.execute("DELETE FROM preferences WHERE key=?", (key,))
             c.execute("INSERT OR REPLACE INTO context_boundary VALUES (1,?)", (now(),))
 
     def context_messages(self, session_id):
         with self.connect() as c:
             boundary = c.execute("SELECT changed_at FROM context_boundary WHERE id=1").fetchone()
-        return [m for m in self.messages(session_id) if not boundary or m["created_at"] > boundary[0]]
+        return [
+            m
+            for m in self.messages(session_id)
+            if (not boundary or m["created_at"] > boundary[0]) and not m["metadata"].get("failed")
+        ]
 
     def practice(self, practice_id):
         with self.connect() as c:
@@ -191,9 +202,54 @@ class Store:
 
     def clear_learning(self):
         with self.connect() as c:
-            for table in ("practices", "reviews", "traces"):
+            for table in ("practices", "reviews", "traces", "feedback", "badcases"):
                 c.execute(f"DELETE FROM {table}")
             c.execute("INSERT OR REPLACE INTO context_boundary VALUES (1,?)", (now(),))
+
+    def purge_quality(self, c, session_id=None, preference_key=None):
+        def affected(snapshot):
+            return (session_id and snapshot.get("subject", {}).get("session_id") == session_id) or (
+                preference_key and preference_key in snapshot.get("memory", {}).get("preferences", {})
+            )
+
+        for row in c.execute("SELECT id,payload FROM traces").fetchall():
+            run = json.loads(row["payload"])
+            if affected(run.get("snapshot", {})):
+                run["snapshot"] = {"redacted": True, "reason": "linked_learning_information_removed"}
+                c.execute(
+                    "UPDATE traces SET payload=? WHERE id=?", (json.dumps(run, ensure_ascii=False), row["id"])
+                )
+        for row in c.execute("SELECT id,payload FROM badcases").fetchall():
+            payload = json.loads(row["payload"])
+            if affected(payload.get("snapshot", {})):
+                if session_id:
+                    c.execute("DELETE FROM feedback WHERE case_id=?", (row["id"],))
+                    c.execute("DELETE FROM badcases WHERE id=?", (row["id"],))
+                    continue
+                payload.update(
+                    title="关联学习信息已删除，现场已清除",
+                    context_redacted=True,
+                    snapshot={"redacted": True},
+                    original_output=None,
+                    expected_behavior="",
+                    notes="",
+                    fix_reference="",
+                    replays=[],
+                    events=[{"at": now(), "action": "context_redacted"}],
+                )
+                c.execute(
+                    "UPDATE badcases SET status='archived',payload=?,updated_at=? WHERE id=?",
+                    (json.dumps(payload, ensure_ascii=False), now(), row["id"]),
+                )
+                for feedback in c.execute(
+                    "SELECT id,payload FROM feedback WHERE case_id=?", (row["id"],)
+                ).fetchall():
+                    data = json.loads(feedback["payload"])
+                    data.update(comment="", context_redacted=True, redacted_feedback_id=feedback["id"])
+                    c.execute(
+                        "UPDATE feedback SET payload=? WHERE id=?",
+                        (json.dumps(data, ensure_ascii=False), feedback["id"]),
+                    )
 
     def trace(self, run):
         with self.connect() as c:
@@ -205,9 +261,33 @@ class Store:
     def traces(self):
         with self.connect() as c:
             return [
-                json.loads(r[0])
+                {k: v for k, v in json.loads(r[0]).items() if k != "snapshot"}
                 for r in c.execute("SELECT payload FROM traces ORDER BY created_at DESC LIMIT 50")
             ]
+
+    def trace_run(self, run_id):
+        with self.connect() as c:
+            row = c.execute("SELECT payload FROM traces WHERE id=?", (run_id,)).fetchone()
+        if not row:
+            raise ValueError("运行记录不存在或已删除。")
+        return json.loads(row[0])
+
+    def learning_digest(self):
+        import hashlib
+
+        with self.connect() as c:
+            records = {
+                table: [list(row) for row in c.execute(f"SELECT * FROM {table} ORDER BY rowid")]
+                for table in (
+                    "sessions",
+                    "messages",
+                    "preferences",
+                    "practices",
+                    "reviews",
+                    "context_boundary",
+                )
+            }
+        return hashlib.sha256(json.dumps(records, sort_keys=True).encode()).hexdigest()
 
     def reserve_search(self, limit):
         month = datetime.now(ZONE).strftime("%Y-%m")

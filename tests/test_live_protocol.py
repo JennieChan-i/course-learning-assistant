@@ -14,6 +14,7 @@ from backend.config import Settings
 from backend.knowledge import Knowledge
 from backend.llm import new_run
 from backend.schemas import ChatInput, PracticeInput
+from backend.observability import start_snapshot, finish_snapshot
 
 
 @pytest.mark.parametrize("effort", [None, "low"])
@@ -118,6 +119,7 @@ async def test_live_agent_flow_over_native_tool_and_stream_protocol(store, effor
     try:
         session_id = store.session(None, "01", "RAG")
         run = new_run(config, "chat")
+        start_snapshot(run, config, {"message": "RAG 是什么", "session_id": session_id, "course_id": "01"})
         events = [
             e
             async for e in agent.chat(
@@ -126,6 +128,10 @@ async def test_live_agent_flow_over_native_tool_and_stream_protocol(store, effor
         ]
         assert "[S01]" in "".join(e.get("text", "") for e in events)
         assert any(e["name"] == "tool_call" for e in run["events"])
+        snapshot = finish_snapshot(run, config)["snapshot"]
+        assert snapshot["retrievals"][0]["query"] == "RAG 检索 重排 证据不足"
+        assert "S01" in snapshot["source_pool"]
+        assert any(c["messages"] for c in snapshot["llm_calls"])
         practice_run = new_run(config, "practice")
         practice = await agent.create_practice(PracticeInput(course_id="01", topic="RAG"), practice_run)
         grade_run = new_run(config, "grade")

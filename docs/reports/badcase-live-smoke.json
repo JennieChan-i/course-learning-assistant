@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-26T12:18:42.428983+08:00",
+  "purpose": "real API mechanical integration on self-authored samples; not human quality acceptance",
+  "kind": "chat",
+  "dataset": "sample",
+  "production_unchanged": true,
+  "result": {
+    "status": "completed",
+    "strategy": "frozen_evidence",
+    "mode_label": "live",
+    "scope": "historical evidence pool; current prompts and model configuration; retrieval quality not tested",
+    "build": {
+      "commit": "2756fc5f2de143355d65f703ce2aa1493058f95f",
+      "source_fingerprint": "3c2eb36648f11ae9e3585a7db42b5aceaddb4d3a2becff532b0abe0fc24a8bd6",
+      "files": {
+        "backend/__init__.py": "34877e9388922ab558dd1e5b81b2ff29384db3e30d2229e21a3b149f0a544cd1",
+        "backend/agents.py": "5a63f4e82ef83d9ad4d51eb221af01dd08c76f219ac8493f684b387fc72d98f4",
+        "backend/badcase_replay.py": "4291012a038a51926147af5e648d789fc370258c1508ce4fbd55b18143822908",
+        "backend/cli.py": "b3361317d5e4d57f3f30c376921a8c882f36caecd2295b660d509640817916dd",
+        "backend/config.py": "03331a4c19f73fb9a6516ee362d9145e2e58c4d374ca403a866a59ea463102f3",
+        "backend/evaluation.py": "934bd86e354944f883fbc64153a8c1a5d9899343fd1a92e4f05b9aecbd445a36",
+        "backend/evaluation_jobs.py": "4c6a083671da2fcae487a8f81598239e0cda5c9a146d83593d9c71e7b5d7628b",
+        "backend/evaluation_review.py": "cf79bdf7378e9be8f5540ec29619193e5d75a70fc57353bc32791fd4e2ee242a",
+        "backend/knowledge.py": "21683e8d96233fdeee8ec7fac0d2ac76eb13b006dbd4b52fdc94a0aaf2c971e0",
+        "backend/llm.py": "700e3fe0d92599e16bb77a3dc6d867f1c5fa19d6462574ecbf9684e69ed02dd6",
+        "backend/main.py": "ee258759dcba3973313e352939f58c47802743872b95c18bafe501743d47aece",
+        "backend/observability.py": "54e5823007b443e3184cfe9ef2d7188bba9d67434c6cede4d7cd0142e94cac36",
+        "backend/quality.py": "6788acec1fdfdd613bcec77cb7778202ac60f3df43100d7667825645a986f8c1",
+        "backend/schemas.py": "b44320fd2dbc2ce79d563c02fadc6ae07bd0c44a7baed43cb19d24b87ef7e095",
+        "backend/store.py": "8993087d28a9f084bbf5abe4064b4fa82547ab180c78350504773de7849d6016",
+        "backend/websearch.py": "c2d0c26b7867c4a42259d3d1e69f5f6598221cc2a47e6b28d297601b8bb03e75",
+        "skills/explain/SKILL.md": "eb07dd0f1cff4450005e144b03092c7598a52ec320c0ab7090e149c9d424982e",
+        "skills/practice/SKILL.md": "4b915669730492ce4a65b01315d7022f54f4c96b9a553b7ca9ecdc2a2f542127",
+        "skills/review/SKILL.md": "756ca2b995663b248fdcf527c7c9bfce8349dc7bab918fa20e4349047cac9689",
+        "skills/explain/manifest.json": "514491459df55a292fe57dd25debc2b91a86863031ebd8dfb137fceddfb63644",
+        "skills/practice/manifest.json": "37d172b1ca89e7aaa7e0dc6cd3c19676dcb4f3ec2280dad99104b320f3329b0d",
+        "skills/review/manifest.json": "b75e4e1810b574ab5db1926f404be5e6417433cd0a413c61b4e87d24ec1108c9",
+        "models.lock.json": "f4bc7bb271496ada9792d61bf3bf93f66748cb3b4127587c69ba560451122dad"
+      }
+    },
+    "configuration": {
+      "model": "kimi-k3",
+      "generation_parameters": {
+        "temperature": null,
+        "reasoning_effort": null,
+        "coach_reasoning_effort": "low",
+        "max_output_tokens": 1800,
+        "structured_output_tokens": 6000,
+        "context_tokens": 32768,
+        "timeout_seconds": 120.0
+      },
+      "embedding_model": "BAAI/bge-small-zh-v1.5",
+      "rerank_model": "BAAI/bge-reranker-base"
+    },
+    "dataset_version": "0cc2a04646d40718",
+    "checks": {
+      "execution_succeeded": true,
+      "production_learning_unchanged": true,
+      "no_invalid_citations": true,
+      "no_unlisted_tools": true,
+      "no_schema_rejections": true,
+      "citations_present_when_required": true
+    },
+    "elapsed_ms": 12428,
+    "usage": {
+      "prompt_tokens": 1484,
+      "completion_tokens": 405
+    },
+    "human_semantic_review": "pending; automatic checks do not establish answer or grading quality",
+    "tool_events": [
+      {
+        "name": "tool_call",
+        "at": "2026-10-26T12:18:35.021409+08:00",
+        "agent": "coach",
+        "tool": "search_course",
+        "source_ids": [
+          "S03",
+          "S01",
+          "S04",
+          "S02"
+        ],
+        "elapsed_ms": 2,
+        "warning": "固定历史资料池复测，不运行向量召回或重排。"
+      }
+    ],
+    "source_ids": [
+      "S01",
+      "S02",
+      "S03",
+      "S04"
+    ]
+  }
+}

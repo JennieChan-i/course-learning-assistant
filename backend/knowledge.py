@@ -339,6 +339,7 @@ class Knowledge:
                 if scores[i] > 0
             ]
             ranked = lexical
+            dense, fused_order = [], []
             if self.settings.app_mode != "demo" and mode != "bm25":
                 vector = self.models.embed([query], query=True)[0]
                 filt = (
@@ -358,6 +359,7 @@ class Knowledge:
                         for rank, key in enumerate(ids):
                             fused[key] = fused.get(key, 0) + 1 / (60 + rank + 1)
                     ranked = sorted(fused, key=fused.get, reverse=True)[:20]
+                    fused_order = list(ranked)
                     if mode == "rerank" and ranked:
                         rerank = self.models.rerank(query, [self.by_id[k]["text"] for k in ranked])
                         ranked = [
@@ -379,6 +381,22 @@ class Knowledge:
                 "elapsed_ms": round((time.perf_counter() - started) * 1000, 1),
                 "mode": "demo_lexical" if self.settings.app_mode == "demo" else mode,
                 "dataset_version": self.corpus.version,
+                "diagnostics": {
+                    "query": query,
+                    "course_id": course_id,
+                    "lexical": lexical,
+                    "dense": dense,
+                    "fused": fused_order,
+                    "reranked": list(ranked),
+                    "candidates": [
+                        {
+                            "child_id": k,
+                            "parent_id": self.by_id[k]["parent_id"],
+                            "text": self.by_id[k]["text"],
+                        }
+                        for k in dict.fromkeys(lexical + dense)
+                    ],
+                },
             }
 
     def close(self):

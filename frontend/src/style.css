@@ -1,4 +1,261 @@
 @import url("./tokens.css");
+.quality-page {
+  overflow-y: auto;
+  padding: 32px clamp(18px, 4vw, 54px);
+}
+.quality-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.quality-heading h1 {
+  margin-bottom: 7px;
+}
+.quality-heading p {
+  color: var(--muted);
+  max-width: 65ch;
+}
+.quality-layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+}
+.quality-list {
+  min-width: 0;
+}
+.quality-list > label {
+  display: block;
+  margin-bottom: 8px;
+}
+.quality-case-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 65vh;
+  overflow: auto;
+}
+.quality-case {
+  text-align: left;
+  padding: 14px 12px;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+.quality-case:hover {
+  background: var(--hover);
+}
+.quality-case.selected {
+  background: var(--selected);
+}
+.quality-case strong {
+  display: block;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 5px 0;
+  font-weight: 550;
+}
+.quality-case span,
+.quality-case small {
+  font-size: 12px;
+  color: var(--muted);
+}
+.quality-detail {
+  min-width: 0;
+  max-width: 76ch;
+}
+.quality-case-heading {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.quality-case-heading h2 {
+  overflow-wrap: anywhere;
+  line-height: 1.65;
+}
+.quality-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.quality-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-bottom: 1px solid var(--line);
+  margin: 12px 0 24px;
+}
+.quality-tabs button {
+  padding: 12px 0;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+}
+.quality-tabs button[aria-pressed="true"] {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+.quality-editor label,
+.quality-replay > label {
+  display: block;
+  margin: 18px 0 7px;
+  font-size: 14px;
+}
+.quality-page input,
+.quality-page select,
+.quality-page textarea,
+.feedback-form textarea,
+.feedback-form select {
+  display: block;
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  background: var(--bg);
+  color: var(--ink);
+  margin-top: 7px;
+}
+.quality-page textarea {
+  line-height: 1.75;
+}
+.quality-page input:focus,
+.quality-page select:focus,
+.quality-page textarea:focus,
+.feedback-form textarea:focus,
+.feedback-form select:focus {
+  outline: 2px solid var(--focus);
+}
+.quality-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.quality-check {
+  display: flex !important;
+  gap: 10px;
+  align-items: flex-start;
+}
+.quality-check input {
+  width: auto;
+  flex-shrink: 0;
+  margin: 5px 0 0;
+}
+.quality-feedback-list p {
+  padding-bottom: 16px;
+  margin: 0 0 16px;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+.quality-feedback-list strong {
+  font-size: 13px;
+  font-weight: 550;
+}
+.quality-notice {
+  padding: 12px 15px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--accent);
+  line-height: 1.7;
+}
+.quality-error {
+  color: var(--danger);
+  line-height: 1.7;
+}
+.quality-json {
+  padding: 14px;
+  background: var(--sidebar);
+  border-radius: 8px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font:
+    12px/1.8 Consolas,
+    "Microsoft YaHei",
+    monospace;
+  max-height: 460px;
+  overflow: auto;
+}
+.quality-snapshot details,
+.quality-replay details {
+  margin: 18px 0;
+}
+.quality-empty {
+  padding: 24px 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.quality-empty h2 {
+  color: var(--ink);
+  font-size: 16px;
+}
+.quality-history {
+  padding-left: 22px;
+}
+.quality-history li {
+  padding: 0 0 24px 8px;
+}
+.quality-history p {
+  margin: 5px 0;
+  overflow-wrap: anywhere;
+}
+.quality-history small {
+  color: var(--muted);
+}
+.quality-back {
+  margin-top: 30px;
+}
+.quality-feedback {
+  margin-top: 12px;
+  font-size: 13px;
+}
+.feedback-form {
+  margin-top: 14px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  max-width: 600px;
+}
+.feedback-form label {
+  display: block;
+  margin: 10px 0;
+}
+.feedback-form .small-note {
+  margin: 12px 0;
+}
+.feedback-recorded {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  color: var(--accent);
+}
+.failed-task-feedback {
+  padding: 0 28px 14px;
+}
+@media (max-width: 950px) {
+  .quality-layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .quality-case-list {
+    max-height: 200px;
+  }
+  .quality-detail {
+    max-width: none;
+  }
+}
+@media (max-width: 520px) {
+  .quality-page {
+    padding: 22px 16px;
+  }
+  .quality-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .quality-tabs {
+    gap: 14px;
+    font-size: 13px;
+  }
+}
 * {
   box-sizing: border-box;
 }

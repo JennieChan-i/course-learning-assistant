@@ -25,8 +25,11 @@ import {
   Sun,
   Trash2,
   X,
+  MessageSquareWarning,
 } from "lucide-react";
 import { api, streamChat } from "./api";
+import Feedback from "./Feedback";
+import Quality from "./Quality";
 
 type Source = {
   id: string;
@@ -43,14 +46,16 @@ type Message = {
   content: string;
   sources?: Source[];
   failed?: boolean;
+  runId?: string;
 };
-type Page = "chat" | "practice" | "review" | "history" | "settings";
+type Page = "chat" | "practice" | "review" | "history" | "settings" | "quality";
 type Course = { id: string; name: string; count: number };
 const navigation = [
   { id: "chat", label: "课程答疑", icon: MessageSquare },
   { id: "practice", label: "理解练习", icon: ListChecks },
   { id: "review", label: "薄弱点复习", icon: RotateCcw },
   { id: "history", label: "学习记录", icon: History },
+  { id: "quality", label: "问题案例", icon: MessageSquareWarning },
 ] as const;
 const prefNames: Record<string, string> = {
   background: "已有基础",
@@ -134,6 +139,12 @@ export default function App() {
     composer = useRef<HTMLTextAreaElement>(null);
   const course = courses.find((c) => c.id === courseId);
   const isDemo = status?.mode === "demo";
+  const [qualityId, setQualityId] = useState<string | undefined>();
+  const [failedRunId, setFailedRunId] = useState<string | undefined>();
+  function openQuality(id: string) {
+    setQualityId(id);
+    navigate("quality");
+  }
 
   async function refresh() {
     const results = await Promise.all([
@@ -209,6 +220,8 @@ export default function App() {
           role: m.role,
           content: m.content,
           sources: m.metadata?.sources || [],
+          runId: m.metadata?.run_id,
+          failed: m.metadata?.failed,
         })),
       );
       navigate("chat");
@@ -224,6 +237,7 @@ export default function App() {
     setError("");
     setNotice("");
     setInput("");
+    setFailedRunId(undefined);
     setPage("chat");
     setBusy(true);
     setStage(isDemo ? "播放演示回放" : "正在理解问题");
@@ -250,7 +264,14 @@ export default function App() {
         },
         controller.current.signal,
         (e) => {
-          if (e.event === "start") setSessionId(e.session_id);
+          if (e.event === "start") {
+            setSessionId(e.session_id);
+            setMessages((prev) =>
+              prev.map((m, i) =>
+                i === prev.length - 1 ? { ...m, runId: e.run_id } : m,
+              ),
+            );
+          }
           if (e.event === "status") setStage(e.text);
           if (e.event === "delta") {
             setStage("");
@@ -298,6 +319,7 @@ export default function App() {
     setBusy(true);
     setStage(isDemo ? "准备固定练习回放" : "教练正在出题，评估员将独立检查");
     setError("");
+    setFailedRunId(undefined);
     setSource(null);
     setPage("practice");
     try {
@@ -314,6 +336,7 @@ export default function App() {
       setAnswers(p.demo_answers || {});
       await refresh();
     } catch (e: any) {
+      setFailedRunId(e.runId);
       setError(
         e.name === "AbortError"
           ? "已停止生成练习。已完成的练习仍可在学习记录中查看。"
@@ -328,6 +351,7 @@ export default function App() {
     controller.current = new AbortController();
     setBusy(true);
     setError("");
+    setFailedRunId(undefined);
     setStage(isDemo ? "播放固定反馈" : "评估员正在核对作答与课程依据");
     try {
       const p = await api(`/practices/${practice.id}/submit`, {
@@ -338,6 +362,7 @@ export default function App() {
       setPractice(p);
       await refresh();
     } catch (e: any) {
+      setFailedRunId(e.runId);
       setError(
         e.name === "AbortError"
           ? "已停止等待评分，可在学习记录中检查完成状态或稍后重试。"
@@ -555,6 +580,14 @@ export default function App() {
             </button>
           </div>
         )}
+        {failedRunId && !busy && (
+          <div className="failed-task-feedback">
+            <Feedback runId={failedRunId} onOpen={openQuality} />
+          </div>
+        )}
+        {page === "quality" && (
+          <Quality initialId={qualityId} busy={busy} onBusy={setBusy} />
+        )}
         {page === "chat" && (
           <section className="chat-page">
             <div className="chat-scroll">
@@ -632,6 +665,9 @@ export default function App() {
                             </button>
                           ))}
                         </div>
+                      )}
+                      {m.role === "assistant" && !busy && (
+                        <Feedback runId={m.runId} onOpen={openQuality} />
                       )}
                       {m.role === "assistant" &&
                         m.content &&
@@ -956,6 +992,12 @@ export default function App() {
                       sources={practice.sources}
                       onSource={setSource}
                     />
+                    <Feedback
+                      runId={practice.result.run_id}
+                      grading
+                      onOpen={openQuality}
+                      disabled={busy}
+                    />
                     <button
                       className="secondary"
                       onClick={() => navigate("review")}
@@ -1126,7 +1168,7 @@ export default function App() {
               onClick={() => {
                 if (
                   confirm(
-                    "删除所有练习、复习及对应运行记录？学习偏好和对话保留。",
+                    "删除所有练习、复习、运行现场和问题案例？学习偏好和对话保留。已下载的回归副本需自行删除。",
                   )
                 ) {
                   remove("/learning-records");

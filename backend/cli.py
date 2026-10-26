@@ -132,6 +132,7 @@ def main():
             "eval",
             "grade-eval",
             "answer-eval",
+            "badcase-eval",
             "serve",
         ],
     )
@@ -141,6 +142,7 @@ def main():
     parser.add_argument("--split", choices=["dev", "test"], default="dev")
     parser.add_argument("--questions", type=Path)
     parser.add_argument("--max-batches", type=int, default=None)
+    parser.add_argument("--max-cases", type=int, default=1)
     parser.add_argument("--retry-report", type=Path, default=None)
     parser.add_argument(
         "--case-ids", default=None, help="Comma-separated case IDs for an explicit regression subset"
@@ -204,6 +206,15 @@ def main():
                     config, question_path, args.split, args.case_ids.split(",") if args.case_ids else None
                 )
             ),
+        )
+    elif args.command == "badcase-eval":
+        from .badcase_replay import evaluate_export
+
+        if not args.questions:
+            parser.error("badcase-eval需要 --questions 指向已人工确认的回归JSONL。")
+        write_report(
+            config.runtime / "reports" / f"badcase-eval-{time.time_ns()}.json",
+            asyncio.run(evaluate_export(config, args.questions, args.max_cases)),
         )
     else:
         import uvicorn

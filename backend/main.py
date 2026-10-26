@@ -17,6 +17,9 @@ from .knowledge import Knowledge
 from .llm import new_run
 from .schemas import ChatInput, PracticeInput, Preference, Submission
 from .store import Store
+from .quality import Quality, FeedbackInput, CaseUpdate, ReplayInput, ReplayReview
+from .observability import start_snapshot, capture_sources, clean
+from .badcase_replay import replay
 
 
 def public_practice(p):
@@ -86,6 +89,7 @@ class LocalRequestGuard:
 def create_app(config=settings, knowledge=None, store=None):
     @asynccontextmanager
     async def lifespan(app):
+        app.state.quality.recover_interrupted()
         yield
         app.state.knowledge.close()
         await app.state.agents.llm.close()
@@ -98,6 +102,7 @@ def create_app(config=settings, knowledge=None, store=None):
     app.state.knowledge = knowledge or Knowledge(config)
     app.state.store = store or Store(config.runtime / "learning.sqlite3")
     app.state.agents = Agents(config, app.state.knowledge, app.state.store)
+    app.state.quality = Quality(app.state.store, config)
     app.state.lock = asyncio.Lock()
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=["127.0.0.1", "localhost", "testserver"])
     app.add_middleware(
@@ -111,7 +116,17 @@ def create_app(config=settings, knowledge=None, store=None):
 
     @app.exception_handler(ValueError)
     async def bad_input(request, exc):
-        return JSONResponse({"detail": str(exc)}, status_code=400)
+        return JSONResponse(
+            {"detail": clean(str(exc), config), "run_id": getattr(request.state, "run_id", None)},
+            status_code=400,
+        )
+
+    @app.exception_handler(HTTPException)
+    async def http_error(request, exc):
+        return JSONResponse(
+            {"detail": exc.detail, "run_id": getattr(request.state, "run_id", None)},
+            status_code=exc.status_code,
+        )
 
     def ensure_course(course_id):
         if course_id and course_id not in {c["id"] for c in app.state.knowledge.corpus.courses()}:
@@ -126,6 +141,7 @@ def create_app(config=settings, knowledge=None, store=None):
         kb = app.state.knowledge
         return {
             "name": "课程智能学习助手",
+            "version": __version__,
             "mode": config.app_mode,
             "dataset": config.dataset,
             "llm_ready": config.llm_ready,
@@ -166,7 +182,7 @@ def create_app(config=settings, knowledge=None, store=None):
         return app.state.store.messages(session_id)
 
     @app.delete("/api/sessions/{session_id}")
-    def delete_session(session_id: str):
+    async def delete_session(session_id: str):
         ensure_idle()
         app.state.store.delete_session(session_id)
         return {"deleted": True}
@@ -181,6 +197,7 @@ def create_app(config=settings, knowledge=None, store=None):
         body.session_id = session_id
         run = new_run(config, "chat")
         run["dataset_version"] = app.state.knowledge.corpus.version
+        start_snapshot(run, config, body.model_dump(), {"session_id": session_id})
 
         async def stream():
             async with app.state.lock:
@@ -214,15 +231,26 @@ def create_app(config=settings, knowledge=None, store=None):
                     raise
                 except Exception as exc:
                     run["status"] = "failed"
+                    run["error_type"] = type(exc).__name__
                     message = (
                         str(exc)
                         if isinstance(exc, ValueError)
                         else "模型服务调用失败，请检查配置、连接或服务额度。"
                     )
-                    yield encode({"event": "error", "text": message})
+                    yield encode({"event": "error", "text": clean(message, config), "run_id": run["id"]})
                 finally:
                     run["elapsed_ms"] = round((time.perf_counter() - started) * 1000)
-                    app.state.store.trace(run)
+                    run["snapshot"]["output"] = {"text": full, "sources": sources}
+                    if run["status"] != "completed":
+                        app.state.store.add_message(
+                            session_id,
+                            "assistant",
+                            "本轮已停止。"
+                            if run["status"] == "cancelled"
+                            else "本轮生成失败，可反馈问题或重试。",
+                            {"run_id": run["id"], "failed": True, "sources": []},
+                        )
+                    app.state.quality.complete_run(run)
 
         return StreamingResponse(
             stream(), media_type="text/event-stream", headers={"X-Accel-Buffering": "no"}
@@ -242,23 +270,28 @@ def create_app(config=settings, knowledge=None, store=None):
         ensure_course(body.course_id)
         async with app.state.lock:
             run = new_run(config, "practice")
+            request.state.run_id = run["id"]
             run["dataset_version"] = app.state.knowledge.corpus.version
+            start_snapshot(run, config, body.model_dump())
             start = time.perf_counter()
             try:
                 result = await cancellable(request, app.state.agents.create_practice(body, run))
                 run["status"] = "completed"
+                run["snapshot"]["output"] = result
+                run["snapshot"]["subject"]["practice_id"] = result["id"]
                 return public_practice(result)
             except asyncio.CancelledError:
                 run["status"] = "cancelled"
                 raise
             except Exception as exc:
                 run["status"] = "failed"
+                run["error_type"] = type(exc).__name__
                 if isinstance(exc, ValueError):
                     raise
                 raise HTTPException(502, "生成练习失败，请检查模型服务后重试。") from None
             finally:
                 run["elapsed_ms"] = round((time.perf_counter() - start) * 1000)
-                app.state.store.trace(run)
+                app.state.quality.complete_run(run)
 
     @app.post("/api/practices/{practice_id}/submit")
     async def submit(practice_id: str, body: Submission, request: Request):
@@ -268,10 +301,16 @@ def create_app(config=settings, knowledge=None, store=None):
             if p["result"]:
                 return public_practice(p)
             run = new_run(config, "assessment")
+            request.state.run_id = run["id"]
             run["dataset_version"] = app.state.knowledge.corpus.version
+            start_snapshot(
+                run, config, {"practice": p, "answers": body.answers}, {"practice_id": practice_id}
+            )
+            capture_sources(run, p["sources"])
             start = time.perf_counter()
             try:
                 result = await cancellable(request, app.state.agents.grade(p, body.answers, run))
+                run["snapshot"]["output"] = result
                 app.state.store.finish_practice(practice_id, result)
                 run["status"] = "completed"
                 return public_practice(app.state.store.practice(practice_id))
@@ -280,12 +319,13 @@ def create_app(config=settings, knowledge=None, store=None):
                 raise
             except Exception as exc:
                 run["status"] = "failed"
+                run["error_type"] = type(exc).__name__
                 if isinstance(exc, ValueError):
                     raise
                 raise HTTPException(502, "评分未完成，本次没有写入成绩，请检查模型服务后重试。") from None
             finally:
                 run["elapsed_ms"] = round((time.perf_counter() - start) * 1000)
-                app.state.store.trace(run)
+                app.state.quality.complete_run(run)
 
     @app.get("/api/reviews")
     def reviews():
@@ -296,19 +336,19 @@ def create_app(config=settings, knowledge=None, store=None):
         return app.state.store.preferences()
 
     @app.put("/api/preferences")
-    def set_preference(body: Preference):
+    async def set_preference(body: Preference):
         ensure_idle()
         app.state.store.preference(body.key, body.value)
         return app.state.store.preferences()
 
     @app.delete("/api/preferences/{key}")
-    def remove_preference(key: str):
+    async def remove_preference(key: str):
         ensure_idle()
         app.state.store.delete_preference(key)
         return {"deleted": True}
 
     @app.delete("/api/learning-records")
-    def clear_learning():
+    async def clear_learning():
         ensure_idle()
         app.state.store.clear_learning()
         return {"deleted": True}
@@ -316,6 +356,63 @@ def create_app(config=settings, knowledge=None, store=None):
     @app.get("/api/traces")
     def traces():
         return app.state.store.traces()
+
+    @app.post("/api/feedback")
+    async def feedback(body: FeedbackInput):
+        return app.state.quality.feedback(body)
+
+    @app.get("/api/badcases")
+    def badcases(status: str | None = None):
+        return app.state.quality.list(status)
+
+    @app.get("/api/badcases/{case_id}")
+    def badcase(case_id: str):
+        return app.state.quality.detail(case_id)
+
+    @app.put("/api/badcases/{case_id}")
+    async def update_badcase(case_id: str, body: CaseUpdate):
+        ensure_idle()
+        return app.state.quality.update(case_id, body)
+
+    @app.delete("/api/badcases/{case_id}")
+    async def delete_badcase(case_id: str):
+        ensure_idle()
+        return app.state.quality.delete(case_id)
+
+    @app.post("/api/badcases/{case_id}/replays")
+    async def replay_badcase(case_id: str, body: ReplayInput, request: Request):
+        ensure_idle()
+        async with app.state.lock:
+            entry, fresh = app.state.quality.begin_replay(case_id, body)
+            if not fresh:
+                return entry
+            case = app.state.quality.case(case_id)
+            try:
+                result = await cancellable(
+                    request, replay(case["snapshot"], config, app.state.store, body.mode, app.state.knowledge)
+                )
+            except asyncio.CancelledError:
+                app.state.quality.finish_replay(
+                    case_id, entry["id"], {"status": "cancelled", "error": "复测已取消，未写入学习结果。"}
+                )
+                raise
+            except Exception as exc:
+                result = {
+                    "status": "failed",
+                    "error_type": type(exc).__name__,
+                    "error": clean(str(exc), config) if isinstance(exc, ValueError) else "复测未完成。",
+                }
+            return app.state.quality.finish_replay(case_id, entry["id"], result)
+
+    @app.put("/api/badcases/{case_id}/replays/{replay_id}/review")
+    async def review_badcase_replay(case_id: str, replay_id: str, body: ReplayReview):
+        ensure_idle()
+        return app.state.quality.review_replay(case_id, replay_id, body)
+
+    @app.post("/api/badcases/{case_id}/export")
+    async def export_badcase(case_id: str):
+        ensure_idle()
+        return app.state.quality.export(case_id)
 
     @app.get("/evaluation", include_in_schema=False)
     def evaluation_page():

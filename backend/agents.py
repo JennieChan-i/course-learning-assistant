@@ -11,6 +11,7 @@ from .schemas import AuditResult, GradeSet, QuestionSet, SearchInput, SourceInpu
 from .websearch import WebSearch
 from .config import ROOT
 from .store import Store
+from .observability import capture_memory, capture_sources
 
 
 def packed_sources(sources, byte_limit=5200):
@@ -163,6 +164,7 @@ class Agents:
                         result = await self.web.search(args.query, include_domains=args.include_domains)
                     else:
                         raise ValueError("工具不在允许列表内，或本轮搜索次数已用完。")
+                    capture_sources(run, result.get("sources", []), result.get("diagnostics"))
                     packed = packed_sources(result.get("sources", []), 2800)
                     allowed_ids = {s["id"] for s in packed}
                     for s in result.get("sources", []):
@@ -207,6 +209,7 @@ class Agents:
     async def chat(self, request, run):
         if self.settings.app_mode == "demo":
             source = self.knowledge.corpus.source("S01")
+            capture_sources(run, [source])
             yield {"event": "sources", "sources": [source]}
             text = (
                 "这是一段固定的演示回放，不会根据你输入的问题生成答案。\n\n"
@@ -227,6 +230,9 @@ class Agents:
             for m in history
             if m["role"] in ("user", "assistant")
         ]
+        capture_memory(
+            run, recent_dialogue=recent, preferences={p["key"]: p["value"] for p in self.store.preferences()}
+        )
         yield {"event": "status", "text": "正在理解问题并查找课程依据"}
         sources = await self.collect(
             request.message,
@@ -259,6 +265,7 @@ class Agents:
                 for r in self.store.reviews()
                 if not request.course_id or r["course_id"] == request.course_id
             ][:3]
+        capture_memory(run, learning_evidence=memory)
         messages = [
             {"role": "system", "content": SYSTEM + "\n" + instruction},
             {
@@ -300,6 +307,7 @@ class Agents:
         if invalid:
             raise ValueError("模型返回了未读取的来源编号，本轮回答未通过引用检查，请重试。")
         if not refs:
+            event(run, "citation_missing")
             yield {
                 "event": "warning",
                 "text": "这次回答未提供可验证的行内引用，请结合来源核对，勿作为已证实结论。",
@@ -392,6 +400,8 @@ class Agents:
             payload.update(topic=review["topic"], course_id=review["course_id"], review_topic=review["topic"])
             payload["previous_misconception"] = review["misconception"]
             skill("review", run)
+        if "snapshot" in run:
+            run["snapshot"]["practice_request"] = payload
         if self.settings.app_mode == "demo":
             questions = demo_questions()
             sources = [self.knowledge.corpus.source(k) for k in ("S01", "S02", "S03")]
@@ -401,6 +411,7 @@ class Agents:
                 {"request": payload, "run": run}, {"recursion_limit": 8}
             )
             questions, sources = state["questions"], state["sources"]
+        capture_sources(run, sources)
         return self.store.add_practice(
             {
                 **payload,

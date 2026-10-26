@@ -16,6 +16,12 @@ flowchart LR
   Judge --> Coach
   API --> Memory[SQLite 事务 / 偏好 / 作答 / 复习]
   API --> Trace[运行版本 / 耗时 / Token]
+  Trace --> Snapshot[本机现场快照]
+  UI --> Quality[反馈 / 归因 / 人工复验]
+  Snapshot --> Quality
+  Quality --> Replay[临时SQLite隔离复测]
+  Replay --> Coach
+  Quality --> Regression[私有回归JSONL]
 ```
 
 ## 数据流
@@ -44,11 +50,18 @@ CSV 校验后保留父片段；按两种 tokenizer 的长度边界生成子片�
 | GET/PUT/DELETE /api/preferences | 用户明确提供的偏好 |
 | DELETE /api/learning-records | 清除练习、复习和运行记录 |
 | GET /api/traces | 本地调试与评测元信息 |
+| POST /api/feedback | 对一个带现场的新运行报告问题；精确重复幂等 |
+| GET /api/badcases、GET/PUT/DELETE /api/badcases/{id} | 案例列表、现场、人工状态处理及删除 |
+| POST /api/badcases/{id}/replays | 固定资料池或当前知识库隔离复测，request_id幂等 |
+| PUT /api/badcases/{id}/replays/{rid}/review | 实际审阅者记录通过/未通过及依据 |
+| POST /api/badcases/{id}/export | 导出人工确认案例为私有回归JSONL |
 | GET /evaluation | 独立于学习流程的开发者人工审阅页 |
 | GET /api/evaluation/sets、/runs | 候选集合和真实评测状态 |
 | GET/PUT /api/evaluation/{name}/cases/{id} | 查看和人工标注，原数据保持不变 |
 
 精确字段与校验见运行中的 `/docs`。接口要求 `X-Learning-Client: workbench`，变更请求校验 Origin，生产绑定本机；这不是公网认证方案。
+
+v1.1新增 `feedback` 与 `badcases` 表，复用 traces 保存有界现场。业务状态仍由后端事务控制，Agent没有案例关闭或正式成绩写权限。复测复用既有Agent，在临时库重建必要上下文；当前知识库模式复用同一个索引实例。案例标准/归因/修复版本指纹绑定复验，失败或过期复验不能关闭。详情与删除规则见 [badcase设计](badcase.md)。
 
 修改或删除偏好、清空学习证据时会重置对话上下文边界。历史仍可查看，但旧消息不再注入后续模型请求，避免被删除的信息从以前的回答间接回流；需要承接的背景可重新说明。
 
